@@ -127,6 +127,9 @@ class OrderValue( models.Model):
 class QuantityBreak( models.Model):
 	fromQuantity = models.IntegerField()
 	thruQuantity = models.IntegerField()
+	def __unicode__(self):
+		return '{0} - {1}'.format( self.fromQuantity, self.thruQuantity )
+
 
 class InventoryItem( PolymorphicModel ):
 	good = models.ForeignKey('Good') 
