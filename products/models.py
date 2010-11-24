@@ -26,6 +26,19 @@ class Service(Product):
 	def __unicode__(self):
 		return self.name
 
+class EstimatedProductCost( PolymorphicModel):
+	fromDate = models.DateField()
+	thruDate = models.DateField(blank=True, null=True)
+	cost = models.DecimalField( max_digits=8, decimal_places=2)
+	feature = models.ForeignKey('Feature', blank=True, null=True)
+	product = models.ForeignKey('Product', blank=True, null=True)
+	kind = models.ForeignKey('CostComponentType')
+	geographicBoundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
+	organization = models.ForeignKey(Organization, related_name='estimatedProductCost_set')
+
+class CostComponentType( models.Model):
+	description = models.CharField(max_length=250)
+
 class PriceComponent( PolymorphicModel):
 	fromDate = models.DateField()
 	thruDate = models.DateField(blank=True, null=True)
