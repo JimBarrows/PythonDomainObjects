@@ -66,6 +66,9 @@ class UnitOfMeasureAdmin( admin.ModelAdmin):
 class InventoryItemAdmin( admin.ModelAdmin):
 	inlines=[ InventoryItemVarianceInLine ]
 
+class PartAdmin( admin.ModelAdmin):
+	inlines=[ ReorderGuidelineInLine, SupplierProductInLine  ]
+
 admin.site.register( Service, ServiceAdmin)
 admin.site.register( Good, GoodAdmin )
 admin.site.register( CategoryType, CategoryTypeAdmin )
@@ -99,3 +102,7 @@ admin.site.register( EstimatedProductCost )
 admin.site.register( CostComponentType )
 admin.site.register( ProductAssociation )
 admin.site.register( ProductAssociationType )
+admin.site.register( FinishedGood, PartAdmin )
+admin.site.register( SubAssembly, PartAdmin )
+admin.site.register( RawMaterial, PartAdmin )
+admin.site.register( PartBom )

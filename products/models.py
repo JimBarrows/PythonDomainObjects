@@ -19,12 +19,33 @@ class Product(PolymorphicModel):
 
 class Good(Product):
 	identifiers = models.ManyToManyField( 'IdentificationType', through='Identification')
+	finishedGood = models.ForeignKey('FinishedGood')
 	def __unicode__(self):
 		return self.name
 
 class Service(Product):
 	def __unicode__(self):
 		return self.name
+
+class Part(PolymorphicModel):
+	name = models.CharField(max_length=250)
+
+class FinishedGood( Part) :
+	''' A finished good ready for sale.'''
+
+class SubAssembly( Part) :
+	''' A sub assembly of a finished good.'''
+
+class RawMaterial( Part) :
+	''' A raw material.'''
+
+class PartBom( models.Model):
+	fromDate = models.DateField()
+	thruDate = models.DateField(blank=True, null=True)
+	quantityUsed = models.IntegerField()
+	instruction = models.TextField()
+	comment = models.TextField()
+	
 
 class ProductAssociation( models.Model):
 	fromDate = models.DateField()
@@ -61,8 +82,9 @@ class PriceComponent( PolymorphicModel):
 	salesType = models.ForeignKey('SaleType', blank=True, null=True)
 	pricerOf = models.ForeignKey(Organization)
 	feature = models.ForeignKey('Feature', blank=True, null=True)
-	product = models.ForeignKey('Product')
+	product = models.ForeignKey('Product', blank=True, null=True)
 	currency = models.ForeignKey('CurrencyMeasure', blank=True, null=True)
+	part = models.ForeignKey('Part', blank=True, null=True)
 
 class BasePrice( PriceComponent):
 	''' A starting point for figuring out the price. '''
@@ -111,6 +133,7 @@ class InventoryItem( PolymorphicModel ):
 	status = models.ForeignKey('InventoryItemStatusType') 
 	locatedAt = models.ForeignKey(Facility) 
 	locatedWithin = models.ForeignKey('Container') 
+	part = models.ForeignKey('Part') 
 	lot = models.ForeignKey('Lot') 
 
 class SerializedInventoryItem( InventoryItem):
@@ -155,6 +178,7 @@ class ReorderGuideline( models.Model):
 	boundary = models.ForeignKey(GeographicBoundary)
 	facility = models.ForeignKey(Facility)
 	internalOrganization = models.ForeignKey(PartyRole, limit_choices_to={'partyRoleType__description':'Internal Organization'})
+	part = models.ForeignKey('Part')
 	
 
 class SupplierProduct( models.Model):
@@ -165,6 +189,7 @@ class SupplierProduct( models.Model):
 	organization = models.ForeignKey(Organization)
 	preference = models.ForeignKey('PreferenceType')
 	rating = models.ForeignKey('RatingType')
+	part = models.ForeignKey('Part')
 	def __unicode__(self):
 		return self.Organization.name
 
