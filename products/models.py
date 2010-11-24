@@ -26,6 +26,16 @@ class Service(Product):
 	def __unicode__(self):
 		return self.name
 
+class ProductAssociation( models.Model):
+	fromDate = models.DateField()
+	thruDate = models.DateField(blank=True, null=True)
+	kind = models.ForeignKey('ProductAssociationType')
+	fromProduct = models.ForeignKey(Product, related_name='fromAssociation_set')
+	toProduct = models.ForeignKey(Product, related_name='toAssociation_set')
+
+class ProductAssociationType( models.Model):
+	description = models.CharField(max_length=250)
+
 class EstimatedProductCost( PolymorphicModel):
 	fromDate = models.DateField()
 	thruDate = models.DateField(blank=True, null=True)
