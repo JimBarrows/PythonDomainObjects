@@ -1,0 +1,569 @@
+[
+  {
+    "pk": 1, 
+    "model": "party.partytype", 
+    "fields": {
+      "description": "Organization Classification", 
+      "parent": null
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.partytype", 
+    "fields": {
+      "description": "Person Classification", 
+      "parent": null
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "party.partytype", 
+    "fields": {
+      "description": "Minority Classification", 
+      "parent": 1
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "party.partytype", 
+    "fields": {
+      "description": "Industry Classification", 
+      "parent": 1
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "party.partytype", 
+    "fields": {
+      "description": "Size Classification", 
+      "parent": 1
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "party.partytype", 
+    "fields": {
+      "description": "EEOC Classification", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "party.partytype", 
+    "fields": {
+      "description": "Income Classification", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Person Role", 
+      "parent": null
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Organization Role", 
+      "parent": null
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Employee Role", 
+      "parent": 1
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Contractor", 
+      "parent": 1
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Family Member", 
+      "parent": 1
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Contact", 
+      "parent": 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Customer", 
+      "parent": null
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Bill To Customer", 
+      "parent": 6
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Ship To Customer", 
+      "parent": 6
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "End User Customer", 
+      "parent": 6
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Distribution Channel", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Distributor", 
+      "parent": 11
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Agent", 
+      "parent": 11
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Partner", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Competitor", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Household", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Regulatory Agency", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Supplier", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Association", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Organization Unit", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Parent Organization", 
+      "parent": 20
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Subsidiary", 
+      "parent": 20
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Department", 
+      "parent": 20
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Division", 
+      "parent": 20
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "Internal Organization", 
+      "parent": 2
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "party.partyrelationshiptype", 
+    "fields": {
+      "toRoleType": 20, 
+      "fromRoleType": 20, 
+      "name": "Organization Rollup", 
+      "parent": null, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.partyrelationshiptype", 
+    "fields": {
+      "toRoleType": 1, 
+      "fromRoleType": 25, 
+      "name": "Employment", 
+      "parent": null, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "party.partyrelationshiptype", 
+    "fields": {
+      "toRoleType": 7, 
+      "fromRoleType": 25, 
+      "name": "Customer Relationship", 
+      "parent": null, 
+      "description": ""
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "party.statustype", 
+    "fields": {
+      "description": "Active"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.statustype", 
+    "fields": {
+      "description": "Inactive"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "party.prioritytype", 
+    "fields": {
+      "description": "High"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.prioritytype", 
+    "fields": {
+      "description": "Medium"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "party.prioritytype", 
+    "fields": {
+      "description": "Low"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "Country"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "Postal Code"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "Province"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "Territory"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "State"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "City"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "County"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "Sales Territory"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "Service Territory"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "party.geographicboundarytype", 
+    "fields": {
+      "description": "Region"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Commercial"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Residential"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Single Family",
+      "kindOf": 2
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Multi-Family",
+      "kindOf": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Warehouse",
+      "kindOf": 1
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Building"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Office",
+      "kindOf": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Plant",
+      "kindOf": 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Floor"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "party.facilitytype", 
+    "fields": {
+      "description": "Room"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "party.communicationeventtype", 
+    "fields": {
+      "description": "Phone Communication"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "party.communicationeventtype", 
+    "fields": {
+      "description": "Face-To-Face Communication"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "party.communicationeventtype", 
+    "fields": {
+      "description": "Email Communication"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "party.communicationeventtype", 
+    "fields": {
+      "description": "Fax Communication"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "party.communicationeventtype", 
+    "fields": {
+      "description": "Letter Communication"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "party.communicationeventtype", 
+    "fields": {
+      "description": "Web Site Communication"
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Support Call"
+    }
+  },
+  {
+    "pk": 2, 
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Customer Service Call"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Meeting"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Activity Request"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Inquiry"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Sales Follow Up"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Conference"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "party.communicationeventpurposetype", 
+    "fields": {
+      "description": "Seminar"
+    }
+  }
+]
