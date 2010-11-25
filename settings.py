@@ -100,4 +100,5 @@ INSTALLED_APPS = (
     'bizondemand.common',
     'bizondemand.party',
     'bizondemand.products',
+    'bizondemand.orders',
 )
