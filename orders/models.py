@@ -49,6 +49,7 @@ class SalesOrderItem( OrderItem):
 	order = models.ForeignKey( SalesOrder )
 	shipTo = models.ForeignKey( ContactMechanism )
 	shipToCustomer = models.ForeignKey( PartyRole )
+	purchasedBy = models.ManyToManyField( 'PurchaseOrderItem')
 
 class OrderRole( models.Model ):
 	percentContribution = models.IntegerField( validators=[MaxValueValidator(100), MinValueValidator(0)])
@@ -102,3 +103,4 @@ class OrderStatusType( models.Model ):
 	description = models.CharField(max_length=250)
 	def __unicode__(self):
 		return self.description
+
