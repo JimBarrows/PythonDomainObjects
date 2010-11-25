@@ -9,6 +9,8 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+AUTH_PROFILE_MODULE = 'ecommerce.UserProfile'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -101,4 +103,5 @@ INSTALLED_APPS = (
     'bizondemand.party',
     'bizondemand.products',
     'bizondemand.orders',
+    'bizondemand.ecommerce',
 )

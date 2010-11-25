@@ -70,7 +70,7 @@ class IpAddress( ContactMechanism):
 	class Meta:
 		app_label = 'party'
 
-class UrlAddress( ContactMechanism):
+class WebAddress( ContactMechanism):
 	url = models.URLField()
 	def __unicode__(self):
 		return self.url
