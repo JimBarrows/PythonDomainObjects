@@ -3,6 +3,8 @@ from datetime import datetime
 from common.models import DateRange
 
 class Party(models.Model):
+	classification = models.ManyToManyField( 'PartyType', through='PartyClassification')
+	roles = models.ManyToManyField( 'PartyRoleType', through='PartyRole')
 	def __unicode__(self):
 		return 'Party'
 
@@ -29,7 +31,6 @@ class Organization( Party):
 
 class PartyType(models.Model):
 	description = models.CharField(max_length=250)
-	descriptionFor = models.ManyToManyField( Party, through='PartyClassification')
 	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
 	def __unicode__(self):
 		return self.description
@@ -52,7 +53,6 @@ class PartyClassification(models.Model):
 class PartyRoleType( models.Model):
 	description = models.CharField(max_length=250)
 	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
-	descriptionFor = models.ManyToManyField( Party, through='PartyRole')
 	def __unicode__(self):
 		return self.description
 	class Meta:
