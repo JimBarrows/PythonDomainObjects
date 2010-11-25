@@ -79,3 +79,26 @@ class OrderAdjustmentType( models.Model ):
 	def __unicode__(self):
 		return self.description
 
+class OrderTerm( models.Model ):
+	value = models.DecimalField( max_digits=12, decimal_places=2) 
+	conditionForItem = models.ForeignKey( OrderItem )
+	conditionForOrder = models.ForeignKey( Order )
+	describedBy = models.ForeignKey( 'OrderTermType' )
+	
+
+class OrderTermType( models.Model ):
+	description = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.description
+
+class OrderStatus( models.Model ):
+	value = models.DecimalField( max_digits=12, decimal_places=2) 
+	conditionForItem = models.ForeignKey( OrderItem )
+	conditionForOrder = models.ForeignKey( Order )
+	describedBy = models.ForeignKey( 'OrderStatusType' )
+	
+
+class OrderStatusType( models.Model ):
+	description = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.description
