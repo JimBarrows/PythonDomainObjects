@@ -12,12 +12,11 @@ def setup( request):
 	if request.method == 'POST':
 		form = Business(request.POST)
 		if form.is_valid():
-			internalOrgRole = PartyRoleType.objects.filter( description='Internal Organization')
-			parentRole = PartyRoleType.objects.filter( description='Parent Organization')
-			organization = Organization( name=form.cleaned_data['name'])
-			organization.partyRole.add( PartyRole( partyRoletype=internalOrgRole))
-			organization.partyRole.add( PartyRole( partyRoletype=parentRole))
-			organization.save()
+			organization = Organization.objects.create( name=form.cleaned_data['name'])
+			internalOrgRole = PartyRoleType.objects.filter( description__contains='Internal Organization').get()
+			parentRole = PartyRoleType.objects.filter( description__contains='Parent Organization').get()
+			PartyRole.objects.create( party=organization, partyRoleType=internalOrgRole)
+			PartyRole.objects.create( party=organization, partyRoleType=parentRole )
 	else:
 		form = Business()
 	c = {'form':form}
