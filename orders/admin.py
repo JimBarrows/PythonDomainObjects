@@ -9,11 +9,17 @@ class SalesOrderItemInLine(admin.TabularInline):
 	model = SalesOrderItem
 	extra=1
 
+class OrderRoleInLine(admin.TabularInline):
+	model = OrderRole
+	extra=1
+
 class PurchaseOrderAdmin( admin.ModelAdmin):
-	inlines=[PurchaseOrderItemInLine]
+	inlines=[PurchaseOrderItemInLine, OrderRoleInLine]
 
 class SalesOrderAdmin( admin.ModelAdmin):
-	inlines=[SalesOrderItemInLine]
+	inlines=[SalesOrderItemInLine, OrderRoleInLine]
 
 admin.site.register( PurchaseOrder, PurchaseOrderAdmin )
 admin.site.register( SalesOrder, SalesOrderAdmin )
+admin.site.register( OrderRole )
+admin.site.register( OrderRoleType )
