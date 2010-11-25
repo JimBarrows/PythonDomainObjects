@@ -1,0 +1,44 @@
+[
+  {
+    "pk": 1, 
+    "model": "orders.orderadjustmenttype", 
+    "fields": {
+      "description": "Miscellaneous Charge"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "orders.orderadjustmenttype", 
+    "fields": {
+      "description": "Discount Adjustment" 
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "orders.orderadjustmenttype", 
+    "fields": {
+      "description": "Surcharge Adjustment"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "orders.orderadjustmenttype",
+    "fields": {
+      "description": "Sales Tax"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "orders.orderadjustmenttype", 
+    "fields": {
+      "description": "Shipping and Handling Charge"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "orders.orderadjustmenttype", 
+    "fields": {
+      "description": "Fee"
+   }
+  }
+]
