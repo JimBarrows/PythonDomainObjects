@@ -56,6 +56,8 @@ class ProductAssociation( models.Model):
 
 class ProductAssociationType( models.Model):
 	description = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.description
 
 class EstimatedProductCost( PolymorphicModel):
 	fromDate = models.DateField()

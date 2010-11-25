@@ -1,0 +1,180 @@
+[
+	{
+		"pk": 1,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "products Usage Categorization",
+			"parent": null
+		}
+	},
+	{
+		"pk": 2,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "products Industry Categorization",
+			"parent": null
+		}
+	},
+	{
+		"pk": 3,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "products Materials Categorization",
+			"parent": null
+		}
+	},
+	{
+		"pk": 1,
+		"model": "products.identificationtype",
+		"fields": {
+			"description": "Manufacturer ID Number"
+		}
+	},
+	{
+		"pk": 2,
+		"model": "products.identificationtype",
+		"fields": {
+			"description": "UPCA"
+		}
+	},
+	{
+		"pk": 3,
+		"model": "products.identificationtype",
+		"fields": {
+			"description": "SKU"
+		}
+	},
+	{
+		"pk": 4,
+		"model": "products.identificationtype",
+		"fields": {
+			"description": "ISBN"
+		}
+	},
+	{
+		"pk": 6,
+		"model": "products.identificationtype",
+		"fields": {
+			"description": "UPCE"
+		}
+	},
+	{
+		"pk": 7,
+		"model": "products.identificationtype",
+		"fields": {
+			"description": "Other ID"
+		}
+	},
+	{
+		"pk": 1,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Product Quality"
+		}
+	},
+	{
+		"pk": 2,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Color"
+		}
+	},
+	{
+		"pk": 3,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Size"
+		}
+	},
+	{
+		"pk": 4,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Brand"
+		}
+	},
+	{
+		"pk": 5,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Software Feature"
+		}
+	},
+	{
+		"pk": 6,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Hardware Feature"
+		}
+	},
+	{
+		"pk": 7,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Billing Feature"
+		}
+	},
+	{
+		"pk": 8,
+		"model": "products.categorytype",
+		"fields": {
+			"description": "Other Feature"
+		}
+	},
+	{
+		"pk": 1,
+		"model": "products.costcomponenttype",
+		"fields": {
+			"description": "Estimated Materials Cost"
+		}
+	},
+	{
+		"pk": 2,
+		"model": "products.costcomponenttype",
+		"fields": {
+			"description": "Estimated Labor Cost"
+		}
+	},
+	{
+		"pk": 3,
+		"model": "products.costcomponenttype",
+		"fields": {
+			"description": "Estimated Other Cost"
+		}
+	},
+	{
+		"pk": 1,
+		"model": "products.productassociationtype",
+		"fields": {
+			"description": "Marketing Package"
+		}
+	},
+	{
+		"pk": 2,
+		"model": "products.productassociationtype",
+		"fields": {
+			"description": "Product Substitute"
+		}
+	},
+	{
+		"pk": 3,
+		"model": "products.productassociationtype",
+		"fields": {
+			"description": "Product Obsolesence"
+		}
+	},
+	{
+		"pk": 4,
+		"model": "products.productassociationtype",
+		"fields": {
+			"description": "Product Complement"
+		}
+	},
+	{
+		"pk": 5,
+		"model": "products.productassociationtype",
+		"fields": {
+			"description": "Product Incompatibility"
+		}
+	}
+]
