@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.validators import MaxValueValidator, MinValueValidator
 from party.models import Party, WebAddress
+from products.models import Feature, Product
 
 class UserProfile( models.Model ):
 	user = models.OneToOneField( User )
@@ -73,6 +74,32 @@ class WebContentAssociation( models.Model ):
 	function = models.ForeignKey( 'FunctionType' )
 
 class FunctionType( models.Model ):
+	description = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.description
+
+class WebObject( models.Model ):
+	name = models.CharField(max_length=250)
+	description = models.TextField( blank=True, null = True)
+	file = models.FileField(upload_to='webObjects', blank=True, null = True)
+	features = models.ManyToManyField( Feature)
+	usage = models.ManyToManyField( 'WebContent', through='ObjectUsage')
+	purposes = models.ManyToManyField( 'PurposeType', blank=True, null = True)
+	products = models.ManyToManyField( Product, blank=True, null = True)
+	kind = models.ForeignKey( 'WebObjectType' )
+
+class WebObjectType( models.Model ):
+	description = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.description
+
+class ObjectUsage( models.Model ):
+	fromDate = models.DateField()
+	thruDate = models.DateField(blank = True, null = True)
+	webObject = models.ForeignKey( 'WebObject' )
+	webContent = models.ForeignKey( 'WebContent' )
+
+class PurposeType( models.Model ):
 	description = models.CharField(max_length=250)
 	def __unicode__(self):
 		return self.description
