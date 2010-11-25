@@ -45,4 +45,6 @@ admin.site.register( WebContentType )
 admin.site.register( WebContentStatusType )
 admin.site.register( WebObject, WebObjectAdmin )
 admin.site.register( WebObjectType )
+admin.site.register( Subscription )
+admin.site.register( SubscriptionType )
 

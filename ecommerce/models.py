@@ -2,8 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.validators import MaxValueValidator, MinValueValidator
-from party.models import Party, WebAddress
-from products.models import Feature, Product
+from party.models import Party, WebAddress, ContactMechanism, PartyRole, CommunicationEvent
+from products.models import Feature, Product, Category
+from orders.models import OrderItem
 
 class UserProfile( models.Model ):
 	user = models.OneToOneField( User )
@@ -100,6 +101,27 @@ class ObjectUsage( models.Model ):
 	webContent = models.ForeignKey( 'WebContent' )
 
 class PurposeType( models.Model ):
+	description = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.description
+
+class Subscription( models.Model ):
+	start = models.DateField()
+	end = models.DateField()
+	fullfilledVia = models.ManyToManyField( 'SubscriptionActivity' )
+	orderItem = models.ForeignKey( OrderItem )
+	kind = models.ForeignKey( 'SubscriptionType' )
+	product = models.ForeignKey( Product )
+	category = models.ForeignKey( Category )
+	subscriber = models.ForeignKey( PartyRole )
+	sentTo = models.ForeignKey( ContactMechanism )
+	originatingFrom = models.ForeignKey( CommunicationEvent )
+
+class SubscriptionActivity( models.Model ):
+	dateSent = models.DateField()
+	comment = models.TextField()
+	
+class SubscriptionType( models.Model ):
 	description = models.CharField(max_length=250)
 	def __unicode__(self):
 		return self.description
