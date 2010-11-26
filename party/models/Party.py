@@ -5,6 +5,8 @@ from common.models import DateRange
 class Party(models.Model):
 	classification = models.ManyToManyField( 'PartyType', through='PartyClassification')
 	roles = models.ManyToManyField( 'PartyRoleType', through='PartyRole')
+	def findRoleByName(self, name):
+		return self.partyrole_set.filter( partyRoleType__description__exact=name).get()
 	def __unicode__(self):
 		return 'Party'
 

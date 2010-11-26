@@ -18,17 +18,25 @@ def setup( request):
 			if primaryBusinessFormQuery.exists():
 				organization = primaryBusinessFormQuery.get()
 				organization.name = form.cleaned_data['name']
+				role = organization.findRoleByName('Internal Organization')
+				role.fromDate=form.cleaned_data['dateStarted']
+				role.save()
+				role = organization.findRoleByName('Parent Organization')
+				role.fromDate=form.cleaned_data['dateStarted']
+				role.save()
+				organization.roles.filter( description__exact='Parent Organization').get().fromDate=form.cleaned_data['dateStarted']
 				organization.save()
 			else:
 				organization = Organization.objects.create( name=form.cleaned_data['name'])
 				internalOrgRole = PartyRoleType.objects.filter( description__contains='Internal Organization').get()
 				parentRole = PartyRoleType.objects.filter( description__contains='Parent Organization').get()
-				PartyRole.objects.create( party=organization, partyRoleType=internalOrgRole)
-				PartyRole.objects.create( party=organization, partyRoleType=parentRole )
+				PartyRole.objects.create( party=organization, partyRoleType=internalOrgRole, fromDate=form.cleand_data['dateStarted'])
+				PartyRole.objects.create( party=organization, partyRoleType=parentRole, fromDate=form.cleand_data['dateStarted'] )
 	else:
 		if( primaryBusinessFormQuery.exists()):
 			organization = primaryBusinessFormQuery.get()	
-			form = BusinessForm({ 'name' : organization.name})
+			role = organization.findRoleByName('Internal Organization')
+			form = BusinessForm({ 'name' : organization.name, 'dateStarted' : role.fromDate})
 		else:
 			form = BusinessForm()
 	c = {'form':form}
