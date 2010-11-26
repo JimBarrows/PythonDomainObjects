@@ -9,7 +9,6 @@ class Party(models.Model):
 		return self.partyrole_set.filter( partyRoleType__description__exact=name).get()
 	def __unicode__(self):
 		return 'Party'
-
 	class Meta:
 		app_label = 'party'
 
@@ -61,6 +60,7 @@ class PartyRoleType( models.Model):
 		app_label = 'party'
 		verbose_name = 'Party Role Type'
 		verbose_name_plural = 'Party Role Types'
+		ordering = ['description']
 
 class PartyRole(models.Model):
 	party = models.ForeignKey(Party)

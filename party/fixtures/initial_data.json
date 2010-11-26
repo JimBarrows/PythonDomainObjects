@@ -256,6 +256,14 @@
     }
   }, 
   {
+    "pk": 26, 
+    "model": "party.partyroletype", 
+    "fields": {
+      "description": "DBA", 
+      "parent": 2
+    }
+  }, 
+  {
     "pk": 1, 
     "model": "party.partyrelationshiptype", 
     "fields": {

@@ -7,10 +7,16 @@ from party.models import Organization, PartyRole, PartyRoleType
 from common.widgets import DatePickerWidget
 from common.forms import CommonModelForm
 
-def index( request):
-	''' does nothing '''
+internalOrganizations = Organization.objects.filter( roles__description__exact='Internal Organization')
 
-primaryBusinessFormQuery =Organization.objects.filter( roles__description__exact='Internal Organization').filter( roles__description__exact='Parent Organization')
+primaryBusinessFormQuery = internalOrganizations.filter( roles__description__exact='Parent Organization')
+
+def index( request):
+	c = {
+		'business':primaryBusinessFormQuery.get(),
+		'departments':internalOrganizations.filter( roles__description__exact='Department')
+	}
+	return render_to_response('business/index.html', c)
 
 def setup( request):
 	if request.method == 'POST':

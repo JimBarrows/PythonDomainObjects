@@ -1,0 +1,31 @@
+{% extends "business/template.html" %}
+
+{% block title %}Business{% endblock %}
+
+{% block content %}
+	<h1>Main Organization: {{ business }}</h1>
+	<h2>Departments</h2>
+		{% if departments %}
+			<p>There is a lit</p>
+		{% else %}
+			<p>There are no Departments</p>
+		{% endif %}
+	<h2>Divisions</h2>
+		{% if divisions %}
+			<p>There is a lit</p>
+		{% else %}
+			<p>There are no divisions</p>
+		{% endif %}
+	<h2>Subsidiarys</h2>
+		{% if subsidiarys %}
+			<p>There is a lit</p>
+		{% else %}
+			<p>There are no subsidiarys</p>
+		{% endif %}
+	<h2>DBA's</h2>
+		{% if dbas %}
+			<p>There is a lit</p>
+		{% else %}
+			<p>There are no DBAs</p>
+		{% endif %}
+{% endblock %}
