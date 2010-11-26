@@ -4,9 +4,11 @@
 
 {% block content %}
 	<h1>Business Setup</h1>
-	<form action="setup" method="post">
-		{% csrf_token %}
-		{{ form.as_p }}
-		<input type="submit" vlaue="Save"/>
-	</form>
+		<form action="setup" method="post">
+			{% include "common/forms.html"%}
+			{% csrf_token %}
+			<div class="span-10 last">
+				<input class="push-7" type="submit" value="Save"/>
+			</div>
+		</form>
 {% endblock %}
