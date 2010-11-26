@@ -1,10 +1,11 @@
-from django.forms import ModelForm, DateField
+from django.forms import DateField
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.shortcuts import render_to_response
 from django.core.context_processors import csrf
 from party.models import Organization, PartyRole, PartyRoleType
 from common.widgets import DatePickerWidget
+from common.forms import CommonModelForm
 
 def index( request):
 	''' does nothing '''
@@ -30,8 +31,8 @@ def setup( request):
 				organization = Organization.objects.create( name=form.cleaned_data['name'])
 				internalOrgRole = PartyRoleType.objects.filter( description__contains='Internal Organization').get()
 				parentRole = PartyRoleType.objects.filter( description__contains='Parent Organization').get()
-				PartyRole.objects.create( party=organization, partyRoleType=internalOrgRole, fromDate=form.cleand_data['dateStarted'])
-				PartyRole.objects.create( party=organization, partyRoleType=parentRole, fromDate=form.cleand_data['dateStarted'] )
+				PartyRole.objects.create( party=organization, partyRoleType=internalOrgRole, fromDate=form.cleaned_data['dateStarted'])
+				PartyRole.objects.create( party=organization, partyRoleType=parentRole, fromDate=form.cleaned_data['dateStarted'] )
 	else:
 		if( primaryBusinessFormQuery.exists()):
 			organization = primaryBusinessFormQuery.get()	
@@ -43,7 +44,8 @@ def setup( request):
 	c.update(csrf(request))
 	return render_to_response('business/setup/index.html', c)
 
-class BusinessForm( ModelForm ):
+class BusinessForm( CommonModelForm ):
+
 	dateStarted = DateField(label='Date Started', widget=DatePickerWidget)
 	class Meta:
 		model=Organization
