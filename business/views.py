@@ -1,22 +1,60 @@
 from django.forms import DateField
 from django.http import HttpResponse
 from django.template import Context, loader
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.core.context_processors import csrf
-from party.models import Organization, PartyRole, PartyRoleType
+from party.models import Organization, PartyRole, PartyRoleType, PartyRelationshipType, PartyRelationship
 from common.widgets import DatePickerWidget
 from common.forms import CommonModelForm
+from business.forms import BusinessForm, SubOrgForm
 
 internalOrganizations = Organization.objects.filter( roles__description__exact='Internal Organization')
 
 primaryBusinessFormQuery = internalOrganizations.filter( roles__description__exact='Parent Organization')
 
+organizationRollup = PartyRelationshipType.objects.filter( name__exact='Organization Rollup').get()
+
+departmentRole = PartyRoleType.objects.filter( description__exact='Department').get()
+internalOrgRole = PartyRoleType.objects.filter( description__contains='Internal Organization').get()
+
 def index( request):
 	c = {
+		'form' : SubOrgForm(),
 		'business':primaryBusinessFormQuery.get(),
-		'departments':internalOrganizations.filter( roles__description__exact='Department')
+		'departments':internalOrganizations.filter( roles__description__exact='Department').iterator(),
+		'divisions':internalOrganizations.filter( roles__description__exact='Division'),
+		'subsidiarys':internalOrganizations.filter( roles__description__exact='Subsidiary'),
+		'dbas':internalOrganizations.filter( roles__description__exact='DBA'),
 	}
+	c.update(csrf(request))
 	return render_to_response('business/index.html', c)
+
+def addSubOrg( request):
+	if request.method =='POST':
+		form = SubOrgForm(request.POST)
+		if( form.is_valid()):
+			primary = primaryBusinessFormQuery.get()
+
+			newDepartment = Organization.objects.create( name=form.cleaned_data['name'])
+
+			PartyRole.objects.create( 
+					partyRoleType=internalOrgRole, 
+					party=newDepartment, 
+					fromDate=form.cleaned_data['dateStarted'])
+			roleName = form.cleaned_data['subOrgRole']	
+			newRole = PartyRole.objects.create( 
+					partyRoleType=PartyRoleType.objects.filter( description__exact= roleName).get(), 
+					party=newDepartment, 
+					fromDate=form.cleaned_data['dateStarted'])
+
+			PartyRelationship.objects.create( 
+					comment=primary.name + ' -> ' + newDepartment.name,
+					relationshipType=organizationRollup, 
+					fromDate = form.cleaned_data['dateStarted'],
+					fromRole = primary.findRoleByName('Parent Organization'),
+					toRole = newRole)
+
+	return redirect(to='/business')
 
 def setup( request):
 	if request.method == 'POST':
@@ -35,7 +73,6 @@ def setup( request):
 				organization.save()
 			else:
 				organization = Organization.objects.create( name=form.cleaned_data['name'])
-				internalOrgRole = PartyRoleType.objects.filter( description__contains='Internal Organization').get()
 				parentRole = PartyRoleType.objects.filter( description__contains='Parent Organization').get()
 				PartyRole.objects.create( party=organization, partyRoleType=internalOrgRole, fromDate=form.cleaned_data['dateStarted'])
 				PartyRole.objects.create( party=organization, partyRoleType=parentRole, fromDate=form.cleaned_data['dateStarted'] )
@@ -50,9 +87,3 @@ def setup( request):
 	c.update(csrf(request))
 	return render_to_response('business/setup/index.html', c)
 
-class BusinessForm( CommonModelForm ):
-
-	dateStarted = DateField(label='Date Started', widget=DatePickerWidget)
-	class Meta:
-		model=Organization
-		fields=['name']
