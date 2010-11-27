@@ -29,7 +29,7 @@ def index( request):
 	c.update(csrf(request))
 	return render_to_response('business/index.html', c)
 
-def addSubOrg( request):
+def add_sub_org( request):
 	if request.method =='POST':
 		form = SubOrgForm(request.POST)
 		if( form.is_valid()):
@@ -38,21 +38,21 @@ def addSubOrg( request):
 			newDepartment = Organization.objects.create( name=form.cleaned_data['name'])
 
 			PartyRole.objects.create( 
-					partyRoleType=internalOrgRole, 
+					party_role_type=internalOrgRole, 
 					party=newDepartment, 
-					fromDate=form.cleaned_data['dateStarted'])
-			roleName = form.cleaned_data['subOrgRole']	
+					from_date=form.cleaned_data['date_started'])
+			roleName = form.cleaned_data['sub_org_role']	
 			newRole = PartyRole.objects.create( 
-					partyRoleType=PartyRoleType.objects.filter( description__exact= roleName).get(), 
+					party_role_type=PartyRoleType.objects.filter( description__exact= roleName).get(), 
 					party=newDepartment, 
-					fromDate=form.cleaned_data['dateStarted'])
+					from_date=form.cleaned_data['date_started'])
 
 			PartyRelationship.objects.create( 
 					comment=primary.name + ' -> ' + newDepartment.name,
-					relationshipType=organizationRollup, 
-					fromDate = form.cleaned_data['dateStarted'],
-					fromRole = primary.findRoleByName('Parent Organization'),
-					toRole = newRole)
+					relationship_type=organizationRollup, 
+					from_date = form.cleaned_data['date_started'],
+					from_role = primary.findRoleByName('Parent Organization'),
+					to_role = newRole)
 
 	return redirect(to='/business')
 
@@ -64,23 +64,23 @@ def setup( request):
 				organization = primaryBusinessFormQuery.get()
 				organization.name = form.cleaned_data['name']
 				role = organization.findRoleByName('Internal Organization')
-				role.fromDate=form.cleaned_data['dateStarted']
+				role.from_date=form.cleaned_data['date_started']
 				role.save()
 				role = organization.findRoleByName('Parent Organization')
-				role.fromDate=form.cleaned_data['dateStarted']
+				role.from_date=form.cleaned_data['date_started']
 				role.save()
-				organization.roles.filter( description__exact='Parent Organization').get().fromDate=form.cleaned_data['dateStarted']
+				organization.roles.filter( description__exact='Parent Organization').get().from_date=form.cleaned_data['date_started']
 				organization.save()
 			else:
 				organization = Organization.objects.create( name=form.cleaned_data['name'])
 				parentRole = PartyRoleType.objects.filter( description__contains='Parent Organization').get()
-				PartyRole.objects.create( party=organization, partyRoleType=internalOrgRole, fromDate=form.cleaned_data['dateStarted'])
-				PartyRole.objects.create( party=organization, partyRoleType=parentRole, fromDate=form.cleaned_data['dateStarted'] )
+				PartyRole.objects.create( party=organization, party_role_type=internalOrgRole, from_date=form.cleaned_data['date_started'])
+				PartyRole.objects.create( party=organization, party_role_type=parentRole, from_date=form.cleaned_data['date_started'] )
 	else:
 		if( primaryBusinessFormQuery.exists()):
 			organization = primaryBusinessFormQuery.get()	
 			role = organization.findRoleByName('Internal Organization')
-			form = BusinessForm({ 'name' : organization.name, 'dateStarted' : role.fromDate})
+			form = BusinessForm({ 'name' : organization.name, 'date_started' : role.from_date})
 		else:
 			form = BusinessForm()
 	c = {'form':form}

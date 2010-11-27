@@ -267,8 +267,8 @@
     "pk": 1, 
     "model": "party.partyrelationshiptype", 
     "fields": {
-      "toRoleType": 20, 
-      "fromRoleType": 20, 
+      "to_role_type": 20, 
+      "from_role_type": 20, 
       "name": "Organization Rollup", 
       "parent": null, 
       "description": ""
@@ -278,8 +278,8 @@
     "pk": 2, 
     "model": "party.partyrelationshiptype", 
     "fields": {
-      "toRoleType": 1, 
-      "fromRoleType": 25, 
+      "to_role_type": 1, 
+      "from_role_type": 25, 
       "name": "Employment", 
       "parent": null, 
       "description": ""
@@ -289,8 +289,8 @@
     "pk": 3, 
     "model": "party.partyrelationshiptype", 
     "fields": {
-      "toRoleType": 7, 
-      "fromRoleType": 25, 
+      "to_role_type": 7, 
+      "from_role_type": 25, 
       "name": "Customer Relationship", 
       "parent": null, 
       "description": ""
@@ -420,7 +420,7 @@
     "model": "party.facilitytype", 
     "fields": {
       "description": "Single Family",
-      "kindOf": 2
+      "kind_of": 2
     }
   }, 
   {
@@ -428,7 +428,7 @@
     "model": "party.facilitytype", 
     "fields": {
       "description": "Multi-Family",
-      "kindOf": 2
+      "kind_of": 2
     }
   }, 
   {
@@ -436,7 +436,7 @@
     "model": "party.facilitytype", 
     "fields": {
       "description": "Warehouse",
-      "kindOf": 1
+      "kind_of": 1
     }
   }, 
   {
@@ -451,7 +451,7 @@
     "model": "party.facilitytype", 
     "fields": {
       "description": "Office",
-      "kindOf": 1
+      "kind_of": 1
     }
   }, 
   {
@@ -459,7 +459,7 @@
     "model": "party.facilitytype", 
     "fields": {
       "description": "Plant",
-      "kindOf": 1
+      "kind_of": 1
     }
   }, 
   {

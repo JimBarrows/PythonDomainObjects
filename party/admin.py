@@ -33,19 +33,19 @@ class ContainsGeographicBoundaryAssociationInLine(admin.TabularInline):
 
 class ContainedByGeographicBoundaryAssociationInLine(admin.TabularInline):
 	model=GeographicBoundaryAssociation
-	fk_name='containedBy'
+	fk_name='contained_by'
 
 class ContainedByGeographicBoundaryAssociationInLine(admin.TabularInline):
 	model=GeographicBoundaryAssociation
-	fk_name='containedBy'
+	fk_name='contained_by'
 
 class SpecifiedForPostalAddressBoundaryInLine(admin.TabularInline):
 	model=PostalAddressBoundary
-	fk_name='specifiedFor'
+	fk_name='specified_for'
 
 class InBoundaryPostalAddressBoundaryInLine(admin.TabularInline):
 	model=PostalAddressBoundary
-	fk_name='inBoundary'
+	fk_name='in_boundary'
 
 class PartyPostalAddressInLine(admin.TabularInline):
 	model=PartyPostalAddress

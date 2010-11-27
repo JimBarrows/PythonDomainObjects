@@ -13,7 +13,7 @@ class LoginAccountHistoryInLine(admin.TabularInline):
 class WebContentAssociationInLine(admin.TabularInline):
 	model = WebContentAssociation
 	extra=1
-	fk_name='fromContent'
+	fk_name='from_content'
 
 class WebContentRoleInLine(admin.TabularInline):
 	model = WebContentRole

@@ -3,23 +3,23 @@ from Party import Party, PartyRole, PartyRelationship
 from ContactMechanism import ContactMechanism
 
 class CommunicationEvent( models.Model):
-	dateTimeStarted = models.DateTimeField()
-	dateTimeEnded = models.DateTimeField()
+	date_time_started = models.DateTimeField()
+	date_time_ended = models.DateTimeField()
 	note = models.TextField()
 	kind = models.ForeignKey('CommunicationEventType')
 	status = models.ForeignKey('CommunicationEventStatusType')
-	occursVia = models.ForeignKey(ContactMechanism)
+	occurs_via = models.ForeignKey(ContactMechanism)
 	context = models.ForeignKey(PartyRelationship)
 	kase = models.ForeignKey('Kase')
 	involving = models.ManyToManyField( 'CommunicationEventRoleType', through='CommunicationEventRole')
-	categorizedBy = models.ManyToManyField( 'CommunicationEventPurposeType', through='CommunicationEventPurpose')
+	categorized_by = models.ManyToManyField( 'CommunicationEventPurposeType', through='CommunicationEventPurpose')
 	def __unicode__(self):
 		return self.note
 	class Meta:
 		app_label = 'party'
 
 class Kase( models.Model):
-	dateTimeStarted = models.DateTimeField()
+	date_time_started = models.DateTimeField()
 	name = models.CharField(max_length=250)
 	description = models.TextField()
 	involving = models.ManyToManyField( 'KaseRoleType', through='KaseRole')
@@ -44,9 +44,9 @@ class CommunicationEventStatusType( models.Model):
 class CommunicationEventRole( models.Model):
 	kind = models.ForeignKey('CommunicationEventRoleType')
 	event = models.ForeignKey(CommunicationEvent)
-	forA = models.ForeignKey(Party)
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
+	for_a = models.ForeignKey(Party)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
 	class Meta:
 		app_label = 'party'
 
@@ -60,9 +60,9 @@ class CommunicationEventRoleType( models.Model):
 class CommunicationEventPurpose( models.Model):
 	kind = models.ForeignKey('CommunicationEventPurposeType')
 	event = models.ForeignKey(CommunicationEvent)
-	forA = models.ForeignKey(Party)
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
+	for_a = models.ForeignKey(Party)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
 	class Meta:
 		app_label = 'party'
 
@@ -84,8 +84,8 @@ class KaseRoleType( models.Model):
 class KaseRole( models.Model):
 	kind = models.ForeignKey('KaseRoleType')
 	kase = models.ForeignKey(Kase)
-	forA = models.ForeignKey(Party)
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
+	for_a = models.ForeignKey(Party)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
 	class Meta:
 		app_label = 'party'

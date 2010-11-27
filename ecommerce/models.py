@@ -10,15 +10,15 @@ class UserProfile( models.Model ):
 	user = models.OneToOneField( User )
 	preferences = models.ManyToManyField( 'PreferenceType', through='UserPreference')
 	party = models.ForeignKey( Party )
-	webAddress = models.ForeignKey( WebAddress )
+	web_address = models.ForeignKey( WebAddress )
 	def __unicode__(self):
 		return self.user.username
 
 class LoginAccountHistory( models.Model ):
 	username = models.CharField(max_length=30)
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
-	userProfile = models.ForeignKey( 'UserProfile' )
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
+	user_profile = models.ForeignKey( 'UserProfile' )
 
 
 class PreferenceType( models.Model ):
@@ -28,8 +28,8 @@ class PreferenceType( models.Model ):
 
 class UserPreference( models.Model ):
 	value = models.CharField(max_length=250)
-	userProfile = models.ForeignKey( 'UserProfile' )
-	preferenceType = models.ForeignKey( 'preferenceType' )
+	user_profile = models.ForeignKey( 'UserProfile' )
+	preference_type = models.ForeignKey( 'PreferenceType' )
 
 class WebContent( models.Model ):
 	description = models.TextField()
@@ -39,7 +39,7 @@ class WebContent( models.Model ):
 	roles = models.ManyToManyField( 'WebContentRoleType', through='WebContentRole', blank=True, null = True)
 	kind = models.ForeignKey( 'WebContentType')
 	status = models.ForeignKey( 'WebContentStatusType')
-	webAddress = models.ForeignKey( WebAddress )
+	web_address = models.ForeignKey( WebAddress )
 	def __unicode__(self):
 		return self.description
 
@@ -62,16 +62,16 @@ class WebContentRole( models.Model ):
 	content = models.ForeignKey( 'WebContent')
 	role = models.ForeignKey( 'WebContentRoleType')
 	party = models.ForeignKey( Party )
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
 
 
 class WebContentAssociation( models.Model ):
 	''' 0,0 is upper left '''
 	x = models.IntegerField( validators=[MinValueValidator(0)])
 	y = models.IntegerField( validators=[MinValueValidator(0)])
-	fromContent = models.ForeignKey( 'WebContent', related_name = 'fromContent_set' )
-	toContent = models.ForeignKey( 'WebContent', related_name = 'toContent_set' )
+	from_content = models.ForeignKey( 'WebContent', related_name = 'from_content_set' )
+	to_content = models.ForeignKey( 'WebContent', related_name = 'to_content_set' )
 	function = models.ForeignKey( 'FunctionType' )
 
 class FunctionType( models.Model ):
@@ -82,7 +82,7 @@ class FunctionType( models.Model ):
 class WebObject( models.Model ):
 	name = models.CharField(max_length=250)
 	description = models.TextField( blank=True, null = True)
-	file = models.FileField(upload_to='webObjects', blank=True, null = True)
+	file = models.FileField(upload_to='web_objects', blank=True, null = True)
 	features = models.ManyToManyField( Feature)
 	usage = models.ManyToManyField( 'WebContent', through='ObjectUsage')
 	purposes = models.ManyToManyField( 'PurposeType', blank=True, null = True)
@@ -95,10 +95,10 @@ class WebObjectType( models.Model ):
 		return self.description
 
 class ObjectUsage( models.Model ):
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
-	webObject = models.ForeignKey( 'WebObject' )
-	webContent = models.ForeignKey( 'WebContent' )
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
+	web_object = models.ForeignKey( 'WebObject' )
+	web_content = models.ForeignKey( 'WebContent' )
 
 class PurposeType( models.Model ):
 	description = models.CharField(max_length=250)
@@ -108,17 +108,17 @@ class PurposeType( models.Model ):
 class Subscription( models.Model ):
 	start = models.DateField()
 	end = models.DateField()
-	fullfilledVia = models.ManyToManyField( 'SubscriptionActivity' )
+	fullfilled_via = models.ManyToManyField( 'SubscriptionActivity' )
 	orderItem = models.ForeignKey( OrderItem )
 	kind = models.ForeignKey( 'SubscriptionType' )
 	product = models.ForeignKey( Product )
 	category = models.ForeignKey( Category )
 	subscriber = models.ForeignKey( PartyRole )
-	sentTo = models.ForeignKey( ContactMechanism )
-	originatingFrom = models.ForeignKey( CommunicationEvent )
+	sent_to = models.ForeignKey( ContactMechanism )
+	originating_from = models.ForeignKey( CommunicationEvent )
 
 class SubscriptionActivity( models.Model ):
-	dateSent = models.DateField()
+	date_sent = models.DateField()
 	comment = models.TextField()
 	
 class SubscriptionType( models.Model ):

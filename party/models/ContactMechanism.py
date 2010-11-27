@@ -18,23 +18,23 @@ class ContactMechanism(models.Model):
 
 class PartyContactMechanism(models.Model):
 	party = models.ForeignKey(Party)
-	contactMechanism = models.ForeignKey(ContactMechanism)
-	partyRoleType = models.ForeignKey(PartyRoleType, blank=True, null=True)
+	contact_mechanism = models.ForeignKey(ContactMechanism)
+	party_role_type = models.ForeignKey(PartyRoleType, blank=True, null=True)
 	purpose = models.ManyToManyField( ContactMechanismPurposeType, through='PartyContactMechanismPurpose')
 	comment = models.TextField(blank=True, null=True)
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
-	acceptsSolicitations = models.BooleanField()
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
+	accepts_solicitations = models.BooleanField()
 	class Meta:
 		app_label = 'party'
 
 class PartyContactMechanismPurpose(models.Model):
-	contactMechanism = models.ForeignKey(PartyContactMechanism)
-	contactMechanismType = models.ForeignKey(ContactMechanismPurposeType)
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
+	contact_mechanism = models.ForeignKey(PartyContactMechanism)
+	contact_mechanismType = models.ForeignKey(ContactMechanismPurposeType)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.contactMechanismType.description
+		return self.contact_mechanismType.description
 	class Meta:
 		app_label = 'party'
 
@@ -48,10 +48,10 @@ class PostalAddress(ContactMechanism):
 		app_label = 'party'
 
 class PostalAddressBoundary(models.Model):
-	specifiedFor = models.ForeignKey(PostalAddress, related_name='specifiedFor')
-	inBoundary = models.ForeignKey(GeographicBoundary, related_name='inBoundary')
+	specified_for = models.ForeignKey(PostalAddress, related_name='specified_for')
+	in_boundary = models.ForeignKey(GeographicBoundary, related_name='in_boundary')
 	def __unicode__(self):
-		return self.specifiedFor.street1 + " - " + self.inBoundary.name
+		return self.specified_for.street1 + " - " + self.in_boundary.name
 	class Meta:
 		app_label = 'party'
 	
@@ -64,9 +64,9 @@ class EmailAddress( ContactMechanism):
 		app_label = 'party'
 
 class IpAddress( ContactMechanism):
-	ipAddress = models.IPAddressField()
+	ip_address = models.IPAddressField()
 	def __unicode__(self):
-		return self.iPAddressField
+		return self.ip_address
 	class Meta:
 		app_label = 'party'
 
@@ -78,11 +78,11 @@ class WebAddress( ContactMechanism):
 		app_label = 'party'
 
 class PhoneNumber( ContactMechanism):
-	countryCode = models.CharField(max_length=7)
-	areaCode = models.CharField(max_length=7)
+	country_code = models.CharField(max_length=7)
+	area_code = models.CharField(max_length=7)
 	number = models.CharField(max_length=15)
 	extension = models.CharField(max_length=15)
 	def __unicode__(self):
-		return '+{} ({}) {} {}'.format(countryCode, areaCode, number, extendsion)
+		return '+{} ({}) {} {}'.format(country_code, area_code, number, extendsion)
 	class Meta:
 		app_label = 'party'

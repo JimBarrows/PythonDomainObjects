@@ -12,7 +12,7 @@ class GeographicBoundary(models.Model):
 	name = models.CharField(max_length=250, blank = True, null = True)
 	abbrev = models.CharField(max_length=10, blank = True, null = True)
 	geocode = models.CharField(max_length=250, blank = True, null = True)
-	geographicBoundaryType = models.ForeignKey(GeographicBoundaryType)
+	geographic_boundary_type = models.ForeignKey(GeographicBoundaryType)
 	def __unicode__(self):
 		return self.name
 	class Meta:
@@ -20,9 +20,9 @@ class GeographicBoundary(models.Model):
 
 class GeographicBoundaryAssociation(models.Model):
 	contains = models.ForeignKey(GeographicBoundary, related_name='contains_set')
-	containedBy = models.ForeignKey(GeographicBoundary, related_name='containedBy_set')
+	contained_by = models.ForeignKey(GeographicBoundary, related_name='contained_by_set')
 	def __unicode__(self):
-		return self.containedBy.name + " - " + self.contains.name 
+		return self.contained_by.name + " - " + self.contains.name 
 	class Meta:
 		app_label = 'party'
 

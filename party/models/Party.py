@@ -6,18 +6,18 @@ class Party(models.Model):
 	classification = models.ManyToManyField( 'PartyType', through='PartyClassification')
 	roles = models.ManyToManyField( 'PartyRoleType', through='PartyRole')
 	def findRoleByName(self, name):
-		return self.partyrole_set.filter( partyRoleType__description__exact=name).get()
+		return self.partyrole_set.filter( party_role_type__description__exact=name).get()
 	def __unicode__(self):
 		return 'Party'
 	class Meta:
 		app_label = 'party'
 
 class Person( Party):
-	firstName=models.CharField(max_length=128)
-	middleName = models.CharField(max_length=128, blank=True, null = True)
-	lastName = models.CharField(max_length=128)
+	first_name=models.CharField(max_length=128)
+	middle_name = models.CharField(max_length=128, blank=True, null = True)
+	last_name = models.CharField(max_length=128)
 	def __unicode__(self):
-		return self.firstName + ' ' + self.middleName + ' '+ self.lastName
+		return self.first_name + ' ' + self.middle_name + ' '+ self.last_name
 	class Meta:
 		app_label = 'party'
 		verbose_name_plural = 'People'
@@ -41,11 +41,11 @@ class PartyType(models.Model):
 
 class PartyClassification(models.Model):
 	party = models.ForeignKey(Party)
-	partyType = models.ForeignKey(PartyType)
-	fromDate = models.DateField(default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
+	party_type = models.ForeignKey(PartyType)
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.partyType.description
+		return self.party_type.description
 	class Meta:
 		app_label = 'party'
 		verbose_name_plural = 'Party Classifications'
@@ -64,11 +64,11 @@ class PartyRoleType( models.Model):
 
 class PartyRole(models.Model):
 	party = models.ForeignKey(Party)
-	partyRoleType = models.ForeignKey(PartyRoleType)
-	fromDate = models.DateField(default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
+	party_role_type = models.ForeignKey(PartyRoleType)
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.partyRoleType.description
+		return self.party_role_type.description
 	class Meta:
 		app_label = 'party'
 		verbose_name = 'Party Role'
@@ -78,8 +78,8 @@ class PartyRelationshipType(models.Model):
 	name = models.CharField(max_length=250)
 	description = models.TextField(max_length=250, blank = True, null = True)
 	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
-	fromRoleType = models.ForeignKey(PartyRoleType, related_name='from_role_type_set')
-	toRoleType = models.ForeignKey(PartyRoleType, related_name='to_role_type_set')
+	from_role_type = models.ForeignKey(PartyRoleType, related_name='from_role_type_set')
+	to_role_type = models.ForeignKey(PartyRoleType, related_name='to_role_type_set')
 	def __unicode__(self):
 		return self.name
 	class Meta:
@@ -89,11 +89,11 @@ class PartyRelationshipType(models.Model):
 
 class PartyRelationship(models.Model):
 	comment = models.TextField()
-	relationshipType = models.ForeignKey(PartyRelationshipType)
-	fromDate = models.DateField( default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
-	fromRole = models.ForeignKey(PartyRole, related_name='from_role_set')
-	toRole = models.ForeignKey(PartyRole, related_name='to_role_set')
+	relationship_type = models.ForeignKey(PartyRelationshipType)
+	from_date = models.DateField( default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
+	from_role = models.ForeignKey(PartyRole, related_name='from_role_set')
+	to_role = models.ForeignKey(PartyRole, related_name='to_role_set')
 	priority = models.ForeignKey('PriorityType', blank=True, null = True)
 	status = models.ForeignKey('StatusType', blank=True, null = True)
 	def __unicode__(self):
@@ -106,8 +106,8 @@ class PartyRelationship(models.Model):
 class PartyPostalAddress(models.Model):
 	party = models.ForeignKey(Party)
 	comment = models.TextField()
-	fromDate = models.DateField( default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
+	from_date = models.DateField( default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
 	location = models.ForeignKey('PostalAddress')
 	def __unicode__(self):
 		return self.location.street1

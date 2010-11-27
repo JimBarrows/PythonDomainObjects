@@ -4,7 +4,7 @@ from ContactMechanism import ContactMechanism
 
 class FacilityType( models.Model):
 	description = models.CharField(max_length=250)
-	kindOf = models.ForeignKey('self', blank = True, null = True, related_name='subType')
+	kind_of = models.ForeignKey('self', blank = True, null = True, related_name='subType')
 	def __unicode__(self):
 		return self.description
 	class Meta:
@@ -19,11 +19,11 @@ class FacilityRoleType( models.Model):
 
 class Facility( models.Model):
 	description = models.CharField(max_length=250)
-	squareFootage = models.IntegerField( blank=True, null = True)
-	facilityType = models.ForeignKey(FacilityType)
-	partOf = models.ForeignKey('self', blank = True, null = True, related_name='madeUpOf')
+	square_footage = models.IntegerField( blank=True, null = True)
+	facility_type = models.ForeignKey(FacilityType)
+	part_of = models.ForeignKey('self', blank = True, null = True, related_name='madeUpOf')
 	roles = models.ManyToManyField( FacilityRoleType, through='FacilityRole')
-	contactMechanisms = models.ManyToManyField( ContactMechanism, through='FacilityContactMechanism')
+	contact_mechanisms = models.ManyToManyField( ContactMechanism, through='FacilityContactMechanism')
 	def __unicode__(self):
 		return self.description
 	class Meta:
@@ -31,11 +31,11 @@ class Facility( models.Model):
 
 class FacilityContactMechanism(models.Model):
 	facility = models.ForeignKey(Facility)
-	contactMechanism = models.ForeignKey(ContactMechanism)
+	contact_mechanism = models.ForeignKey(ContactMechanism)
 	comment = models.TextField(blank=True, null=True)
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank = True, null = True)
-	acceptsSolicitations = models.BooleanField()
+	from_date = models.DateField()
+	thru_date = models.DateField(blank = True, null = True)
+	accepts_solicitations = models.BooleanField()
 	class Meta:
 		app_label = 'party'
 
@@ -43,9 +43,9 @@ class FacilityContactMechanism(models.Model):
 class FacilityRole( models.Model):
 	party = models.ForeignKey(Party, blank=True, null=True)
 	facility = models.ForeignKey(Facility)
-	roleType = models.ForeignKey(FacilityRoleType)
-	fromDate = models.DateField()
-	thruDate = models.DateField( blank=True, null=True)
+	role_type = models.ForeignKey(FacilityRoleType)
+	from_date = models.DateField()
+	thru_date = models.DateField( blank=True, null=True)
 	class Meta:
 		app_label = 'party'
 

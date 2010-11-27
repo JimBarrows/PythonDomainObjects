@@ -7,15 +7,18 @@ from party.models import Organization, Facility, PartyRole, GeographicBoundary
 
 class Product(PolymorphicModel):
 	name = models.CharField(max_length=250)
-	introductionDate = models.DateField(blank=True, null=True)
-	salesDiscontinuationDate = models.DateField(blank=True, null=True)
-	supportDiscontinuationDate = models.DateField(blank=True, null=True)
+	introduction_date = models.DateField(blank=True, null=True)
+	sales_discontinuation_date = models.DateField(blank=True, null=True)
+	support_discontinuation_date = models.DateField(blank=True, null=True)
 	comment = models.TextField(blank=True, null=True)
 	categories = models.ManyToManyField( 'CategoryType', through='Category')
 	manufacturedBy = models.ForeignKey(Organization, related_name='producerOf_set')
 	suppliedThru = models.ManyToManyField( Organization, through='SupplierProduct')
 	def __unicode__(self):
 		return self.name
+	class Meta:
+		ordering=['name']
+		
 
 class Good(Product):
 	identifiers = models.ManyToManyField( 'IdentificationType', through='Identification')
