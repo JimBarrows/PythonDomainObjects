@@ -185,7 +185,7 @@ class ReorderGuideline( models.Model):
 	reorderLevel = models.IntegerField()
 	boundary = models.ForeignKey(GeographicBoundary)
 	facility = models.ForeignKey(Facility)
-	internalOrganization = models.ForeignKey(PartyRole, limit_choices_to={'partyRoleType__description':'Internal Organization'})
+	internalOrganization = models.ForeignKey(PartyRole, limit_choices_to={'party_role_type__description':'Internal Organization'})
 	part = models.ForeignKey('Part')
 	
 
