@@ -1,0 +1,15 @@
+{% extends "products/template.html" %}
+
+{% block title %}Goods &amp; Services{% endblock %}
+
+{% block content %}
+	<div class="span-20 last">
+		<form action="" method="post">
+			{% include "common/forms.html"%}
+			{% csrf_token %}
+			<div class="span-10 last">
+				<input class="push-7" type="submit" value="Save"/>
+			</div>
+		</form>
+
+{% endblock %}
