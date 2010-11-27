@@ -7,6 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^business/', include( 'business.urls')),
+    (r'^products/', include( 'products.urls')),
 		(r'css/(?P<path>.*)$', 'django.views.static.serve', 
 				{'document_root': '/home/jimbarrows/Desktop/bizondemand/css/'}),
 		(r'img/(?P<path>.*)$', 'django.views.static.serve', 
