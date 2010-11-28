@@ -12,8 +12,8 @@ class Product(PolymorphicModel):
 	support_discontinuation_date = models.DateField(blank=True, null=True)
 	comment = models.TextField(blank=True, null=True)
 	categories = models.ManyToManyField( 'CategoryType', through='Category')
-	manufacturedBy = models.ForeignKey(Organization, related_name='producerOf_set')
-	suppliedThru = models.ManyToManyField( Organization, through='SupplierProduct')
+	manufactured_by = models.ForeignKey(Organization, related_name='producerOf_set')
+	supplied_thru = models.ManyToManyField( Organization, through='SupplierProduct')
 	def __unicode__(self):
 		return self.name
 	class Meta:
@@ -22,7 +22,7 @@ class Product(PolymorphicModel):
 
 class Good(Product):
 	identifiers = models.ManyToManyField( 'IdentificationType', through='Identification')
-	finishedGood = models.ForeignKey('FinishedGood')
+	finished_good = models.ForeignKey('FinishedGood')
 	def __unicode__(self):
 		return self.name
 
@@ -43,19 +43,19 @@ class RawMaterial( Part) :
 	''' A raw material.'''
 
 class PartBom( models.Model):
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank=True, null=True)
-	quantityUsed = models.IntegerField()
+	from_date = models.DateField()
+	thru_date = models.DateField(blank=True, null=True)
+	quantity_used = models.IntegerField()
 	instruction = models.TextField()
 	comment = models.TextField()
 	
 
 class ProductAssociation( models.Model):
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank=True, null=True)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank=True, null=True)
 	kind = models.ForeignKey('ProductAssociationType')
-	fromProduct = models.ForeignKey(Product, related_name='fromAssociation_set')
-	toProduct = models.ForeignKey(Product, related_name='toAssociation_set')
+	from_product = models.ForeignKey(Product, related_name='fromAssociation_set')
+	to_product = models.ForeignKey(Product, related_name='toAssociation_set')
 
 class ProductAssociationType( models.Model):
 	description = models.CharField(max_length=250)
@@ -63,31 +63,31 @@ class ProductAssociationType( models.Model):
 		return self.description
 
 class EstimatedProductCost( PolymorphicModel):
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank=True, null=True)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank=True, null=True)
 	cost = models.DecimalField( max_digits=8, decimal_places=2)
 	feature = models.ForeignKey('Feature', blank=True, null=True)
 	product = models.ForeignKey('Product', blank=True, null=True)
 	kind = models.ForeignKey('CostComponentType')
-	geographicBoundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
+	geographic_boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
 	organization = models.ForeignKey(Organization, related_name='estimatedProductCost_set')
 
 class CostComponentType( models.Model):
 	description = models.CharField(max_length=250)
 
 class PriceComponent( PolymorphicModel):
-	fromDate = models.DateField()
-	thruDate = models.DateField(blank=True, null=True)
-	comment = models.TextField(blank=True, null=True)
-	geographicBoundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
-	partyType = models.ForeignKey(PartyType, blank=True, null=True)
-	productCategory = models.ForeignKey('CategoryType', blank=True, null=True) 
-	quantityBreak = models.ForeignKey('QuantityBreak', blank=True, null=True)
-	orderValue = models.ForeignKey('OrderValue', blank=True, null=True)
-	salesType = models.ForeignKey('SaleType', blank=True, null=True)
-	pricerOf = models.ForeignKey(Organization)
-	feature = models.ForeignKey('Feature', blank=True, null=True)
 	product = models.ForeignKey('Product', blank=True, null=True)
+	from_date = models.DateField()
+	thru_date = models.DateField(blank=True, null=True)
+	comment = models.TextField(blank=True, null=True)
+	geographic_boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
+	party_type = models.ForeignKey(PartyType, blank=True, null=True)
+	product_category = models.ForeignKey('CategoryType', blank=True, null=True) 
+	quantity_break = models.ForeignKey('QuantityBreak', blank=True, null=True)
+	order_value = models.ForeignKey('OrderValue', blank=True, null=True)
+	sales_type = models.ForeignKey('SaleType', blank=True, null=True)
+	specified_for = models.ForeignKey(Organization, blank=True, null=True)
+	feature = models.ForeignKey('Feature', blank=True, null=True)
 	currency = models.ForeignKey('CurrencyMeasure', blank=True, null=True)
 	part = models.ForeignKey('Part', blank=True, null=True)
 
@@ -126,43 +126,44 @@ class SaleType( models.Model):
 	description = models.CharField(max_length=250)
 
 class OrderValue( models.Model):
-	fromValue = models.DecimalField( max_digits=9, decimal_places=2)
-	thruValue = models.DecimalField( max_digits=9, decimal_places=2)
+	from_value = models.DecimalField( max_digits=9, decimal_places=2)
+	thru_value = models.DecimalField( max_digits=9, decimal_places=2)
 
 class QuantityBreak( models.Model):
-	fromQuantity = models.IntegerField()
-	thruQuantity = models.IntegerField()
+	from_quantity = models.IntegerField()
+	thru_quantity = models.IntegerField()
 	def __unicode__(self):
-		return '{0} - {1}'.format( self.fromQuantity, self.thruQuantity )
-
+		return '{0} - {1}'.format( self.from_quantity, self.thru_quantity )
+	class Meta:
+		ordering = ['from_quantity', 'thru_quantity']
 
 class InventoryItem( PolymorphicModel ):
 	good = models.ForeignKey('Good') 
 	status = models.ForeignKey('InventoryItemStatusType') 
-	locatedAt = models.ForeignKey(Facility) 
-	locatedWithin = models.ForeignKey('Container') 
+	located_at = models.ForeignKey(Facility) 
+	located_within = models.ForeignKey('Container') 
 	part = models.ForeignKey('Part') 
 	lot = models.ForeignKey('Lot') 
 
 class SerializedInventoryItem( InventoryItem):
-	serialNumber = models.CharField(max_length=250)
+	serial_number = models.CharField(max_length=250)
 
 class NonSerializedInventoryItem( InventoryItem):
-	quantityOnHand = models.IntegerField()
+	quantity_on_hand = models.IntegerField()
 
 class InventoryItemVariance( models.Model):
-	physicalInventoryDate = models.DateField()
+	physical_inventory_date = models.DateField()
 	quantity = models.IntegerField();
 	comment = models.CharField(max_length=250)
 	reason = models.ForeignKey('Reason') 
-	adjustmentFor = models.ForeignKey('InventoryItem') 
+	adjustment_for = models.ForeignKey('InventoryItem') 
 
 class Reason( models.Model):
 	description = models.CharField(max_length=250)
 
 class Container( models.Model):
 	description = models.CharField(max_length=250)
-	locatedAt = models.ForeignKey(Facility) 
+	located_at = models.ForeignKey(Facility) 
 	kind = models.ForeignKey('ContainerType') 
 	
 class ContainerType( models.Model):
@@ -171,28 +172,28 @@ class ContainerType( models.Model):
 class Lot( models.Model):
 	description = models.CharField(max_length=250)
 	quantity = models.IntegerField()
-	creationDate = models.DateField(default = datetime.today())
-	expirationDate = models.DateField(blank=True, null=True)
+	creation_date = models.DateField(default = datetime.today())
+	expiration_date = models.DateField(blank=True, null=True)
 
 class InventoryItemStatusType( models.Model):
 	description = models.CharField(max_length=250)
 
 class ReorderGuideline( models.Model):
 	guidelineFor = models.ForeignKey('Good')
-	fromDate = models.DateField(default = datetime.today())
-	thruDate = models.DateField(blank=True, null=True)
-	reorderQuantity = models.IntegerField()
-	reorderLevel = models.IntegerField()
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank=True, null=True)
+	reorder_quantity = models.IntegerField()
+	reorder_level = models.IntegerField()
 	boundary = models.ForeignKey(GeographicBoundary)
 	facility = models.ForeignKey(Facility)
-	internalOrganization = models.ForeignKey(PartyRole, limit_choices_to={'party_role_type__description':'Internal Organization'})
+	internal_organization = models.ForeignKey(PartyRole, limit_choices_to={'party_role_type__description':'Internal Organization'})
 	part = models.ForeignKey('Part')
 	
 
 class SupplierProduct( models.Model):
-	availableFrom = models.DateField(default = datetime.today())
-	availableThru = models.DateField(blank=True, null=True)
-	standardLeadTimeInDays = models.IntegerField(blank=True, null=True)
+	available_from = models.DateField(default = datetime.today())
+	available_thru = models.DateField(blank=True, null=True)
+	standard_lead_time_in_days = models.IntegerField(blank=True, null=True)
 	product = models.ForeignKey('Product')
 	organization = models.ForeignKey(Organization)
 	preference = models.ForeignKey('PreferenceType')
@@ -211,18 +212,18 @@ class Identification( models.Model ):
 	value = models.CharField(max_length=250)
 	good = models.ForeignKey(Good)
 	kind = models.ForeignKey('IdentificationType')
-	fromDate = models.DateField(default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.partyType.description
+		return self.party_type.description
 
 class Category( models.Model ):
 	product = models.ForeignKey(Product)
-	categoryType = models.ForeignKey('CategoryType')
-	fromDate = models.DateField(default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
+	category_type = models.ForeignKey('CategoryType')
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.categoryType.description
+		return self.category_type.description
 
 class Feature( PolymorphicModel ):
 	description = models.CharField(max_length=250)
@@ -232,29 +233,33 @@ class Feature( PolymorphicModel ):
 		return self.description
 
 class Dimension( Feature ) :
-	numberSpecified =models.IntegerField()
-	measuredUsing = models.ForeignKey('UnitOfMeasure')
+	number_specified =models.IntegerField()
+	measured_using = models.ForeignKey('UnitOfMeasure')
 	def __unicode__(self):
-		return '{0} {1}'.format( self.numberSpecified, self.measuredUsing.abbreviation)
+		return '{0} {1}'.format( self.number_specified, self.measured_using.abbreviation)
 
 class UnitOfMeasure( PolymorphicModel):
 	abbreviation = models.CharField(max_length=15)
 	description = models.CharField(max_length=100)
 	def __unicode__(self):
 		return self.abbreviation 
+	class Meta:
+		ordering=['abbreviation', 'description']
 
 class TimeFrequencyMeasure( UnitOfMeasure):
-	''' another measure '''
+	def __unicode__(self):
+		return self.abbreviation 
 
 class CurrencyMeasure( UnitOfMeasure):
-	''' Currencies '''
+	def __unicode__(self):
+		return self.abbreviation 
 
 class UnitOfMeasureConversion( models.Model):
-	convertFrom = models.ForeignKey('UnitOfMeasure', related_name='convertFrom_set')
-	convertTo = models.ForeignKey('UnitOfMeasure', related_name='convertInto_set')
-	conversionFactor = models.DecimalField( max_digits=5, decimal_places=3)
+	convert_from = models.ForeignKey('UnitOfMeasure', related_name='convert_from_set')
+	convert_to = models.ForeignKey('UnitOfMeasure', related_name='convertInto_set')
+	conversion_factor = models.DecimalField( max_digits=5, decimal_places=3)
 	def __unicode__(self):
-		return '{0} * {1} = {2}'.format( self.convertFrom.abbreviation, self.conversionFactor, self.convertTo.abbreviation)
+		return '{0} * {1} = {2}'.format( self.convert_from.abbreviation, self.conversion_factor, self.convert_to.abbreviation)
 
 class FeatureApplicability( models.Model) :
 	ApplicabilityChoices = (
@@ -263,8 +268,8 @@ class FeatureApplicability( models.Model) :
 		('Optional' , 'Optional'),
 		('Selectable' , 'Selectable')
 		)
-	fromDate = models.DateField(default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
 	product = models.ForeignKey('Product')
 	feature = models.ForeignKey('Feature' )
 	kind = models.CharField(max_length=10, choices=ApplicabilityChoices)
@@ -273,25 +278,25 @@ class FeatureApplicability( models.Model) :
 
 class FeatureInteraction( models.Model ):
 	incompatibility = models.BooleanField()
-	interactionDependancy = models.BooleanField()
+	interaction_dependancy = models.BooleanField()
 	of = models.ForeignKey('Feature', related_name='of_set')
-	factorIn = models.ForeignKey('Feature', related_name='factorIn_set')
-	contextOf = models.ForeignKey('Product')
+	factor_in = models.ForeignKey('Feature', related_name='factor_in_set')
+	context_of = models.ForeignKey('Product')
 
 class CategoryType(models.Model):
 	description = models.CharField(max_length=250)
 	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
-	ofInterestTo = models.ManyToManyField( PartyType, through='MarketInterest')
+	of_interest_to = models.ManyToManyField( PartyType, through='MarketInterest')
 	def __unicode__(self):
 		return self.description
 
 class MarketInterest( models.Model ):
-	partyType = models.ForeignKey(PartyType)
-	categoryType = models.ForeignKey(CategoryType)
-	fromDate = models.DateField(default = datetime.today())
-	thruDate = models.DateField(blank = True, null = True)
+	party_type = models.ForeignKey(PartyType)
+	category_type = models.ForeignKey(CategoryType)
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.partyType.description
+		return self.party_type.description
 
 class IdentificationType(models.Model):
 	description = models.CharField(max_length=250)

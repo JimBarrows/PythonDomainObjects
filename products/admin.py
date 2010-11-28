@@ -20,7 +20,7 @@ class FeatureInteractionOfInLine(admin.TabularInline):
 
 class FeatureInteractionFactorInInLine(admin.TabularInline):
 	model=FeatureInteraction
-	fk_name='factorIn'
+	fk_name='factor_in'
 	extra=1
 
 class FeatureApplicabilityInLine(admin.TabularInline):
@@ -34,7 +34,7 @@ class CategoryTypeInLine(admin.TabularInline):
 class UnitOfMeasureConversionInLine(admin.TabularInline):
 	model=UnitOfMeasureConversion
 	extra=1
-	fk_name='convertFrom'
+	fk_name='convert_from'
 
 class SupplierProductInLine(admin.TabularInline):
 	model=SupplierProduct
@@ -48,11 +48,43 @@ class InventoryItemVarianceInLine(admin.TabularInline):
 	model=InventoryItemVariance
 	extra=1
 
+class BasePriceInLine(admin.TabularInline):
+	model=BasePrice
+	extra=1
+
+class DiscountComponentInLine(admin.TabularInline):
+	model=DiscountComponent
+	extra=1
+
+class SurchargeComponentInLine(admin.TabularInline):
+	model=SurchargeComponent
+	extra=1
+
+class ManufacturerSuggestedPriceInLine(admin.TabularInline):
+	model=ManufacturerSuggestedPrice
+	extra=1
+
+class OneTimeChargeInLine(admin.TabularInline):
+	model=OneTimeCharge
+	extra=1
+
+class RecurringChargeInLine(admin.TabularInline):
+	model=RecurringCharge
+	extra=1
+
+class UtilizationChargeInLine(admin.TabularInline):
+	model=UtilizationCharge
+	extra=1
+
 class ServiceAdmin( admin.ModelAdmin):
-	inlines=[ CategoryInLine, FeatureApplicabilityInLine, SupplierProductInLine]
+	inlines=[ CategoryInLine, FeatureApplicabilityInLine, SupplierProductInLine, BasePriceInLine, 
+			DiscountComponentInLine,SurchargeComponentInLine, ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, 
+			RecurringChargeInLine, UtilizationChargeInLine ]
 
 class GoodAdmin( admin.ModelAdmin):
-	inlines=[ CategoryInLine, IdentificationInLine,FeatureApplicabilityInLine, SupplierProductInLine, ReorderGuidelineInLine  ]
+	inlines=[ CategoryInLine, IdentificationInLine, FeatureApplicabilityInLine, SupplierProductInLine, 
+			ReorderGuidelineInLine, BasePriceInLine, DiscountComponentInLine, SurchargeComponentInLine,
+			ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, OneTimeChargeInLine, RecurringChargeInLine, UtilizationChargeInLine ]
 
 class CategoryTypeAdmin( admin.ModelAdmin):
 	inlines=[ MarketInterestInLine, CategoryTypeInLine]
