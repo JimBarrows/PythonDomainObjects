@@ -27,8 +27,8 @@ class FeatureApplicabilityInLine(admin.TabularInline):
 	model=FeatureApplicability
 	extra=1
 
-class CategoryTypeInLine(admin.TabularInline):
-	model=CategoryType
+class CategoryClassificationInLine(admin.TabularInline):
+	model=CategoryClassification
 	extra=1
 
 class UnitOfMeasureConversionInLine(admin.TabularInline):
@@ -77,17 +77,17 @@ class UtilizationChargeInLine(admin.TabularInline):
 	extra=1
 
 class ServiceAdmin( admin.ModelAdmin):
-	inlines=[ CategoryInLine, FeatureApplicabilityInLine, SupplierProductInLine, BasePriceInLine, 
+	inlines=[ CategoryClassificationInLine, FeatureApplicabilityInLine, SupplierProductInLine, BasePriceInLine, 
 			DiscountComponentInLine,SurchargeComponentInLine, ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, 
 			RecurringChargeInLine, UtilizationChargeInLine ]
 
 class GoodAdmin( admin.ModelAdmin):
-	inlines=[ CategoryInLine, IdentificationInLine, FeatureApplicabilityInLine, SupplierProductInLine, 
+	inlines=[ CategoryClassificationInLine, IdentificationInLine, FeatureApplicabilityInLine, SupplierProductInLine, 
 			ReorderGuidelineInLine, BasePriceInLine, DiscountComponentInLine, SurchargeComponentInLine,
 			ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, OneTimeChargeInLine, RecurringChargeInLine, UtilizationChargeInLine ]
 
-class CategoryTypeAdmin( admin.ModelAdmin):
-	inlines=[ MarketInterestInLine, CategoryTypeInLine]
+class CategoryAdmin( admin.ModelAdmin):
+	inlines=[ MarketInterestInLine, CategoryInLine]
 
 class FeatureAdmin( admin.ModelAdmin):
 	inlines=[ FeatureInteractionOfInLine, FeatureInteractionFactorInInLine]
@@ -103,7 +103,7 @@ class PartAdmin( admin.ModelAdmin):
 
 admin.site.register( Service, ServiceAdmin)
 admin.site.register( Good, GoodAdmin )
-admin.site.register( CategoryType, CategoryTypeAdmin )
+admin.site.register( Category, CategoryAdmin )
 admin.site.register( Feature,  FeatureAdmin)
 admin.site.register( IdentificationType )
 admin.site.register( FeatureCategory )

@@ -1,3 +1,4 @@
+from django.forms import ModelForm
 from common.widgets import DatePickerWidget
 from common.forms import CommonModelForm
 from products.models import Good

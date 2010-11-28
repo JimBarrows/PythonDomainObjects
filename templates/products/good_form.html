@@ -4,16 +4,60 @@
 
 {% block content %}
 	<div class="span-20 last">
-		<form action="" method="post">
-			<div class="span-20">
+		<form action="save" method="post">
+			<div class="span-20 {% if form.name.errors%} error {% endif %}">
 				<div class="span-5">{{form.name.label_tag}}</div>
-				<div class="span-10">{{form.name}}</div>
+				<div class="span-15 last">
+					{{form.name}}
+					{{form.name.errors}}
+				</div>
 			</div>
 			<div class="span-20">
+				<div class="span-6">{{form.introduction_date.label_tag}}</div>
+				<div class="span-6">{{form.sales_discontinuation_date.label_tag}}</div>
+				<div class="span-6 last">{{form.support_discontinuation_date.label_tag}}</div>
+			</div>
+
+			<div class="span-20">
+				<div class="span-6 {% if form.introduction_date.errors %} error {% endif %}">
+					{{form.introduction_date}}
+					{{form.introduction_date.errors}}
+				</div>
+				<div class="span-6 {% if form.sales_discontinuation_date.errors %} error {% endif %}">
+					{{form.sales_discontinuation_date}}
+					{{form.sales_discontinuation_date.errors}}
+				</div>
+				<div class="span-6 last {% if form.support_discontinuation_date.errors %} error {% endif %}">
+					{{form.support_discontinuation_date}}
+					{{form.support_discontinuation_date.errors}}
+				</div>
+
+			</div>
+			<div class="span-20" >
 				<div class="span-5">{{form.comment.label_tag}}</div>
 				<div class="span-10">{{form.comment}}</div>
+				<div class="span-4">{{form.comment.errors}}</div>
+			</div>
+
+			<div class="span-20">
+				<div class="span-5">
+					{{form.categories.label_tag}}
+				</div>
+				<div class="span-15">
+					<table>
+					{{category_formset}}
+					</table>
+					{{form.categories.errors}}
+				</div>
+			</div>
+				<div class="span-5">{{form.manufactured_by.label_tag}}</div>
+				<div class="span-15 last">
+					{{form.manufactured_by}}
+					{{form.manufactured_by.errors}}
+				</div>
 			</div>
 			<input class="push-7" type="submit" value="Save"/>
+			{% csrf_token %}
 		</form>
 
 {% endblock %}

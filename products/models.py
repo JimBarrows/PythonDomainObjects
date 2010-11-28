@@ -11,9 +11,9 @@ class Product(PolymorphicModel):
 	sales_discontinuation_date = models.DateField(blank=True, null=True)
 	support_discontinuation_date = models.DateField(blank=True, null=True)
 	comment = models.TextField(blank=True, null=True)
-	categories = models.ManyToManyField( 'CategoryType', through='Category')
-	manufactured_by = models.ForeignKey(Organization, related_name='producerOf_set')
-	supplied_thru = models.ManyToManyField( Organization, through='SupplierProduct')
+	categories = models.ManyToManyField( 'Category', through='CategoryClassification')
+	manufactured_by = models.ForeignKey(Organization, related_name='producerOf_set', blank=True, null=True)
+	supplied_thru = models.ManyToManyField( Organization, through='SupplierProduct', blank=True, null=True)
 	def __unicode__(self):
 		return self.name
 	class Meta:
@@ -21,8 +21,8 @@ class Product(PolymorphicModel):
 		
 
 class Good(Product):
-	identifiers = models.ManyToManyField( 'IdentificationType', through='Identification')
-	finished_good = models.ForeignKey('FinishedGood')
+	identifiers = models.ManyToManyField( 'IdentificationType', through='Identification', blank=True, null=True)
+	finished_good = models.ForeignKey('FinishedGood', blank=True, null=True)
 	def __unicode__(self):
 		return self.name
 
@@ -82,7 +82,7 @@ class PriceComponent( PolymorphicModel):
 	comment = models.TextField(blank=True, null=True)
 	geographic_boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
 	party_type = models.ForeignKey(PartyType, blank=True, null=True)
-	product_category = models.ForeignKey('CategoryType', blank=True, null=True) 
+	product_category = models.ForeignKey('Category', blank=True, null=True) 
 	quantity_break = models.ForeignKey('QuantityBreak', blank=True, null=True)
 	order_value = models.ForeignKey('OrderValue', blank=True, null=True)
 	sales_type = models.ForeignKey('SaleType', blank=True, null=True)
@@ -217,11 +217,13 @@ class Identification( models.Model ):
 	def __unicode__(self):
 		return self.party_type.description
 
-class Category( models.Model ):
+class CategoryClassification( models.Model ):
 	product = models.ForeignKey(Product)
-	category_type = models.ForeignKey('CategoryType')
+	category_type = models.ForeignKey('Category')
 	from_date = models.DateField(default = datetime.today())
 	thru_date = models.DateField(blank = True, null = True)
+	primary = models.BooleanField()
+	comment = models.TextField()
 	def __unicode__(self):
 		return self.category_type.description
 
@@ -283,7 +285,7 @@ class FeatureInteraction( models.Model ):
 	factor_in = models.ForeignKey('Feature', related_name='factor_in_set')
 	context_of = models.ForeignKey('Product')
 
-class CategoryType(models.Model):
+class Category(models.Model):
 	description = models.CharField(max_length=250)
 	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
 	of_interest_to = models.ManyToManyField( PartyType, through='MarketInterest')
@@ -292,7 +294,7 @@ class CategoryType(models.Model):
 
 class MarketInterest( models.Model ):
 	party_type = models.ForeignKey(PartyType)
-	category_type = models.ForeignKey(CategoryType)
+	category_type = models.ForeignKey(Category)
 	from_date = models.DateField(default = datetime.today())
 	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
