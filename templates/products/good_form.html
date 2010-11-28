@@ -5,10 +5,15 @@
 {% block content %}
 	<div class="span-20 last">
 		<form action="" method="post">
-			{% include "common/forms.html"%}
-			<div class="span-10 last">
-				<input class="push-7" type="submit" value="Save"/>
+			<div class="span-20">
+				<div class="span-5">{{form.name.label_tag}}</div>
+				<div class="span-10">{{form.name}}</div>
 			</div>
+			<div class="span-20">
+				<div class="span-5">{{form.comment.label_tag}}</div>
+				<div class="span-10">{{form.comment}}</div>
+			</div>
+			<input class="push-7" type="submit" value="Save"/>
 		</form>
 
 {% endblock %}

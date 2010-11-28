@@ -47,7 +47,9 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/home/jimbarrows/Desktop/bizondemand/templates'
+MEDIA_ROOT = '/home/jimbarrows/Desktop/bizondemand/templates/'
+CKEDITOR_MEDIA_PREFIX = 'ckeditor/'
+CKEDITOR_UPLOAD_PATH = '/home/jimbarrows/Desktop/bizondemand/templates/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -57,7 +59,7 @@ MEDIA_URL = ''
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+ADMIN_MEDIA_PREFIX = '/media'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'zj$w0)j96-1i7rgdjve_)p)iq0j9b_2y7d8ng-#@^ngggb^$p9'
@@ -87,6 +89,7 @@ TEMPLATE_DIRS = (
 		'/home/jimbarrows/Desktop/bizondemand/css',
 		'/home/jimbarrows/Desktop/bizondemand/js',
 		'/home/jimbarrows/Desktop/bizondemand/img'
+		'/home/jimbarrows/Desktop/bizondemand/ckeditor'
 )
 
 INSTALLED_APPS = (
@@ -99,6 +102,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
+    'ckeditor',
     'bizondemand.common',
     'bizondemand.party',
     'bizondemand.products',

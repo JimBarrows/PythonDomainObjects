@@ -14,7 +14,11 @@ urlpatterns = patterns('',
 				{'document_root': '/home/jimbarrows/Desktop/bizondemand/img/'}),
 		(r'js/(?P<path>.*)$', 'django.views.static.serve', 
 				{'document_root': '/home/jimbarrows/Desktop/bizondemand/js/'}),
+		(r'ckeditor/(?P<path>.*)$', 'django.views.static.serve', 
+				{'document_root': '/home/jimbarrows/Desktop/bizondemand/ckeditor/'}),
     (r'^$', index),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    (r'^ckeditor/', include('ckeditor.urls')),
+
 )
