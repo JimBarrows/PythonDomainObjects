@@ -11,7 +11,7 @@ class Product(PolymorphicModel):
 	sales_discontinuation_date = models.DateField(blank=True, null=True)
 	support_discontinuation_date = models.DateField(blank=True, null=True)
 	comment = models.TextField(blank=True, null=True)
-	categories = models.ManyToManyField( 'Category', through='CategoryClassification')
+	categories = models.ManyToManyField( 'Category', through='CategoryClassification', blank=True, null=True)
 	manufactured_by = models.ForeignKey(Organization, related_name='producerOf_set', blank=True, null=True)
 	supplied_thru = models.ManyToManyField( Organization, through='SupplierProduct', blank=True, null=True)
 	def __unicode__(self):

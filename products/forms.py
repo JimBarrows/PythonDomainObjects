@@ -13,3 +13,4 @@ class GoodForm( CommonModelForm ):
 			'sales_discontinuation_date' : DatePickerWidget,
 			'support_discontinuation_date' : DatePickerWidget,
 		}
+
