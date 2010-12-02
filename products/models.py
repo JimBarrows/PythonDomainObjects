@@ -196,9 +196,9 @@ class SupplierProduct( models.Model):
 	standard_lead_time_in_days = models.IntegerField(blank=True, null=True)
 	product = models.ForeignKey('Product')
 	organization = models.ForeignKey(Organization)
-	preference = models.ForeignKey('PreferenceType')
-	rating = models.ForeignKey('RatingType')
-	part = models.ForeignKey('Part')
+	preference = models.ForeignKey('PreferenceType', blank=True, null=True)
+	rating = models.ForeignKey('RatingType', blank=True, null=True)
+	part = models.ForeignKey('Part', blank=True, null=True)
 	def __unicode__(self):
 		return self.Organization.name
 

@@ -5,9 +5,10 @@ from django.forms.models import modelformset_factory, inlineformset_factory
 
 
 from products.forms import GoodForm
-from products.models import CategoryClassification, Good
+from products.models import CategoryClassification, Good, SupplierProduct
 
 CategoryClassificationFormSet = inlineformset_factory( Good, CategoryClassification, extra=1 )
+SupplierFormSet = inlineformset_factory( Good, SupplierProduct, extra=1 )
 
 def index( request ) :
 	return render_to_response('products/index.html', {})
@@ -17,23 +18,27 @@ def index( request ) :
 def good_add( request ) :
 	good_form = GoodForm() 
 	good = Good()
-	formset = CategoryClassificationFormSet( instance=good)
-	context = {'form': good_form,
-		'category_formset':formset
-	}
-	return render_form_to_response(request, 'products/good_form.html', context)
-
-
+	category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
+	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
+	return render_form_to_response(request, 'products/good_form.html', product_context( good_form, category_formset, supplier_formset))
 
 def good_save( request ) :
+	print("good_save")
 	if request.method == 'POST':
 		good_form = GoodForm( request.POST )
 		if good_form.is_valid():
 			new_good = good_form.save(commit=False)	
-			category_classification_formset = CategoryClassificationFormSet(request.POST, instance=new_good)
-			if category_classification_formset.is_valid():
+			category_formset = CategoryClassificationFormSet(request.POST, instance=new_good, prefix="categories")
+			supplier_formset =SupplierFormSet( request.POST, instance=new_good, prefix="supplier" )
+			if category_formset.is_valid() and supplier_formset.is_valid():
 				new_good.save()
-				category_classification_formset.save()
+				category_formset.save()
+				supplier_formset.save()
 				return redirect(to='/products')
-	return render_form_to_response(request, 'products/good_form.html', {'form':form, 'category_formset': category_classifciation_formset})
+	return render_form_to_response(request, 'products/good_form.html', product_context(good_form, category_formset, supplier_formset))
 
+def product_context( product_form, category_formset, supplier_formset):
+	return {'product_form': product_form,
+		'category_formset':category_formset,
+		'supplier_formset':supplier_formset
+	}
