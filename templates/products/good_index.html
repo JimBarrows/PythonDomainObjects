@@ -16,7 +16,7 @@
 			<tbody>
 				{% for good in current_goods %}
 					<tr>
-						<td> {{ good.name }}</td>
+						<td> <a href="goods/{{good.id}}">{{ good.name }}</a></td>
 						<td> {{ good.comments }}</td>
 					</tr>
 				{% endfor %}

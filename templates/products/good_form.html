@@ -5,6 +5,7 @@
 {% block content %}
 	<div class="span-20 last">
 		<form action="save" method="post">
+			<input type="hidden" name="{{product_form.id.name}}" value="{{product_form.id}}"/>
 			<div class="span-20 {% if product_form.name.errors%} error {% endif %}">
 				<div class="span-5">{{product_form.name.label_tag}}</div>
 				<div class="span-15 last">
@@ -59,7 +60,7 @@
 					<tbody>
 						{% for form in category_formset.forms %}
 							<tr>
-								<td>{{ form.category_type }}</td>
+								<td> {% for field in form.hidden_fields %}{{field}}{% endfor %}{{ form.category_type }}</td>
 								<td>{{ form.from_date}}</td>
 								<td>{{ form.thru_date}}</td>
 								<td>{{ form.primary}}</td>
@@ -75,7 +76,7 @@
 					<caption>Suppliers</caption>
 					<thead>
 							<tr>
-								<th>{{ supplier_formset.empty_form.organization.label_tag}}</th>
+								<th>{{ supplier_formset.empty_form.party.label_tag}}</th>
 								<th>{{ supplier_formset.empty_form.available_from.label_tag}}</th>
 								<th>{{ supplier_formset.empty_form.available_thru.label_tag}}</th>
 								<th>{{ supplier_formset.empty_form.standard_lead_time_in_days.label_tag}}</th>
@@ -86,7 +87,7 @@
 					<tbody>
 						{% for form in supplier_formset.forms %}
 							<tr>
-								<td>{{ form.organization }}</td>
+								<td>{% for field in form.hidden_fields %}{{field}}{% endfor %}{{ form.organization }}</td>
 								<td>{{ form.available_from}}</td>
 								<td>{{ form.available_thru}}</td>
 								<td>{{ form.standard_lead_time_in_days}}</td>

@@ -13,7 +13,7 @@ class Product(PolymorphicModel):
 	comment = models.TextField(blank=True, null=True)
 	categories = models.ManyToManyField( 'Category', through='CategoryClassification', blank=True, null=True)
 	manufactured_by = models.ForeignKey(Organization, related_name='producerOf_set', blank=True, null=True)
-	supplied_thru = models.ManyToManyField( Organization, through='SupplierProduct', blank=True, null=True)
+	suppliers = models.ManyToManyField( Organization, through='SupplierProduct', blank=True, null=True)
 	def __unicode__(self):
 		return self.name
 	class Meta:
@@ -191,11 +191,11 @@ class ReorderGuideline( models.Model):
 	
 
 class SupplierProduct( models.Model):
+	product = models.ForeignKey('Product')
+	organization = models.ForeignKey(Organization)
 	available_from = models.DateField(default = datetime.today())
 	available_thru = models.DateField(blank=True, null=True)
 	standard_lead_time_in_days = models.IntegerField(blank=True, null=True)
-	product = models.ForeignKey('Product')
-	organization = models.ForeignKey(Organization)
 	preference = models.ForeignKey('PreferenceType', blank=True, null=True)
 	rating = models.ForeignKey('RatingType', blank=True, null=True)
 	part = models.ForeignKey('Part', blank=True, null=True)

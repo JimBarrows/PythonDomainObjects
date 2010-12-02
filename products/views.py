@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.http import HttpResponse
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, get_object_or_404
 from common.forms import render_form_to_response
 from django.forms.models import modelformset_factory, inlineformset_factory
 from django.db.models import Q
@@ -33,6 +33,14 @@ def good_index( request ) :
 			'past_goods':past_goods
 		})
 
+def good_edit( request, good_id):
+	good = get_object_or_404(Good, pk=good_id)
+	good_form = GoodForm(instance=good) 
+	category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
+	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
+	return render_form_to_response(request, 'products/good_form.html', 
+			product_context( good_form, category_formset, supplier_formset))
+
 def good_add( request ) :
 	good_form = GoodForm() 
 	good = Good()
@@ -40,7 +48,7 @@ def good_add( request ) :
 	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
 	return render_form_to_response(request, 'products/good_form.html', product_context( good_form, category_formset, supplier_formset))
 
-def good_save( request ) :
+def good_save( request) :
 	if request.method == 'POST':
 		good_form = GoodForm( request.POST )
 		if good_form.is_valid():
@@ -49,6 +57,20 @@ def good_save( request ) :
 			supplier_formset =SupplierFormSet( request.POST, instance=new_good, prefix="supplier" )
 			if category_formset.is_valid() and supplier_formset.is_valid():
 				new_good.save()
+				category_formset.save()
+				supplier_formset.save()
+				return redirect(to='/products/goods')
+	return render_form_to_response(request, 'products/good_form.html', product_context(good_form, category_formset, supplier_formset))
+
+def good_update( request, good_id ) :
+	if request.method == 'POST':
+		good = get_object_or_404(Good, pk=good_id)
+		good_form = GoodForm( request.POST, instance=good)
+		if good_form.is_valid():
+			category_formset = CategoryClassificationFormSet(request.POST, instance=good, prefix="categories")
+			supplier_formset =SupplierFormSet( request.POST, instance=good, prefix="supplier" )
+			if category_formset.is_valid() and supplier_formset.is_valid():
+				good.save()
 				category_formset.save()
 				supplier_formset.save()
 				return redirect(to='/products/goods')
