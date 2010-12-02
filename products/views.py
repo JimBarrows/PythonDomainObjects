@@ -1,21 +1,23 @@
 from datetime import datetime
+
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
-from common.forms import render_form_to_response
 from django.forms.models import modelformset_factory, inlineformset_factory
 from django.db.models import Q
 
-
-
+from common.forms import render_form_to_response
 from products.forms import GoodForm
 from products.models import CategoryClassification, Good, SupplierProduct
 
 CategoryClassificationFormSet = inlineformset_factory( Good, CategoryClassification, extra=1 )
 SupplierFormSet = inlineformset_factory( Good, SupplierProduct, extra=1 )
 
+@login_required
 def index( request ) :
 	return render_to_response('products/index.html', {})
 
+@login_required
 def good_index( request ) :
 	current_goods = Good.objects.filter( 
 			(Q(introduction_date__lte = datetime.now()) | Q(introduction_date__isnull=True)) &
@@ -33,6 +35,7 @@ def good_index( request ) :
 			'past_goods':past_goods
 		})
 
+@login_required
 def good_edit( request, good_id):
 	good = get_object_or_404(Good, pk=good_id)
 	good_form = GoodForm(instance=good) 
@@ -41,6 +44,7 @@ def good_edit( request, good_id):
 	return render_form_to_response(request, 'products/good_form.html', 
 			product_context( good_form, category_formset, supplier_formset))
 
+@login_required
 def good_add( request ) :
 	good_form = GoodForm() 
 	good = Good()
@@ -48,6 +52,7 @@ def good_add( request ) :
 	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
 	return render_form_to_response(request, 'products/good_form.html', product_context( good_form, category_formset, supplier_formset))
 
+@login_required
 def good_save( request) :
 	if request.method == 'POST':
 		good_form = GoodForm( request.POST )
@@ -62,6 +67,7 @@ def good_save( request) :
 				return redirect(to='/products/goods')
 	return render_form_to_response(request, 'products/good_form.html', product_context(good_form, category_formset, supplier_formset))
 
+@login_required
 def good_update( request, good_id ) :
 	if request.method == 'POST':
 		good = get_object_or_404(Good, pk=good_id)

@@ -2,8 +2,10 @@ from django.http import HttpResponse
 from django.template import Context, loader
 from django.shortcuts import render_to_response, redirect
 from django.core.context_processors import csrf
-from common.forms import CommonModelForm
+from django.contrib.auth.decorators import login_required
 from django.forms import DateField
+
+from common.forms import CommonModelForm
 from common.widgets import DatePickerWidget
 from party.models import Organization, PartyRole, PartyRoleType, PartyRelationshipType, PartyRelationship
 from business.forms import BusinessForm, SubOrgForm
@@ -17,6 +19,7 @@ organizationRollup = PartyRelationshipType.objects.filter( name__exact='Organiza
 departmentRole = PartyRoleType.objects.filter( description__exact='Department').get()
 internalOrgRole = PartyRoleType.objects.filter( description__contains='Internal Organization').get()
 
+@login_required
 def index( request):
 	c = {
 		'form' : SubOrgForm(),
@@ -29,6 +32,7 @@ def index( request):
 	c.update(csrf(request))
 	return render_to_response('business/index.html', c)
 
+@login_required
 def add_sub_org( request):
 	if request.method =='POST':
 		form = SubOrgForm(request.POST)
@@ -56,6 +60,7 @@ def add_sub_org( request):
 
 	return redirect(to='/business')
 
+@login_required
 def setup( request):
 	if request.method == 'POST':
 		form = BusinessForm(request.POST)
