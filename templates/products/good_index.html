@@ -1,0 +1,25 @@
+{% extends "products/template.html" %}
+
+{% block title %}Goods Services{% endblock %}
+
+{% block content %}
+	<div class="span-20 last">
+		<h1>Goods</h1>
+		<h2>Current Goods</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Note</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for good in current_goods %}
+					<tr>
+						<td> {{ good.name }}</td>
+						<td> {{ good.comments }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+{% endblock %}
