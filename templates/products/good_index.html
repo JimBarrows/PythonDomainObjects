@@ -22,4 +22,38 @@
 				{% endfor %}
 			</tbody>
 		</table>
+		<h2>Future Goods</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Note</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for good in future_goods %}
+					<tr>
+						<td> {{ good.name }}</td>
+						<td> {{ good.comments }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<h2>Past Goods</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Note</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for good in past_goods %}
+					<tr>
+						<td> {{ good.name }}</td>
+						<td> {{ good.comments }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 {% endblock %}

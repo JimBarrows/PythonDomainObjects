@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect
 from common.forms import render_form_to_response
 from django.forms.models import modelformset_factory, inlineformset_factory
+from django.db.models import Q
+
 
 
 from products.forms import GoodForm
@@ -15,8 +17,21 @@ def index( request ) :
 	return render_to_response('products/index.html', {})
 
 def good_index( request ) :
-	current_goods = Good.objects.filter( introduction_date__lte=datetime.now())#.filter( sales_discontinuation_date__lte=datetime.now())
-	return render_to_response('products/good_index.html', {'current_goods':current_goods})
+	current_goods = Good.objects.filter( 
+			(Q(introduction_date__lte = datetime.now()) | Q(introduction_date__isnull=True)) &
+			(Q(sales_discontinuation_date__gte=datetime.now()) | Q(sales_discontinuation_date__isnull=True))
+		)
+	future_goods = Good.objects.filter( 
+			Q(introduction_date__gte = datetime.now()) 
+		)
+	past_goods = Good.objects.filter( 
+			Q(sales_discontinuation_date__lte=datetime.now()) 
+		)
+	return render_to_response('products/good_index.html', {
+			'current_goods':current_goods, 
+			'future_goods':future_goods,
+			'past_goods':past_goods
+		})
 
 def good_add( request ) :
 	good_form = GoodForm() 
