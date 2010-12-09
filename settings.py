@@ -110,4 +110,5 @@ INSTALLED_APPS = (
     'bizondemand.orders',
     'bizondemand.ecommerce',
     'bizondemand.business',
+    'bizondemand.invoices',
 )
