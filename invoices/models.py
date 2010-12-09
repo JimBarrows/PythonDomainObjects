@@ -3,22 +3,46 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from polymorphic import PolymorphicModel
 from products.models import Product, Feature
 
-class Invoice( models.Model ):
+class Invoice( PolymorphicModel ):
 	invoice_date = models.DateField()
 	message = models.TextField()
 	description = models.TextField()
 
-class InvoiceItem( models.Model ):
+class SalesInvoice( Invoice ):
+	pass
+
+class PurchaseInvoice( Invoice ):
+	pass
+
+class Item( PolymorphicModel ):
 	taxable = models.BooleanField()
 	quantity = models.IntegerField()
-	amount = models.DecimalField( max_digits = 8, decimal_places=2)
 	description = models.TextField()
-	invoice = models.ForeignKey( Invoice)
-	kind = models.ForeignKey( 'InvoiceItemType', blank=True, null=True)
+	amount = models.DecimalField( max_digits = 8, decimal_places=2)
+
+class AcquiringItem( Item):
+	invoice = models.ForeignKey( Invoice )
+
+class ProductItem( Item):
 	product = models.ForeignKey( Product,  blank=True, null=True)
-	productFeature = models.ForeignKey( Feature, blank=True, null=True )
+	invoice = models.ForeignKey( Invoice )
 
-class InvoiceItemType( models.Model ):
-	description = models.CharField( max_length=250 )
+class FeatureItem( Item):
+	feature = models.ForeignKey( Feature, blank=True, null=True )
+	invoiceProductItem = models.ForeignKey( ProductItem, blank=True, null=True )
+	invoice = models.ForeignKey( Invoice )
 
+class Adjustment( Item):
+	perentage = models.DecimalField( max_digits = 5, decimal_places=2)
+	invoice = models.ForeignKey( Invoice )
+	kind = models.ForeignKey( 'AdjustmentType')
+
+class AdjustmentType( models.Model):
+	description = models.CharField(max_length=250)
+
+class PurchaseInvoiceItem( Item ):
+	invoice = models.ForeignKey( PurchaseInvoice )
+
+class SalesInvoiceItem( Item ):
+	invoice = models.ForeignKey( SalesInvoice )
 

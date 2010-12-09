@@ -1,12 +1,32 @@
 from django.contrib import admin
 from invoices.models import *
 
-class InvoiceItemInLine( admin.TabularInline):
-	model=InvoiceItem
+class SalesInvoiceItemInLine( admin.TabularInline):
+	model=SalesInvoiceItem
 	extra=1
 
-class InvoiceAdmin( admin.ModelAdmin ):
-	inlines=[InvoiceItemInLine]
+class PurchaseInvoiceItemInLine( admin.TabularInline):
+	model=PurchaseInvoiceItem
+	extra=1
 
-admin.site.register(  InvoiceItemType)
-admin.site.register(  Invoice, InvoiceAdmin)
+class ProductItemInLine( admin.TabularInline):
+	model=ProductItem
+	extra=1
+
+class FeatureItemInLine( admin.TabularInline):
+	model=FeatureItem
+	extra=1
+
+class AdjustmentInLine( admin.TabularInline):
+	model=Adjustment
+	extra=1
+
+class SalesInvoiceAdmin( admin.ModelAdmin ):
+	inlines=[SalesInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine]
+
+class PurchaseInvoiceAdmin( admin.ModelAdmin ):
+	inlines=[PurchaseInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine]
+
+admin.site.register(  SalesInvoice, SalesInvoiceAdmin)
+admin.site.register(  PurchaseInvoice, PurchaseInvoiceAdmin)
+admin.site.register( AdjustmentType)
