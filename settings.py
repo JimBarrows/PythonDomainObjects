@@ -48,7 +48,7 @@ USE_L10N = True
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
 MEDIA_ROOT = '/home/jimbarrows/Desktop/bizondemand/templates/'
-CKEDITOR_MEDIA_PREFIX = 'ckeditor/'
+CKEDITOR_MEDIA_PREFIX = 'ckeditor/ckeditor/'
 CKEDITOR_UPLOAD_PATH = '/home/jimbarrows/Desktop/bizondemand/templates/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
