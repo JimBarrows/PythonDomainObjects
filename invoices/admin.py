@@ -21,12 +21,17 @@ class AdjustmentInLine( admin.TabularInline):
 	model=Adjustment
 	extra=1
 
+class RoleInLine( admin.TabularInline):
+	model=Role
+	extra=1
+
 class SalesInvoiceAdmin( admin.ModelAdmin ):
-	inlines=[SalesInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine]
+	inlines=[SalesInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine, RoleInLine]
 
 class PurchaseInvoiceAdmin( admin.ModelAdmin ):
-	inlines=[PurchaseInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine]
+	inlines=[PurchaseInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine, RoleInLine]
 
 admin.site.register(  SalesInvoice, SalesInvoiceAdmin)
 admin.site.register(  PurchaseInvoice, PurchaseInvoiceAdmin)
 admin.site.register( AdjustmentType)
+admin.site.register( RoleType)
