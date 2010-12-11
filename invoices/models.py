@@ -69,4 +69,20 @@ class OrderItemBilling( models.Model) :
 	orderItem = models.ForeignKey( OrderItem )
 	quantity = models.IntegerField()
 	amount = models.DecimalField( max_digits = 9, decimal_places=2)
-	
+
+class TermType ( models.Model):
+	description = models.CharField(max_length=250)
+
+class Term( models.Model) :
+	value = models.IntegerField()
+	kind = models.ForeignKey( TermType )
+	item = models.ForeignKey( Item )
+	invoice = models.ForeignKey( Invoice )
+
+class StatusType ( models.Model):
+	description = models.CharField(max_length=250)
+
+class Status( models.Model) :
+	date = models.DateField()
+	invoice = models.ForeignKey( Invoice )
+	kind = models.ForeignKey( StatusType )
