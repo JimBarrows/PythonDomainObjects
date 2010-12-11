@@ -41,6 +41,22 @@ class PaymentApplicationInLine( admin.TabularInline):
 	model=PaymentApplication
 	extra=1
 
+class WithdrawalInline( admin.TabularInline):
+	model=Withdrawal
+	extra=1
+
+class DepositInLine( admin.TabularInline):
+	model=Deposit
+	extra=1
+
+class FinancialAccountAdjustmentInLine( admin.TabularInline):
+	model=FinancialAccountAdjustment
+	extra=1
+
+class FinancialAccountRoleInLine( admin.TabularInline):
+	model=FinancialAccountRole
+	extra=1
+
 class SalesInvoiceAdmin( admin.ModelAdmin ):
 	inlines=[SalesInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine, RoleInLine, TermInLine, StatusInLine, PaymentApplicationInLine]
 
@@ -53,13 +69,21 @@ class ItemAdmin( admin.ModelAdmin ):
 class PaymentAdmin( admin.ModelAdmin ):
 	inlines=[PaymentApplicationInLine]
 
-admin.site.register(  SalesInvoice, SalesInvoiceAdmin)
-admin.site.register(  PurchaseInvoice, PurchaseInvoiceAdmin)
-admin.site.register( Item, ItemAdmin)
-admin.site.register( AdjustmentType)
-admin.site.register( RoleType)
-admin.site.register( TermType)
-admin.site.register( StatusType)
+class FinancialAccountAdmin( admin.ModelAdmin ):
+	inlines=[WithdrawalInline, DepositInLine, FinancialAccountAdjustmentInLine, FinancialAccountRoleInLine]
+
 admin.site.register( BillingAccount)
+admin.site.register( Disbursement, PaymentAdmin)
+admin.site.register( FinancialAccount, FinancialAccountAdmin)
+admin.site.register( Item, ItemAdmin)
+admin.site.register( PurchaseInvoice, PurchaseInvoiceAdmin)
+admin.site.register( Receipt, PaymentAdmin)
+admin.site.register( SalesInvoice, SalesInvoiceAdmin)
+
+admin.site.register( AdjustmentType)
+admin.site.register( FinancialAccountRoleType)
+admin.site.register( FinancialAccountType)
 admin.site.register( PaymentMethodType)
-admin.site.register( Payment, PaymentAdmin)
+admin.site.register( RoleType)
+admin.site.register( StatusType)
+admin.site.register( TermType)

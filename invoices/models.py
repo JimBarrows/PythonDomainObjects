@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from polymorphic import PolymorphicModel
@@ -10,10 +11,10 @@ class Invoice( PolymorphicModel ):
 	message = models.TextField()
 	description = models.TextField()
 	parties = models.ManyToManyField( Party, through='Role', blank=True, null=True)
-	billedTo = models.ForeignKey( Party, related_name="billedTo_set" )
-	billedFrom = models.ForeignKey( Party, related_name="billedFrom_set" )
-	addressedTo = models.ForeignKey( ContactMechanism, related_name="addressedTo_set" )
-	addressedFrom = models.ForeignKey( ContactMechanism, related_name="addressedFrom_set" )
+	billed_to = models.ForeignKey( Party, related_name="billedTo_set" )
+	billed_from = models.ForeignKey( Party, related_name="billedFrom_set" )
+	addressed_to = models.ForeignKey( ContactMechanism, related_name="addressedTo_set" )
+	addressed_from = models.ForeignKey( ContactMechanism, related_name="addressedFrom_set" )
 	paid_via = models.ManyToManyField( 'Payment', through='PaymentApplication', blank=True, null=True)
 
 class SalesInvoice( Invoice ):
@@ -27,7 +28,7 @@ class Item( PolymorphicModel ):
 	quantity = models.IntegerField()
 	description = models.TextField()
 	amount = models.DecimalField( max_digits = 8, decimal_places=2)
-	orderItems = models.ManyToManyField( OrderItem, through='OrderItemBilling', blank=True, null=True)
+	order_items = models.ManyToManyField( OrderItem, through='OrderItemBilling', blank=True, null=True)
 
 class AcquiringItem( Item):
 	invoice = models.ForeignKey( Invoice )
@@ -38,7 +39,7 @@ class ProductItem( Item):
 
 class FeatureItem( Item):
 	feature = models.ForeignKey( Feature, blank=True, null=True )
-	invoiceProductItem = models.ForeignKey( ProductItem, blank=True, null=True )
+	invoice_product_item = models.ForeignKey( ProductItem, blank=True, null=True )
 	invoice = models.ForeignKey( Invoice )
 
 class Adjustment( Item):
@@ -61,13 +62,13 @@ class RoleType ( models.Model):
 class Role( models.Model):
 	invoice = models.ForeignKey( Invoice)
 	party = models.ForeignKey( Party)
-	roleType = models.ForeignKey( RoleType)
+	role_type = models.ForeignKey( RoleType)
 	percentage = models.DecimalField( max_digits=5, decimal_places=2)
 	at = models.DateTimeField(auto_now=True, auto_now_add=True)
 
 class OrderItemBilling( models.Model) :
-	invoiceItem = models.ForeignKey( Item )
-	orderItem = models.ForeignKey( OrderItem )
+	invoice_item = models.ForeignKey( Item )
+	order_item = models.ForeignKey( OrderItem )
 	quantity = models.IntegerField()
 	amount = models.DecimalField( max_digits = 9, decimal_places=2)
 
@@ -96,21 +97,57 @@ class BillingAccount( models.Model):
 	thru_date = models.DateField()
 	description = models.CharField(max_length=250)
 
-PAYMENT_TYPE = ( ('rcpt', 'Receipt'), ('dsbrs', 'Disbursement'))
-
-class Payment( models.Model):
+class Payment( PolymorphicModel):
 	effective_date = models.DateField()
 	reference_number = models.IntegerField()
 	amount = models.DecimalField( max_digits = 9, decimal_places=2)
 	comment = models.TextField()
-	kind = models.CharField( max_length=10, choices=PAYMENT_TYPE)
 	paid_via = models.ForeignKey( PaymentMethodType )
 	paid_from = models.ForeignKey( Party, related_name="paidFrom_set" )
 	paid_to = models.ForeignKey( Party, related_name="paidTo_set" )
+
+class Receipt( Payment ) :
+	deposit = models.ForeignKey( 'Deposit' )
+
+class Disbursement( Payment ) :
+	pass
+
 
 class PaymentApplication( models.Model) :
 	invoice = models.ForeignKey( Invoice )
 	payment = models.ForeignKey( Payment )
 	applied_to = models.ForeignKey( BillingAccount )
 	amount_applied = models.DecimalField( max_digits = 9, decimal_places=2)
-	
+
+class FinancialAccountRoleType( models.Model):
+	description = models.CharField(max_length=250)
+
+class FinancialAccountRole( models.Model):
+	kind = models.ForeignKey( FinancialAccountRoleType)
+	from_date = models.DateField( default=datetime.today())
+	thru_date = models.DateField( blank=True, null=True)
+	party = models.ForeignKey( Party)
+	account = models.ForeignKey( 'FinancialAccount')
+
+class FinancialAccountType( models.Model):
+	description = models.CharField(max_length=250)
+
+class FinancialAccount( models.Model):
+	name = models.CharField( max_length = 250 )
+	kind = models.ForeignKey( FinancialAccountType)
+	owned_by = models.ManyToManyField( Party, through='FinancialAccountRole', blank=True, null=True)
+
+class FinancialAccountTransaction( PolymorphicModel):
+	transaction_date = models.DateField();
+	entry_date = models.DateField();
+	account = models.ForeignKey( FinancialAccount)
+	party = models.ForeignKey( Party)
+
+class Withdrawal ( FinancialAccountTransaction):
+	disbursement = models.OneToOneField( Disbursement )
+
+class Deposit ( FinancialAccountTransaction):
+	pass
+
+class FinancialAccountAdjustment ( FinancialAccountTransaction):
+	pass
