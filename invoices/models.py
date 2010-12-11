@@ -3,6 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from polymorphic import PolymorphicModel
 from products.models import Product, Feature
 from party.models import Party, ContactMechanism
+from orders.models import OrderItem
 
 class Invoice( PolymorphicModel ):
 	invoice_date = models.DateField()
@@ -25,6 +26,7 @@ class Item( PolymorphicModel ):
 	quantity = models.IntegerField()
 	description = models.TextField()
 	amount = models.DecimalField( max_digits = 8, decimal_places=2)
+	orderItems = models.ManyToManyField( OrderItem, through='OrderItemBilling', blank=True, null=True)
 
 class AcquiringItem( Item):
 	invoice = models.ForeignKey( Invoice )
@@ -62,3 +64,9 @@ class Role( models.Model):
 	percentage = models.DecimalField( max_digits=5, decimal_places=2)
 	at = models.DateTimeField(auto_now=True, auto_now_add=True)
 
+class OrderItemBilling( models.Model) :
+	invoiceItem = models.ForeignKey( Item )
+	orderItem = models.ForeignKey( OrderItem )
+	quantity = models.IntegerField()
+	amount = models.DecimalField( max_digits = 9, decimal_places=2)
+	
