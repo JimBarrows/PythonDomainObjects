@@ -37,14 +37,21 @@ class StatusInLine( admin.TabularInline):
 	model=Status
 	extra=1
 
+class PaymentApplicationInLine( admin.TabularInline):
+	model=PaymentApplication
+	extra=1
+
 class SalesInvoiceAdmin( admin.ModelAdmin ):
-	inlines=[SalesInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine, RoleInLine, TermInLine, StatusInLine]
+	inlines=[SalesInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine, RoleInLine, TermInLine, StatusInLine, PaymentApplicationInLine]
 
 class PurchaseInvoiceAdmin( admin.ModelAdmin ):
-	inlines=[PurchaseInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine, RoleInLine, TermInLine, StatusInLine]
+	inlines=[PurchaseInvoiceItemInLine, AdjustmentInLine, ProductItemInLine, FeatureItemInLine, RoleInLine, TermInLine, StatusInLine, PaymentApplicationInLine]
 
 class ItemAdmin( admin.ModelAdmin ):
 	inlines=[OrderItemBillingInLine]
+
+class PaymentAdmin( admin.ModelAdmin ):
+	inlines=[PaymentApplicationInLine]
 
 admin.site.register(  SalesInvoice, SalesInvoiceAdmin)
 admin.site.register(  PurchaseInvoice, PurchaseInvoiceAdmin)
@@ -53,3 +60,6 @@ admin.site.register( AdjustmentType)
 admin.site.register( RoleType)
 admin.site.register( TermType)
 admin.site.register( StatusType)
+admin.site.register( BillingAccount)
+admin.site.register( PaymentMethodType)
+admin.site.register( Payment, PaymentAdmin)

@@ -14,6 +14,7 @@ class Invoice( PolymorphicModel ):
 	billedFrom = models.ForeignKey( Party, related_name="billedFrom_set" )
 	addressedTo = models.ForeignKey( ContactMechanism, related_name="addressedTo_set" )
 	addressedFrom = models.ForeignKey( ContactMechanism, related_name="addressedFrom_set" )
+	paid_via = models.ManyToManyField( 'Payment', through='PaymentApplication', blank=True, null=True)
 
 class SalesInvoice( Invoice ):
 	pass
@@ -86,3 +87,30 @@ class Status( models.Model) :
 	date = models.DateField()
 	invoice = models.ForeignKey( Invoice )
 	kind = models.ForeignKey( StatusType )
+
+class PaymentMethodType ( models.Model):
+	description = models.CharField(max_length=250)
+
+class BillingAccount( models.Model):
+	from_date = models.DateField()
+	thru_date = models.DateField()
+	description = models.CharField(max_length=250)
+
+PAYMENT_TYPE = ( ('rcpt', 'Receipt'), ('dsbrs', 'Disbursement'))
+
+class Payment( models.Model):
+	effective_date = models.DateField()
+	reference_number = models.IntegerField()
+	amount = models.DecimalField( max_digits = 9, decimal_places=2)
+	comment = models.TextField()
+	kind = models.CharField( max_length=10, choices=PAYMENT_TYPE)
+	paid_via = models.ForeignKey( PaymentMethodType )
+	paid_from = models.ForeignKey( Party, related_name="paidFrom_set" )
+	paid_to = models.ForeignKey( Party, related_name="paidTo_set" )
+
+class PaymentApplication( models.Model) :
+	invoice = models.ForeignKey( Invoice )
+	payment = models.ForeignKey( Payment )
+	applied_to = models.ForeignKey( BillingAccount )
+	amount_applied = models.DecimalField( max_digits = 9, decimal_places=2)
+	
