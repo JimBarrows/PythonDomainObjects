@@ -12,7 +12,7 @@ class ContactMechanismPurposeType(models.Model):
 class ContactMechanism(models.Model):
 	comment = models.TextField( blank = True, null = True)
 	def __unicode__(self):
-		return 'Contact Mechanism'
+		return self.comment
 	class Meta:
 		app_label = 'party'
 

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from products.models import *
 
+
 class CategoryInLine(admin.TabularInline):
 	model=Category
 	extra=1
@@ -12,6 +13,7 @@ class IdentificationInLine(admin.TabularInline):
 class MarketInterestInLine(admin.TabularInline):
 	model=MarketInterest
 	extra=1
+
 
 class FeatureInteractionOfInLine(admin.TabularInline):
 	model=FeatureInteraction
@@ -44,6 +46,10 @@ class ReorderGuidelineInLine(admin.TabularInline):
 	model=ReorderGuideline
 	extra=1
 
+class InventoryItemInLine(admin.TabularInline):
+	model=InventoryItem
+	extra=1
+
 class InventoryItemVarianceInLine(admin.TabularInline):
 	model=InventoryItemVariance
 	extra=1
@@ -64,6 +70,7 @@ class ManufacturerSuggestedPriceInLine(admin.TabularInline):
 	model=ManufacturerSuggestedPrice
 	extra=1
 
+
 class OneTimeChargeInLine(admin.TabularInline):
 	model=OneTimeCharge
 	extra=1
@@ -78,18 +85,22 @@ class UtilizationChargeInLine(admin.TabularInline):
 
 class ServiceAdmin( admin.ModelAdmin):
 	inlines=[ CategoryClassificationInLine, FeatureApplicabilityInLine, SupplierProductInLine, BasePriceInLine, 
-			DiscountComponentInLine,SurchargeComponentInLine, ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, 
+			DiscountComponentInLine, SurchargeComponentInLine, ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, 
 			RecurringChargeInLine, UtilizationChargeInLine ]
 
 class GoodAdmin( admin.ModelAdmin):
-	inlines=[ CategoryClassificationInLine, IdentificationInLine, FeatureApplicabilityInLine, SupplierProductInLine, 
-			ReorderGuidelineInLine, BasePriceInLine, DiscountComponentInLine, SurchargeComponentInLine,
-			ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, OneTimeChargeInLine, RecurringChargeInLine, UtilizationChargeInLine ]
+	inlines=[ CategoryClassificationInLine,  FeatureApplicabilityInLine, SupplierProductInLine,  BasePriceInLine, 
+		  DiscountComponentInLine, SurchargeComponentInLine, ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, 
+		  RecurringChargeInLine, UtilizationChargeInLine, InventoryItemInLine, IdentificationInLine, ReorderGuidelineInLine ]
+
+class CurrencyMeasureAdmin( admin.ModelAdmin):
+	inlines=[ BasePriceInLine]
 
 class CategoryAdmin( admin.ModelAdmin):
 	inlines=[ MarketInterestInLine, CategoryInLine]
 
 class FeatureAdmin( admin.ModelAdmin):
+	pass
 	inlines=[ FeatureInteractionOfInLine, FeatureInteractionFactorInInLine]
 
 class UnitOfMeasureAdmin( admin.ModelAdmin):
@@ -106,13 +117,13 @@ admin.site.register( Good, GoodAdmin )
 admin.site.register( Category, CategoryAdmin )
 admin.site.register( Feature,  FeatureAdmin)
 admin.site.register( IdentificationType )
+
 admin.site.register( FeatureCategory )
 admin.site.register( FeatureInteraction )
 admin.site.register( Dimension )
 admin.site.register( UnitOfMeasure, UnitOfMeasureAdmin )
 admin.site.register( UnitOfMeasureConversion )
-admin.site.register( SerializedInventoryItem, InventoryItemAdmin )
-admin.site.register( NonSerializedInventoryItem, InventoryItemAdmin )
+admin.site.register( InventoryItem, InventoryItemAdmin )
 admin.site.register( Reason )
 admin.site.register( ContainerType )
 admin.site.register( Container )
@@ -129,7 +140,7 @@ admin.site.register( QuantityBreak )
 admin.site.register( OrderValue )
 admin.site.register( SaleType )
 admin.site.register( TimeFrequencyMeasure )
-admin.site.register( CurrencyMeasure )
+admin.site.register( CurrencyMeasure, CurrencyMeasureAdmin )
 admin.site.register( EstimatedProductCost )
 admin.site.register( CostComponentType )
 admin.site.register( ProductAssociation )

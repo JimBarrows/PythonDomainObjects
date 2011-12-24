@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:8000/" />
+<title>AddUpdateGood</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddUpdateGood</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/accounts/login/?next=/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Welcome to NSFW Enterprises, LLC</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>NSFW Enterprises, LLC - Login</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_username</td>
+	<td>jimbarrows</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_password</td>
+	<td>newpass</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>loginButton</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>NSFW Enterprises, LLC - Business Setup</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_name</td>
+	<td>test biz</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>products_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>add_good_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_name</td>
+	<td>test good</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_introduction_date</td>
+	<td>01/01/2000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_sales_discontinuation_date</td>
+	<td>01/01/2020</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_support_discontinuation_date</td>
+	<td>01/01/2021</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_comment</td>
+	<td>This is a comment</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='content']/div/table[1].1.0</td>
+	<td>test good</td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>NSFW Enterprises, LLC - Goods Services</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test good</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_name</td>
+	<td>test good 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_introduction_date</td>
+	<td>2000-01-02</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_sales_discontinuation_date</td>
+	<td>2020-01-02</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_support_discontinuation_date</td>
+	<td>2021-01-02</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id_comment</td>
+	<td>This is a comment that's been modified</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>save_button</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTitle</td>
+	<td>NSFW Enterprises, LLC - Goods Services</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='content']/div/table[1].1.0</td>
+	<td>test good 2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=test good 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id_name</td>
+	<td>test good 2</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id_introduction_date</td>
+	<td>2000-01-02</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id_sales_discontinuation_date</td>
+	<td>2020-01-02</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id_support_discontinuation_date</td>
+	<td>2021-01-02</td>
+</tr>
+<tr>
+	<td>verifyValue</td>
+	<td>id_comment</td>
+	<td>This is a comment that's been modified</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

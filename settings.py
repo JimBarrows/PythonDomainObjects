@@ -1,4 +1,7 @@
 # Django settings for bizondemand project.
+import os.path
+
+PROJECT_DIR = os.path.dirname(__file__) # this is not Django setting.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -47,9 +50,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/home/jimbarrows/Desktop/bizondemand/templates/'
-CKEDITOR_MEDIA_PREFIX = 'ckeditor/ckeditor/'
-CKEDITOR_UPLOAD_PATH = '/home/jimbarrows/Desktop/bizondemand/templates/'
+MEDIA_ROOT = os.path.join(PROJECT_DIR,'/web/templates')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -59,7 +60,7 @@ MEDIA_URL = ''
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media'
+ADMIN_MEDIA_PREFIX = '/media/'
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'zj$w0)j96-1i7rgdjve_)p)iq0j9b_2y7d8ng-#@^ngggb^$p9'
@@ -79,17 +80,16 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'bizondemand.urls'
+ROOT_URLCONF = 'bizondemand-python.urls'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-		'/home/jimbarrows/Desktop/bizondemand/templates',
-		'/home/jimbarrows/Desktop/bizondemand/css',
-		'/home/jimbarrows/Desktop/bizondemand/js',
-		'/home/jimbarrows/Desktop/bizondemand/img'
-		'/home/jimbarrows/Desktop/bizondemand/ckeditor'
+		os.path.join(PROJECT_DIR, 'web/templates'),
+		os.path.join(PROJECT_DIR, 'web/css'),
+		os.path.join(PROJECT_DIR, 'web/js'),
+		os.path.join(PROJECT_DIR, 'web/img'),
 )
 
 INSTALLED_APPS = (
@@ -102,13 +102,14 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'ckeditor',
-    'south',
-    'bizondemand.common',
-    'bizondemand.party',
-    'bizondemand.products',
-    'bizondemand.orders',
-    'bizondemand.ecommerce',
-    'bizondemand.business',
-    'bizondemand.invoices',
+#dont' user until you figure out error    'south',
+    'lettuce.django',
+    'bizondemand-python.common',
+    'bizondemand-python.party',
+    'bizondemand-python.products',
+    'bizondemand-python.orders',
+    'bizondemand-python.ecommerce',
+    'bizondemand-python.business',
+    'bizondemand-python.invoices',
+    'bizondemand-python.tests',
 )

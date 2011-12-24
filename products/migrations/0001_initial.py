@@ -275,7 +275,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('description', self.gf('django.db.models.fields.CharField')(max_length=250)),
             ('quantity', self.gf('django.db.models.fields.IntegerField')()),
-            ('creation_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2010, 12, 8, 21, 7, 2, 835031))),
+            ('creation_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2011, 12, 24, 1, 14, 35, 776426))),
             ('expiration_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
         ))
         db.send_create_signal('products', ['Lot'])
@@ -291,7 +291,7 @@ class Migration(SchemaMigration):
         db.create_table('products_reorderguideline', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('guidelineFor', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Good'])),
-            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2010, 12, 8, 21, 7, 2, 838631))),
+            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2011, 12, 24, 1, 14, 35, 780013))),
             ('thru_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('reorder_quantity', self.gf('django.db.models.fields.IntegerField')()),
             ('reorder_level', self.gf('django.db.models.fields.IntegerField')()),
@@ -307,7 +307,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('product', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Product'])),
             ('organization', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['party.Organization'])),
-            ('available_from', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2010, 12, 8, 21, 7, 2, 841859))),
+            ('available_from', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2011, 12, 24, 1, 14, 35, 781109))),
             ('available_thru', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('standard_lead_time_in_days', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
             ('preference', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.PreferenceType'], null=True, blank=True)),
@@ -336,7 +336,7 @@ class Migration(SchemaMigration):
             ('value', self.gf('django.db.models.fields.CharField')(max_length=250)),
             ('good', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Good'])),
             ('kind', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.IdentificationType'])),
-            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2010, 12, 8, 21, 7, 2, 851678))),
+            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2011, 12, 24, 1, 14, 35, 783065))),
             ('thru_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
         ))
         db.send_create_signal('products', ['Identification'])
@@ -346,7 +346,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('product', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Product'])),
             ('category_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Category'])),
-            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2010, 12, 8, 21, 7, 2, 853808))),
+            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2011, 12, 24, 1, 14, 35, 783804))),
             ('thru_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('primary', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('comment', self.gf('django.db.models.fields.TextField')()),
@@ -403,7 +403,7 @@ class Migration(SchemaMigration):
         # Adding model 'FeatureApplicability'
         db.create_table('products_featureapplicability', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2010, 12, 8, 21, 7, 2, 873826))),
+            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2011, 12, 24, 1, 14, 35, 790919))),
             ('thru_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('product', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Product'])),
             ('feature', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Feature'])),
@@ -435,7 +435,7 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('party_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['party.PartyType'])),
             ('category_type', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['products.Category'])),
-            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2010, 12, 8, 21, 7, 2, 881087))),
+            ('from_date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2011, 12, 24, 1, 14, 35, 793586))),
             ('thru_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
         ))
         db.send_create_signal('products', ['MarketInterest'])
@@ -687,7 +687,7 @@ class Migration(SchemaMigration):
         },
         'party.partyclassification': {
             'Meta': {'object_name': 'PartyClassification'},
-            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 589445)'}),
+            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 704584)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'party': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.Party']"}),
             'party_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.PartyType']"}),
@@ -695,7 +695,7 @@ class Migration(SchemaMigration):
         },
         'party.partyrole': {
             'Meta': {'object_name': 'PartyRole'},
-            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 592912)'}),
+            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 705885)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'party': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.Party']"}),
             'party_role_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.PartyRoleType']"}),
@@ -729,7 +729,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'CategoryClassification'},
             'category_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Category']"}),
             'comment': ('django.db.models.fields.TextField', [], {}),
-            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 853808)'}),
+            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 783804)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'primary': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'product': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Product']"}),
@@ -791,7 +791,7 @@ class Migration(SchemaMigration):
         'products.featureapplicability': {
             'Meta': {'object_name': 'FeatureApplicability'},
             'feature': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Feature']"}),
-            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 873826)'}),
+            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 790919)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'kind': ('django.db.models.fields.CharField', [], {'max_length': '10'}),
             'product': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Product']"}),
@@ -823,7 +823,7 @@ class Migration(SchemaMigration):
         },
         'products.identification': {
             'Meta': {'object_name': 'Identification'},
-            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 851678)'}),
+            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 783065)'}),
             'good': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Good']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'kind': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.IdentificationType']"}),
@@ -862,7 +862,7 @@ class Migration(SchemaMigration):
         },
         'products.lot': {
             'Meta': {'object_name': 'Lot'},
-            'creation_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 835031)'}),
+            'creation_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 776426)'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '250'}),
             'expiration_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -876,7 +876,7 @@ class Migration(SchemaMigration):
         'products.marketinterest': {
             'Meta': {'object_name': 'MarketInterest'},
             'category_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Category']"}),
-            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 881087)'}),
+            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 793586)'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'party_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.PartyType']"}),
             'thru_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'})
@@ -994,7 +994,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'ReorderGuideline'},
             'boundary': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.GeographicBoundary']"}),
             'facility': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.Facility']"}),
-            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 838631)'}),
+            'from_date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 780013)'}),
             'guidelineFor': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['products.Good']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'internal_organization': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.PartyRole']"}),
@@ -1023,7 +1023,7 @@ class Migration(SchemaMigration):
         },
         'products.supplierproduct': {
             'Meta': {'object_name': 'SupplierProduct'},
-            'available_from': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2010, 12, 8, 21, 7, 2, 841859)'}),
+            'available_from': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2011, 12, 24, 1, 14, 35, 781109)'}),
             'available_thru': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'organization': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['party.Organization']"}),

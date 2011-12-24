@@ -77,7 +77,7 @@ class CostComponentType( models.Model):
 
 class PriceComponent( PolymorphicModel):
 	product = models.ForeignKey('Product', blank=True, null=True)
-	from_date = models.DateField()
+	from_date = models.DateField(default = datetime.today())
 	thru_date = models.DateField(blank=True, null=True)
 	comment = models.TextField(blank=True, null=True)
 	geographic_boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
@@ -90,9 +90,13 @@ class PriceComponent( PolymorphicModel):
 	feature = models.ForeignKey('Feature', blank=True, null=True)
 	currency = models.ForeignKey('CurrencyMeasure', blank=True, null=True)
 	part = models.ForeignKey('Part', blank=True, null=True)
+	def __unicode__(self):
+		return self.comment
+	class Meta:
+		abstract = True
 
 class BasePrice( PriceComponent):
-	''' A starting point for figuring out the price. '''
+	''' A starting point for figuring out the price. ''' 
 	price = models.DecimalField( max_digits=8, decimal_places=2)
 
 class DiscountComponent( PriceComponent):
@@ -118,7 +122,7 @@ class RecurringCharge( PriceComponent):
 	price = models.DecimalField( max_digits=8, decimal_places=2)
 
 class UtilizationCharge( PriceComponent):
-	per = models.ForeignKey('UnitOfMeasure')
+	per = models.ForeignKey('UnitOfMeasure', related_name="per_set")
 	quantity = models.IntegerField()
 	price = models.DecimalField( max_digits=8, decimal_places=2)
 
@@ -144,12 +148,10 @@ class InventoryItem( PolymorphicModel ):
 	located_within = models.ForeignKey('Container') 
 	part = models.ForeignKey('Part') 
 	lot = models.ForeignKey('Lot') 
-
-class SerializedInventoryItem( InventoryItem):
-	serial_number = models.CharField(max_length=250)
-
-class NonSerializedInventoryItem( InventoryItem):
 	quantity_on_hand = models.IntegerField()
+	serial_number = models.CharField(max_length=250)
+	def __unicode__(self):
+		return quantity_on_hand if (quantity_on_hand == null) else serial_number
 
 class InventoryItemVariance( models.Model):
 	physical_inventory_date = models.DateField()
@@ -157,9 +159,13 @@ class InventoryItemVariance( models.Model):
 	comment = models.CharField(max_length=250)
 	reason = models.ForeignKey('Reason') 
 	adjustment_for = models.ForeignKey('InventoryItem') 
+	def __unicode__(self):
+		return self.comment
 
 class Reason( models.Model):
 	description = models.CharField(max_length=250)
+	def __unicode__(self):
+		return self.description
 
 class Container( models.Model):
 	description = models.CharField(max_length=250)
@@ -184,12 +190,11 @@ class ReorderGuideline( models.Model):
 	thru_date = models.DateField(blank=True, null=True)
 	reorder_quantity = models.IntegerField()
 	reorder_level = models.IntegerField()
-	boundary = models.ForeignKey(GeographicBoundary)
-	facility = models.ForeignKey(Facility)
-	internal_organization = models.ForeignKey(PartyRole, limit_choices_to={'party_role_type__description':'Internal Organization'})
+	boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
+	facility = models.ForeignKey(Facility, blank=True, null=True)
+	internal_organization = models.ForeignKey(PartyRole, blank=True, null=True, limit_choices_to={'party_role_type__description':'Internal Organization'})
 	part = models.ForeignKey('Part')
 	
-
 class SupplierProduct( models.Model):
 	product = models.ForeignKey('Product')
 	organization = models.ForeignKey(Organization)
@@ -200,7 +205,7 @@ class SupplierProduct( models.Model):
 	rating = models.ForeignKey('RatingType', blank=True, null=True)
 	part = models.ForeignKey('Part', blank=True, null=True)
 	def __unicode__(self):
-		return self.Organization.name
+		return self.organization.name
 
 class PreferenceType( models.Model):
 	description = models.CharField(max_length=250)
@@ -215,7 +220,7 @@ class Identification( models.Model ):
 	from_date = models.DateField(default = datetime.today())
 	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.party_type.description
+		return self.value
 
 class CategoryClassification( models.Model ):
 	product = models.ForeignKey(Product)
@@ -223,7 +228,7 @@ class CategoryClassification( models.Model ):
 	from_date = models.DateField(default = datetime.today())
 	thru_date = models.DateField(blank = True, null = True)
 	primary = models.BooleanField()
-	comment = models.TextField()
+	comment = models.TextField( blank = True, null = True)
 	def __unicode__(self):
 		return self.category_type.description
 

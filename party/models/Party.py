@@ -68,7 +68,7 @@ class PartyRole(models.Model):
 	from_date = models.DateField(default = datetime.today())
 	thru_date = models.DateField(blank = True, null = True)
 	def __unicode__(self):
-		return self.party_role_type.description
+		return u'%s - %s' % (unicode( self.party), self.party_role_type.description)
 	class Meta:
 		app_label = 'party'
 		verbose_name = 'Party Role'

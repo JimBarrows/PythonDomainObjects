@@ -1,16 +1,15 @@
 from django.forms import ModelForm
-from common.widgets import DatePickerWidget
-from common.forms import CommonModelForm
+from common.forms import CommonModelForm,make_custom_field
 from products.models import Good
-from ckeditor.widgets import CKEditorWidget
+from products.models import Service
 
 class GoodForm( CommonModelForm ):
+	formfield_callback = make_custom_field 
 	class Meta:
 		model=Good
-		widgets = {
-			'comment' : CKEditorWidget,
-			'introduction_date' : DatePickerWidget,
-			'sales_discontinuation_date' : DatePickerWidget,
-			'support_discontinuation_date' : DatePickerWidget,
-		}
+
+class ServiceForm( CommonModelForm ):
+	formfield_callback = make_custom_field 
+	class Meta:
+		model=Service
 

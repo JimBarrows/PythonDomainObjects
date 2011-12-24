@@ -1,0 +1,58 @@
+{% extends "products/template.html" %}
+
+{% block title %}Services{% endblock %}
+
+{% block content %}
+<h1>Services</h1>
+<h2>Current Services</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Note</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for service in current_goods %}
+		<tr>
+			<td> <a href="services/{{service.id}}">{{ service.name }}</a></td>
+			<td> {{ service.comments }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<h2>Future Services</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Note</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for sercice in future_servicess %}
+		<tr>
+			<td> {{ service.name }}</td>
+			<td> {{ service.comments }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<h2>Past Services</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Note</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for service in past_servicess %}
+		<tr>
+			<td> {{ service.name }}</td>
+			<td> {{ service.comments }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}
