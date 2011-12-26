@@ -10,8 +10,8 @@ from common.forms import render_form_to_response, make_custom_field
 from products.forms import *
 from products.models import *
 
-#CategoryClassificationFormSet = inlineformset_factory( Good, CategoryClassification, extra=1, formfield_callback=make_custom_field )
-#SupplierFormSet = inlineformset_factory( Good, SupplierProduct, extra=1, formfield_callback=make_custom_field )
+CategoryClassificationFormSet = inlineformset_factory( Good, CategoryClassification, extra=1, formfield_callback=make_custom_field )
+SupplierFormSet = inlineformset_factory( Good, SupplierProduct, extra=1, formfield_callback=make_custom_field )
 
 @login_required
 def index( request ) :
