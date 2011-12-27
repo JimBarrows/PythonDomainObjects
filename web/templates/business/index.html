@@ -3,57 +3,48 @@
 {% block title %}Business{% endblock %}
 
 {% block content %}
-	<h1>Main Organization: {{ business }}</h1>
-		<div class="span-20 last">
-		<form action="addSubOrg" method="post">
-			{% include "common/forms.html"%}
-			{% csrf_token %}
-			<div class="span-15">
-				<input class="ss_sprite ss_add" type="submit" value="Add"/>
-			</div>
-		</form>
-		</div>
-	
-	<div class="span-20">
+<h1>Main Organization: {{ business }}</h1>
+<a href="/business/subOrganizationForm">Add a Sub-Organization</a>
+<div class="span-20">
 	<h2>Departments</h2>
-		{% if departments %}
-			<ul>
-			{% for department in departments %}
-				<li>{{department}}</li>
-			{% endfor %}
-			</ul>
-		{% else %}
-			<p>There are no Departments</p>
-		{% endif %}
+	{% if departments %}
+	<ul>
+		{% for department in departments %}
+		<li>{{department}}</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>There are no Departments</p>
+	{% endif %}
 	<h2>Divisions</h2>
-		{% if divisions %}
-			<ul>
-			{% for division in divisions %}
-				<li>{{division}}</li>
-			{% endfor %}
-			</ul>
-		{% else %}
-			<p>There are no divisions</p>
-		{% endif %}
+	{% if divisions %}
+	<ul>
+		{% for division in divisions %}
+		<li>{{division}}</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>There are no divisions</p>
+	{% endif %}
 	<h2>Subsidiarys</h2>
-		{% if subsidiarys %}
-			<ul>
-			{% for subsidiary in subsidiarys %}
-				<li>{{subsidiary}}</li>
-			{% endfor %}
-			</ul>
-		{% else %}
-			<p>There are no subsidiarys</p>
-		{% endif %}
+	{% if subsidiarys %}
+	<ul>
+		{% for subsidiary in subsidiarys %}
+		<li>{{subsidiary}}</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>There are no subsidiarys</p>
+	{% endif %}
 	<h2>DBA's</h2>
-		{% if dbas %}
-			<ul>
-			{% for dba in dbas %}
-				<li>{{dba}}</li>
-			{% endfor %}
-			</ul>
-		{% else %}
-			<p>There are no DBAs</p>
-		{% endif %}
-	</div>
+	{% if dbas %}
+	<ul>
+		{% for dba in dbas %}
+		<li>{{dba}}</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p>There are no DBAs</p>
+	{% endif %}
+</div>
 {% endblock %}

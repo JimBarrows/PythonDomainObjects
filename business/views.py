@@ -5,10 +5,11 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.forms import DateField
 
-from common.forms import CommonModelForm
+from common.forms import CommonModelForm, render_form_to_response
 from common.widgets import DatePickerWidget
 from party.models import Organization, PartyRole, PartyRoleType, PartyRelationshipType, PartyRelationship
 from business.forms import BusinessForm, SubOrgForm
+
 
 internalOrganizations = Organization.objects.filter( roles__description__exact='Internal Organization')
 
@@ -31,6 +32,10 @@ def index( request):
 	}
 	c.update(csrf(request))
 	return render_to_response('business/index.html', c)
+
+@login_required
+def subOrganizationForm( request ) :
+	return render_form_to_response(request, 'business/subOrganizationForm.html', {'form' :SubOrgForm()})
 
 @login_required
 def add_sub_org( request):
@@ -90,5 +95,4 @@ def setup( request):
 			form = BusinessForm()
 	c = {'form':form}
 	c.update(csrf(request))
-	return render_to_response('business/setup/index.html', c)
-
+	return render_form_to_response(request, 'business/setup/index.html', c)

@@ -1,0 +1,14 @@
+{% extends "business/template.html" %}
+
+{% block title %}Sub Organization{% endblock%}
+
+{% block content %}
+<h1>Add sub-organization</h1>
+<form action="addSubOrg" method="post">
+	{% include "common/forms.html"%}
+	{% csrf_token %}
+	<div class="span-15">
+		<input type="submit" name="addButton" value="Add" class="ss_sprite ss_add"/>
+	</div>
+</form>
+{% endblock %}
