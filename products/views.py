@@ -29,7 +29,7 @@ def good_index( request ) :
 	past_goods = Good.objects.filter( 
 			Q(sales_discontinuation_date__lte=datetime.now()) 
 		)
-	return render_to_response('products/good_index.html', {
+	return render_to_response('products/goods/index.html', {
 			'current_goods':current_goods, 
 			'future_goods':future_goods,
 			'past_goods':past_goods
@@ -47,7 +47,7 @@ def service_index( request ) :
 	past_services = Service.objects.filter( 
 		Q(sales_discontinuation_date__lte=datetime.now()) 
 		)
-	return render_to_response('products/service_index.html', {
+	return render_to_response('products/services/index.html', {
 			'current_services':current_services, 
 			'future_services':future_services,
 			'past_services':past_services
@@ -59,7 +59,7 @@ def good_edit( request, good_id):
 	good_form = GoodForm(instance=good) 
 	category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
 	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
-	return render_form_to_response(request, 'products/good_form.html', 
+	return render_form_to_response(request, 'products/goods/form.html', 
 			product_context( good_form, category_formset, supplier_formset))
 
 @login_required
@@ -68,7 +68,7 @@ def service_edit( request, service_id):
 	service_form = ServiceForm(instance=good) 
 	category_formset = CategoryClassificationFormSet( instance=service, prefix="categories")
 	supplier_formset =SupplierFormSet( instance=service, prefix="supplier")
-	return render_form_to_response(request, 'products/service_form.html', 
+	return render_form_to_response(request, 'products/services/form.html', 
 			product_context( service_form, category_formset, supplier_formset))
 
 @login_required
@@ -77,15 +77,15 @@ def good_add( request ) :
 	good = Good()
 	category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
 	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
-	return render_form_to_response(request, 'products/good_form.html', product_context( good_form, category_formset, supplier_formset))
+	return render_form_to_response(request, 'products/goods/form.html', product_context( good_form, category_formset, supplier_formset))
 
 @login_required
 def service_add( request ) :
 	service_form = ServiceForm() 
 	service = Service()
-	category_formset = CategoryClassificationFormSet( instance=service, prefix="categores")
+	category_formset = CategoryClassificationFormSet( instance=service, prefix="categories")
 	supplier_formset =SupplierFormSet( instance=service, prefix="supplier")
-	return render_form_to_response(request, 'products/service_form.html', product_context( service_form, category_formset, supplier_formset))
+	return render_form_to_response(request, 'products/services/form.html', product_context( service_form, category_formset, supplier_formset))
 
 @login_required
 def good_save( request) :
@@ -102,12 +102,12 @@ def good_save( request) :
 				return redirect(to='/products/goods')
 			else:
 				new_good.save()
-				return render_form_to_response(request, 'products/good_form.html', product_context(good_form, category_formset, supplier_formset))
+				return render_form_to_response(request, 'products/goods/form.html', product_context(good_form, category_formset, supplier_formset))
 		else:
 			good = Good()
 			category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
 			supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
-			return render_form_to_response(request, 'products/good_form.html', product_context(good_form, category_formset, supplier_formset))
+			return render_form_to_response(request, 'products/goods/form.html', product_context(good_form, category_formset, supplier_formset))
 
 @login_required
 def service_save( request) :
@@ -124,12 +124,12 @@ def service_save( request) :
 				return redirect(to='/products/services')
 			else:
 				new_service.save()
-				return render_form_to_response(request, 'products/serivce_form.html', product_context(service_form, category_formset, supplier_formset))
+				return render_form_to_response(request, 'products/services/form.html', product_context(service_form, category_formset, supplier_formset))
 		else:
 			service = Service()
 			category_formset = CategoryClassificationFormSet( instance=service, prefix="categories")
 			supplier_formset =SupplierFormSet( instance=service, prefix="supplier")
-			return render_form_to_response(request, 'products/service_form.html', product_context(service_form, category_formset, supplier_formset))
+			return render_form_to_response(request, 'products/services/form.html', product_context(service_form, category_formset, supplier_formset))
 
 @login_required
 def good_update( request, good_id ) :
@@ -144,7 +144,7 @@ def good_update( request, good_id ) :
 				category_formset.save()
 				supplier_formset.save()
 				return redirect(to='/products/goods')
-	return render_form_to_response(request, 'products/good_form.html', product_context(good_form, category_formset, supplier_formset))
+	return render_form_to_response(request, 'products/goods/form.html', product_context(good_form, category_formset, supplier_formset))
 
 @login_required
 def service_update( request, service_id ) :
@@ -159,7 +159,7 @@ def service_update( request, service_id ) :
 				category_formset.save()
 				supplier_formset.save()
 				return redirect(to='/products/services')
-	return render_form_to_response(request, 'products/service_form.html', product_context(good_form, category_formset, supplier_formset))
+	return render_form_to_response(request, 'products/services/form.html', product_context(good_form, category_formset, supplier_formset))
 
 def product_context( product_form, category_formset, supplier_formset):
 	return {'product_form': product_form,

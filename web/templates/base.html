@@ -21,13 +21,50 @@
   </script>
 </head>
 <body >
-  <div class="container">
-    <div class="span-4">
-      {% block sidebar %}{% endblock %}
-    </div>
-    <div class="span-19">
+  <div class="container showgrid">
+		<div id="mainMenu" class="span-24">
+			<div class="prepend-2 span-3">
+				<a href="/">NSFW Enterprises</a>
+			</div>
+			<div class="span-1">
+				CRM
+			</div>
+			<div class="span-1">
+				VRM
+			</div>
+			<div class="span-2">
+				<a href="/products/goods">Inventory</a>
+			</div>
+			<div class="span-2">
+				<a href="/products/services">Services</a>
+			</div>
+			<div class="span-2">
+				Sales Orders
+			</div>
+			<div class="span-2">
+				Sales Invoices
+			</div>
+			<div class="span-2">
+				Accounting
+			</div>
+			<div class="span-2">
+				Purchase Orders
+			</div>
+			<div class="span-2">
+				Purchase Invoices
+			</div>
+			<div class="span-1">
+				CMS
+			</div>
+			<div class="span-2">
+				<a href="/business">Business</a>
+			</div>
+		</div>
+		{% block subMenu %}{% endblock %}
+    <div class="span-24">
+			<h1>{% block pageTitle %}{% endblock %}</h1>
       {% block content %}{% endblock %}
-    </div>
+    </div><!-- main span-24 div -->
   </div>
 </body>
 </html>

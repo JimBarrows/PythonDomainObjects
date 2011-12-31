@@ -1,10 +1,8 @@
-{% extends "products/template.html" %}
-
-{% block title %}Services{% endblock %}
+{% extends "products/services/template.html" %}
 
 {% block content %}
-<h1>Services</h1>
-<h2>Current Services</h2>
+<h2>Services</h2>
+<h3>Current Services</h3>
 <table>
 	<thead>
 		<tr>
@@ -21,7 +19,7 @@
 		{% endfor %}
 	</tbody>
 </table>
-<h2>Future Services</h2>
+<h3>Future Services</h3>
 <table>
 	<thead>
 		<tr>
@@ -38,7 +36,7 @@
 		{% endfor %}
 	</tbody>
 </table>
-<h2>Past Services</h2>
+<h3>Past Services</h3>
 <table>
 	<thead>
 		<tr>
