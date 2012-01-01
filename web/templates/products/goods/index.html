@@ -1,57 +1,7 @@
 {% extends "products/goods/template.html" %}
 
 {% block content %}
-	<div class="span-20 last">
-		<h1>Goods</h1>
-		<h2>Current Goods</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Note</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for good in current_goods %}
-					<tr>
-						<td> <a href="goods/{{good.id}}">{{ good.name }}</a></td>
-						<td> {{ good.comments }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<h2>Future Goods</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Note</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for good in future_goods %}
-					<tr>
-						<td> {{ good.name }}</td>
-						<td> {{ good.comments }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-		<h2>Past Goods</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Note</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for good in past_goods %}
-					<tr>
-						<td> {{ good.name }}</td>
-						<td> {{ good.comments }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+<h2>Goods</h2>
+{% include "products/index_template.html" with current=current_goods future=future_goods past=past_goods edit_url="goods" %}
+
 {% endblock %}

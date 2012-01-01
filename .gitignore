@@ -2,6 +2,8 @@
 *.bak
 *.class
 .classpath
+*#
+.#*
 .CVS
 *.db
 derby.log
@@ -48,4 +50,3 @@ src_managed
 target/
 test-output
 tmp*
-

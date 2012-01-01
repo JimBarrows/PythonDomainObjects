@@ -2,5 +2,5 @@
 
 {% block content %}
 <h2>Services</h2>
-{% include "products/index_template.html" %}
+{% include "products/index_template.html" with current=current_services future=future_services past=past_services edit_url="services" %}
 {% endblock %}
