@@ -2,55 +2,5 @@
 
 {% block content %}
 <h2>Services</h2>
-<h3>Current Services</h3>
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Note</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for service in current_services %}
-		<tr>
-			<td> <a href="services/{{service.id}}">{{ service.name }}</a></td>
-			<td> {{ service.comments }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
-<h3>Future Services</h3>
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Note</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for service in future_services %}
-		<tr>
-			<td> <a href="services/{{service.id}}">{{ service.name }}</a></td>
-			<td> {{ service.comments }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
-<h3>Past Services</h3>
-<table>
-	<thead>
-		<tr>
-			<th>Name</th>
-			<th>Note</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for service in past_services %}
-		<tr>
-			<td> <a href="services/{{service.id}}">{{ service.name }}</a></td>
-			<td> {{ service.comments }}</td>
-		</tr>
-		{% endfor %}
-	</tbody>
-</table>
+{% include "products/index_template.html" %}
 {% endblock %}

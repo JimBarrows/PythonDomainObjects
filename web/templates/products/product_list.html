@@ -1,0 +1,16 @@
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Note</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for product in products %}
+		<tr>
+			<td><a href="{{edit_url}}/{{product.id}}">{{ product.name }}</a></td>
+			<td> {{ service.comments }}</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
