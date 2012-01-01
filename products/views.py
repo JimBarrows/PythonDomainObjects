@@ -53,113 +53,92 @@ def service_index( request ) :
 			'past_services':past_services
 			})
 
+def product_edit( request, product_form,  product, url):
+	category_formset = CategoryClassificationFormSet( instance=product, prefix="categories")
+	supplier_formset =SupplierFormSet( instance=product, prefix="supplier")
+	return render_form_to_response(request, url,
+				       product_context( product_form, category_formset, supplier_formset))
+
 @login_required
 def good_edit( request, good_id):
 	good = get_object_or_404(Good, pk=good_id)
 	good_form = GoodForm(instance=good) 
-	category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
-	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
-	return render_form_to_response(request, 'products/goods/form.html', 
-			product_context( good_form, category_formset, supplier_formset))
+	return product_edit( request, good_form, good, 'products/goods/form.html')
 
 @login_required
 def service_edit( request, service_id):
 	service = get_object_or_404(Service, pk=service_id)
 	service_form = ServiceForm(instance=service) 
-	category_formset = CategoryClassificationFormSet( instance=service, prefix="categories")
-	supplier_formset =SupplierFormSet( instance=service, prefix="supplier")
-	return render_form_to_response(request, 'products/services/form.html', 
-			product_context( service_form, category_formset, supplier_formset))
+	return product_edit( request, service_form, service, 'products/services/form.html')
+
+def product_add( request, url, product_form, product):
+	category_formset = CategoryClassificationFormSet( instance=product, prefix="categories")
+	supplier_formset =SupplierFormSet( instance=product, prefix="supplier")
+	return render_form_to_response(request, url,product_context( product_form, category_formset, supplier_formset))
 
 @login_required
 def good_add( request ) :
 	good_form = GoodForm() 
 	good = Good()
-	category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
-	supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
-	return render_form_to_response(request, 'products/goods/form.html', product_context( good_form, category_formset, supplier_formset))
+	return product_add( request, 'products/goods/form.html', good_form, good)
 
 @login_required
 def service_add( request ) :
 	service_form = ServiceForm() 
 	service = Service()
-	category_formset = CategoryClassificationFormSet( instance=service, prefix="categories")
-	supplier_formset =SupplierFormSet( instance=service, prefix="supplier")
-	return render_form_to_response(request, 'products/services/form.html', product_context( service_form, category_formset, supplier_formset))
+	return product_add( request, 'products/services/form.html', service_form, service)
 
+def product_save(request, form, product, list_url, form_url):
+	if form.is_valid():
+		new_product = form.save( commit=False)
+		category_formset = CategoryClassificationFormSet( request.POST, instance=new_product, prefix="categories")
+		supplier_formset = SupplierFormSet( request.POST, instance=new_product, prefix="supplier")
+		if category_formset.is_valid() and supplier_formset.is_valid():
+			new_product.save()
+			category_formset.save()
+			supplier_formset.save()
+			return redirect(to=list_url)
+		else:
+			new_product.save()
+			return render_form_to_repsonse( request, form_url, product_context( form, category_formset, supplier_formset))
+	else:
+		category_formset = CategoryClassificationFormSet( instance=product, prefix="categories")
+		supplier_formset =SupplierFormSet( instance=product, prefix="supplier")
+		return render_form_to_response(request, form_url, product_context(good_form, category_formset, supplier_formset))
 @login_required
 def good_save( request) :
-	if request.method == 'POST':
-		good_form = GoodForm( request.POST )
-		if good_form.is_valid():
-			new_good = good_form.save(commit=False)	
-			category_formset = CategoryClassificationFormSet(request.POST, instance=new_good, prefix="categories")
-			supplier_formset =SupplierFormSet( request.POST, instance=new_good, prefix="supplier" )
-			if category_formset.is_valid() and supplier_formset.is_valid():
-				new_good.save()
-				category_formset.save()
-				supplier_formset.save()
-				return redirect(to='/products/goods')
-			else:
-				new_good.save()
-				return render_form_to_response(request, 'products/goods/form.html', product_context(good_form, category_formset, supplier_formset))
-		else:
-			good = Good()
-			category_formset = CategoryClassificationFormSet( instance=good, prefix="categories")
-			supplier_formset =SupplierFormSet( instance=good, prefix="supplier")
-			return render_form_to_response(request, 'products/goods/form.html', product_context(good_form, category_formset, supplier_formset))
+	good_form = GoodForm( request.POST )
+	return product_save(request, good_form, Good(), '/products/goods', 'products/goods/form.html')
 
 @login_required
 def service_save( request) :
-	if request.method == 'POST':
-		service_form = ServiceForm( request.POST )
-		if service_form.is_valid():
-			new_service = service_form.save(commit=False)	
-			category_formset = CategoryClassificationFormSet(request.POST, instance=new_service, prefix="categories")
-			supplier_formset =SupplierFormSet( request.POST, instance=new_service, prefix="supplier" )
-			if category_formset.is_valid() and supplier_formset.is_valid():
-				new_service.save()
-				category_formset.save()
-				supplier_formset.save()
-				return redirect(to='/products/services')
-			else:
-				new_service.save()
-				return render_form_to_response(request, 'products/services/form.html', product_context(service_form, category_formset, supplier_formset))
-		else:
-			service = Service()
-			category_formset = CategoryClassificationFormSet( instance=service, prefix="categories")
-			supplier_formset =SupplierFormSet( instance=service, prefix="supplier")
-			return render_form_to_response(request, 'products/services/form.html', product_context(service_form, category_formset, supplier_formset))
+	service_form = ServiceForm( request.POST )
+	return product_save(request, service_form, Service(), '/products/services', 'products/services/form.html')
+
+def product_update( request, form_url, list_url, form, product) :
+	if form.is_valid():
+		category_formset = CategoryClassificationFormSet( request.POST, instance=product, prefix="categories")
+		supplier_formset = SupplierFormSet( request.POST, instance=product, prefix="supplier")
+		if category_formset.is_valid() and supplier_formset.is_valid():
+			product.save()
+			category_formset.save()
+			supplier_formset.save()
+			return redirect(to=list_url)
+	return render_form_to_response( request, form_url, product_context( form, category_formset, supplier_formset))
 
 @login_required
 def good_update( request, good_id ) :
 	if request.method == 'POST':
 		good = get_object_or_404(Good, pk=good_id)
 		good_form = GoodForm( request.POST, instance=good)
-		if good_form.is_valid():
-			category_formset = CategoryClassificationFormSet(request.POST, instance=good, prefix="categories")
-			supplier_formset =SupplierFormSet( request.POST, instance=good, prefix="supplier" )
-			if category_formset.is_valid() and supplier_formset.is_valid():
-				good.save()
-				category_formset.save()
-				supplier_formset.save()
-				return redirect(to='/products/goods')
-	return render_form_to_response(request, 'products/goods/form.html', product_context(good_form, category_formset, supplier_formset))
+		return product_update( request, 'products/goods/form.html', '/products/goods', good_form, good)
 
 @login_required
 def service_update( request, service_id ) :
 	if request.method == 'POST':
 		service = get_object_or_404(Service, pk=service_id)
 		service_form = ServiceForm( request.POST, instance=service)
-		if service_form.is_valid():
-			category_formset = CategoryClassificationFormSet(request.POST, instance=service, prefix="categories")
-			supplier_formset =SupplierFormSet( request.POST, instance=service, prefix="supplier" )
-			if category_formset.is_valid() and supplier_formset.is_valid():
-				service.save()
-				category_formset.save()
-				supplier_formset.save()
-				return redirect(to='/products/services')
-	return render_form_to_response(request, 'products/services/form.html', product_context(good_form, category_formset, supplier_formset))
+		return product_update( request, 'products/services/form.html', '/products/goods', service_form, service)
 
 def product_context( product_form, category_formset, supplier_formset):
 	return {'product_form': product_form,
