@@ -65,7 +65,7 @@ def good_edit( request, good_id):
 @login_required
 def service_edit( request, service_id):
 	service = get_object_or_404(Service, pk=service_id)
-	service_form = ServiceForm(instance=good) 
+	service_form = ServiceForm(instance=service) 
 	category_formset = CategoryClassificationFormSet( instance=service, prefix="categories")
 	supplier_formset =SupplierFormSet( instance=service, prefix="supplier")
 	return render_form_to_response(request, 'products/services/form.html', 

@@ -11,7 +11,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for service in current_goods %}
+		{% for service in current_services %}
 		<tr>
 			<td> <a href="services/{{service.id}}">{{ service.name }}</a></td>
 			<td> {{ service.comments }}</td>
@@ -28,9 +28,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for sercice in future_servicess %}
+		{% for service in future_services %}
 		<tr>
-			<td> {{ service.name }}</td>
+			<td> <a href="services/{{service.id}}">{{ service.name }}</a></td>
 			<td> {{ service.comments }}</td>
 		</tr>
 		{% endfor %}
@@ -45,9 +45,9 @@
 		</tr>
 	</thead>
 	<tbody>
-		{% for service in past_servicess %}
+		{% for service in past_services %}
 		<tr>
-			<td> {{ service.name }}</td>
+			<td> <a href="services/{{service.id}}">{{ service.name }}</a></td>
 			<td> {{ service.comments }}</td>
 		</tr>
 		{% endfor %}
