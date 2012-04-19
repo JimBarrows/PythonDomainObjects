@@ -23,12 +23,19 @@ class SalesInvoice( Invoice ):
 class PurchaseInvoice( Invoice ):
 	pass
 
-class Item( PolymorphicModel ):
-	taxable = models.BooleanField()
+class InvoiceItemType ( models.Model):
+	description = models.CharField(max_length=250)
+	parent = models.ForeignKey( 'self', blank=True, null=True, related_name='child_set')
+	def __unicode__(self):
+		return self.description
+
+class Item( PolymorphicModel ): 
+	taxable = models.BooleanField() 
 	quantity = models.IntegerField()
 	description = models.TextField()
 	amount = models.DecimalField( max_digits = 8, decimal_places=2)
 	order_items = models.ManyToManyField( OrderItem, through='OrderItemBilling', blank=True, null=True)
+	describedBy = models.ForeignKey( InvoiceItemType)
 
 class AcquiringItem( Item):
 	invoice = models.ForeignKey( Invoice )
