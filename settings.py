@@ -108,5 +108,6 @@ INSTALLED_APPS = (
     'bizondemand-python.ecommerce',
     'bizondemand-python.business',
     'bizondemand-python.invoices',
+    'bizondemand-python.accounting',
     'bizondemand-python.tests',
 )

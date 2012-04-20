@@ -25,7 +25,7 @@ def index( request):
 	c = {
 		'form' : SubOrgForm(),
 		'business':primaryBusinessFormQuery.get(),
-		'departments':internalOrganizations.filter( roles__description__exact='Department').iterator(),
+		'departments':internalOrganizations.filter( roles__description__exact='Department'),
 		'divisions':internalOrganizations.filter( roles__description__exact='Division'),
 		'subsidiarys':internalOrganizations.filter( roles__description__exact='Subsidiary'),
 		'dbas':internalOrganizations.filter( roles__description__exact='DBA'),
