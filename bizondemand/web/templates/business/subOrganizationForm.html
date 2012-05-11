@@ -1,0 +1,21 @@
+{% extends "business/template.html" %}
+
+{% block title %}Sub Organization{% endblock%}
+{% block javascript %}
+	<script>
+		$(function() {
+			$( ".dateFieldPicker" ).datepicker({
+				changeMonth: true,
+				changeYear: true
+			});
+    });
+  </script>
+{% endblock %}
+{% block content %}
+<h1>Add sub-organization</h1>
+<form action="addSubOrg" method="post" class="form-horizontal">
+	{% include "common/forms.html"%}
+	{% csrf_token %}
+		<input type="submit" name="addButton" value="Add" class="ss_sprite ss_add"/>
+</form>
+{% endblock %}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+  <title>NSFW Enterprises, LLC - {% block title %}##### REPLACE ME IN TEMPLATE #####{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/silk_sprite.css" type="text/css" />
+  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/silk.css" type="text/css" />
+  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/bootstrap.min.css" media="screen, projection"/>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <style>
+   	body {
+			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+		}
+  </style>
+  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/bootstrap-responsive.min.css" media="screen, projection"/>
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+   {% block javascript %}
+   {% endblock %}
+   {% block css %}
+   {% endblock %}
+</head>
+<body >
+	<div id="mainMenu" class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a href="/" class="brand">NSFW Enterprises</a>
+				<div class="nav-collapse">
+					<ul class="nav">
+						<li><a href="#">CRM</a></li>
+						<li><a href="#">VRM</a></li>
+						<li><a href="/products/goods">Inventory</a></li>
+						<li id="servicesMenu" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Services
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/products/services">List</a>
+								</li>
+								<li>
+									<a href="/products/services/add">Add Service</a>
+								</li>
+								<li>
+									<a href="/products/services/addSubscriptionService">Add Subscription</a>
+								</li>
+							</ul><!-- dropdown-menu -->
+						</li><!-- servicesMenu -->
+						<li><a href="#">Sales Orders</a></li>
+						<li><a href="#">Sales Invoices</a></li>
+						<li><a href="#">Accounting</a></li>
+						<li><a href="#">Purchase Orders</a></li>
+						<li><a href="#">Purchase Invoices</a></li>
+						<li><a href="#">CMS</a></li>
+						<li id="businessMenu" class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								Business
+								<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="/business">Organization</a></li>
+								<li><a href="/business/setup">Setup</a></li>
+							</ul> <!-- dropdown-menu -->
+						</li><!-- businessMenu -->
+					</ul> <!-- nav -->
+				</div> <!-- nav-collapse -->
+			</div><!-- container -->
+		</div> <!-- navbar-inner -->
+	</div> <!-- mainMenu -->
+	<div class="container ">
+		<h1>{% block pageTitle %}{% endblock %}</h1>
+		{% block content %}{% endblock %}
+	</div> <!-- container -->
+	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+	<script src="/js/bootstrap-transition.js"></script>
+	<script src="/js/bootstrap-alert.js"></script>
+	<script src="/js/bootstrap-modal.js"></script>
+	<script src="/js/bootstrap-dropdown.js"></script>
+	<script src="/js/bootstrap-scrollspy.js"></script>
+	<script src="/js/bootstrap-tab.js"></script>
+	<script src="/js/bootstrap-tooltip.js"></script>
+	<script src="/js/bootstrap-popover.js"></script>
+	<script src="/js/bootstrap-button.js"></script>
+	<script src="/js/bootstrap-collapse.js"></script>
+	<script src="/js/bootstrap-carousel.js"></script>
+	<script src="/js/bootstrap-typeahead.js"></script>
+	{% block footerJavascript %}
+	{% endblock footerJavascript %}
+</body>
+</html>

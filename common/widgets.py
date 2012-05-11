@@ -8,3 +8,4 @@ class DatePickerWidget(DateInput):
         css = {"all":("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/redmond/jquery-ui.css",)}
         js = ("http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
               "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js",)
+

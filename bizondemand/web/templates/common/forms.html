@@ -1,0 +1,25 @@
+{% for field in form %}
+
+	{% if field.errors %}
+		<div class="control-group error">
+	{% else %}
+		<div class="control-group">
+	{% endif %}
+	{% if not field.is_hidden %}
+		{% with field.field.required as required %}
+		<label for="{{ id }}"{% if required %} class="required control-label" {% else %} class="control-label"{% endif %}>
+    	{{ field.label }}
+		</label>
+		{% endwith %}
+	{% endif %}
+
+	<div class="controls">
+ 		{{ field }}
+ 		<span class="help-inline">
+ 	 		{{ field.errors }}
+ 	 	</span>
+ 	</div><!-- controls -->
+  </div> <!-- control-group -->
+{% endfor %}
+{% csrf_token %}
+

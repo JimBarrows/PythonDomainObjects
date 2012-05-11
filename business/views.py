@@ -96,3 +96,6 @@ def setup( request):
 	c = {'form':form}
 	c.update(csrf(request))
 	return render_form_to_response(request, 'business/setup/index.html', c)
+
+def thisIsATest():
+	return "This is a test"
