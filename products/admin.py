@@ -42,10 +42,10 @@ class SupplierProductInLine(admin.TabularInline):
 	model=SupplierProduct
 	extra=1
 
-class ReorderGuidelineInLine(admin.TabularInline):
+"""class ReorderGuidelineInLine(admin.TabularInline):
 	model=ReorderGuideline
 	extra=1
-
+"""
 class InventoryItemInLine(admin.TabularInline):
 	model=InventoryItem
 	extra=1
@@ -91,7 +91,7 @@ class ServiceAdmin( admin.ModelAdmin):
 class GoodAdmin( admin.ModelAdmin):
 	inlines=[ CategoryClassificationInLine,  FeatureApplicabilityInLine, SupplierProductInLine,  BasePriceInLine, 
 		  DiscountComponentInLine, SurchargeComponentInLine, ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, 
-		  RecurringChargeInLine, UtilizationChargeInLine, InventoryItemInLine, IdentificationInLine, ReorderGuidelineInLine ]
+		  RecurringChargeInLine, UtilizationChargeInLine, InventoryItemInLine, IdentificationInLine ]
 
 class CurrencyMeasureAdmin( admin.ModelAdmin):
 	inlines=[ BasePriceInLine]
@@ -100,7 +100,6 @@ class CategoryAdmin( admin.ModelAdmin):
 	inlines=[ MarketInterestInLine, CategoryInLine]
 
 class FeatureAdmin( admin.ModelAdmin):
-	pass
 	inlines=[ FeatureInteractionOfInLine, FeatureInteractionFactorInInLine]
 
 class UnitOfMeasureAdmin( admin.ModelAdmin):
@@ -110,7 +109,7 @@ class InventoryItemAdmin( admin.ModelAdmin):
 	inlines=[ InventoryItemVarianceInLine ]
 
 class PartAdmin( admin.ModelAdmin):
-	inlines=[ ReorderGuidelineInLine, SupplierProductInLine  ]
+	inlines=[ SupplierProductInLine  ]
 
 admin.site.register( Service, ServiceAdmin)
 admin.site.register( Good, GoodAdmin )

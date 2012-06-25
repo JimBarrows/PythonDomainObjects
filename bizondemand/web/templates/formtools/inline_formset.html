@@ -1,0 +1,40 @@
+{% if forms.non_form_errors %}
+<div id="{{forms.prefix}}_non_form_errors" class="alert alert-error">
+{{ forms.non_form_errors.as_ul }}
+</div>
+{% endif %}
+{{ forms.management_form }}
+<fieldset id="{{forms.prefix}}_fieldset">
+	<table id="{{forms.prefix}}_table">
+		{% for form in forms.forms %}
+			{% if forloop.first %}
+				<thead>
+					<tr>
+						{% for field in form.visible_fields%}
+							<th>{{ field.label|capfirst}}</th>
+						{% endfor %}
+					</tr>
+				</thead>
+			{% endif %}
+			<tbody>
+				<tr>
+					{% for field in form.visible_fields%}
+						<td>
+							{% if forloop.first %}
+								{% for hidden in form.hidden_fields %}
+									{{ hidden }}
+								{% endfor %}
+							{% endif %}
+							{% if field.errors %}	
+								<div class="alert alert-error">
+									{{ field.errors.as_ul}}
+								</div>
+							{% endif %}
+							{{ field }}
+						</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+<fieldset>

@@ -5,21 +5,19 @@
   <title>NSFW Enterprises, LLC - {% block title %}##### REPLACE ME IN TEMPLATE #####{% endblock %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/silk_sprite.css" type="text/css" />
-  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/silk.css" type="text/css" />
-  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/bootstrap.min.css" media="screen, projection"/>
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/start/jquery-ui.css" type="text/css" rel="Stylesheet" />
-  <style>
-   	body {
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/silk_sprite.css" type="text/css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/silk.css" type="text/css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" media="screen, projection"/>
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.8.21.custom.css" type="text/css"/>
+	<style>
+		body {
 			padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 		}
-  </style>
-  <link rel="stylesheet" href="{{ MEDIA_URL }}/css/bootstrap-responsive.min.css" media="screen, projection"/>
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+	</style>
+	<link rel="stylesheet" href="{{ STATIC_URL }}/css/bootstrap-responsive.min.css" media="screen, projection"/>
+	<script type="text/javascript" src="{{ STATIC_URL}}js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL}}js/jquery-ui-1.8.21.custom.min.js"></script>
+
    {% block javascript %}
    {% endblock %}
    {% block css %}
@@ -83,19 +81,21 @@
 		{% block content %}{% endblock %}
 	</div> <!-- container -->
 	<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-	<script src="/js/bootstrap-transition.js"></script>
-	<script src="/js/bootstrap-alert.js"></script>
-	<script src="/js/bootstrap-modal.js"></script>
-	<script src="/js/bootstrap-dropdown.js"></script>
-	<script src="/js/bootstrap-scrollspy.js"></script>
-	<script src="/js/bootstrap-tab.js"></script>
-	<script src="/js/bootstrap-tooltip.js"></script>
-	<script src="/js/bootstrap-popover.js"></script>
-	<script src="/js/bootstrap-button.js"></script>
-	<script src="/js/bootstrap-collapse.js"></script>
-	<script src="/js/bootstrap-carousel.js"></script>
-	<script src="/js/bootstrap-typeahead.js"></script>
-	{% block footerJavascript %}
-	{% endblock footerJavascript %}
+	<script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-scrollspy.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-popover.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-button.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
+	<script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
+	{% block footer_javascript_include %}
+	{% endblock footer_javascript_include %}
+	{% block footer_javascript %}
+	{% endblock footer_javascript %}
 </body>
 </html>

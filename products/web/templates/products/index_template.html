@@ -1,0 +1,8 @@
+<h3>Current</h3>
+{% include "products/product_list.html" with products=current edit_url=edit_url %}
+
+<h3>Future</h3>
+{% include "products/product_list.html" with products=future edit_url=edit_url %}
+
+<h3>Past</h3>
+{% include "products/product_list.html" with products=past edit_url=edit_url %}

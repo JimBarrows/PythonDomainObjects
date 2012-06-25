@@ -184,16 +184,16 @@ class Lot( models.Model):
 class InventoryItemStatusType( models.Model):
 	description = models.CharField(max_length=250)
 
-class ReorderGuideline( models.Model):
-	guidelineFor = models.ForeignKey('Good')
-	from_date = models.DateField(default = datetime.today())
-	thru_date = models.DateField(blank=True, null=True)
-	reorder_quantity = models.IntegerField()
-	reorder_level = models.IntegerField()
-	boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
-	facility = models.ForeignKey(Facility, blank=True, null=True)
-	internal_organization = models.ForeignKey(PartyRole, blank=True, null=True, limit_choices_to={'party_role_type__description':'Internal Organization'})
-	part = models.ForeignKey('Part')
+#class ReorderGuideline( models.Model):
+#	guidelineFor = models.ForeignKey('Good')
+#	from_date = models.DateField(default = datetime.today())
+#	thru_date = models.DateField(blank=True, null=True)
+#	reorder_quantity = models.IntegerField()
+#	reorder_level = models.IntegerField()
+#	boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
+#	facility = models.ForeignKey(Facility, blank=True, null=True)
+#	internal_organization = models.ForeignKey(PartyRole, blank=True, null=True, limit_choices_to={'party_role_type__description':'Internal Organization'})
+#	part = models.ForeignKey('Part')
 	
 class SupplierProduct( models.Model):
 	product = models.ForeignKey('Product')

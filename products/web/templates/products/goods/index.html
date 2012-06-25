@@ -1,0 +1,7 @@
+{% extends "products/goods/template.html" %}
+
+{% block content %}
+<h2>Goods</h2>
+{% include "products/index_template.html" with current=current_goods future=future_goods past=past_goods edit_url="goods" %}
+
+{% endblock %}

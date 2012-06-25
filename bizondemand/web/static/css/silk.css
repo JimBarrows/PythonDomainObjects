@@ -13,3 +13,11 @@
 .save {
  	background-image:url(/img/silk/save.png) !important;
 }
+.yes {
+	background-image: url(../img/silk/accept.png) !important;
+	background-repeat:no-repeat !important;
+}	
+.no {
+	background-image: url(../img/silk/cancel.png) !important;
+	background-repeat:no-repeat !important;
+}	

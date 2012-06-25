@@ -1,0 +1,51 @@
+{% extends "products/goods/template.html" %}
+
+{% block content %}
+<form action="save" method="post">
+	<input type="hidden" name="{{product_form.id.name}}" value="{{product_form.id}}"/>
+	<div class="span-20 {% if product_form.name.errors%} error {% endif %}">
+		<div class="span-5">{{product_form.name.label_tag}}</div>
+		<div class="span-14">
+			{{product_form.name}}
+			{{product_form.name.errors}}
+		</div>
+	</div>
+	<div class="span-20">
+		<div class="span-6">{{product_form.introduction_date.label_tag}}</div>
+		<div class="span-6">{{product_form.sales_discontinuation_date.label_tag}}</div>
+		<div class="span-6 last">{{product_form.support_discontinuation_date.label_tag}}</div>
+	</div>
+	<div class="span-20">
+		<div class="span-6 {% if product_form.introduction_date.errors %} error {% endif %}">
+			{{product_form.introduction_date}}
+			{{product_form.introduction_date.errors}}
+		</div>
+		<div class="span-6 {% if product_form.sales_discontinuation_date.errors %} error {% endif %}">
+			{{product_form.sales_discontinuation_date}}
+			{{product_form.sales_discontinuation_date.errors}}
+		</div>
+		<div class="span-6 last {% if product_form.support_discontinuation_date.errors %} error {% endif %}">
+			{{product_form.support_discontinuation_date}}
+			{{product_form.support_discontinuation_date.errors}}
+		</div>
+	</div>
+	<div class="span-20">
+		<div class="span-5">{{product_form.manufactured_by.label_tag}}</div>
+		<div class="span-15 last">
+			{{product_form.manufactured_by}}
+			{{product_form.manufactured_by.errors}}
+		</div>
+	</div>
+	<div class="span-20" >
+		<div class="span-5">{{product_form.comment.label_tag}}</div>
+		<div class="span-10">{{product_form.comment}}</div>
+		<div class="span-4 last">{{product_form.comment.errors}}</div>
+	</div>
+	{% include "products/form_template.html" with category_formset=category_formset supplier_formset=supplier_formset %}
+	<div class="span-24">
+		<input id="save_button" class="push-7" type="submit" value="Save"/>
+	</div>
+	{% csrf_token %}
+</form>
+
+{% endblock %}

@@ -1,7 +1,8 @@
 # Django settings for bizondemand project.
 import os.path
 
-PROJECT_DIR = os.path.dirname(__file__) # this is not Django setting.
+APP_DIR = os.path.dirname( __file__) 
+PROJECT_DIR = os.path.join( APP_DIR, '..')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -42,13 +43,17 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = True
+USE_I18N = False
 
 # If you set this to False, Django will not format dates, numbers and
 # calendars according to the current locale
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ=True
+
+DATETIME_INPUT_FORMATS = ('%m/%d/%Y %I:%M %p', '%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M', '%Y-%m-%d',
+'%m/%d/%Y %H:%M:%S', '%m/%d/%Y %H:%M', '%m/%d/%Y',
+'%m/%d/%y %H:%M:%S', '%m/%d/%y %H:%M', '%m/%d/%y', '%m/%d/%Y %I:%M %p',)
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
@@ -67,6 +72,8 @@ STATIC_ROOT = os.path.join(PROJECT_DIR, '/deploy/static')
 
 
 
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
 # Additional locations of static files
@@ -74,7 +81,8 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	os.path.join( PROJECT_DIR, 'web/static'),
+	os.path.join( PROJECT_DIR, 'bizondemand/web/static'),
+	os.path.join( PROJECT_DIR, 'products/web/static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -109,8 +117,9 @@ ROOT_URLCONF = 'bizondemand.urls'
 
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_DIR, 'web/templates'),
-    )
+	os.path.join(PROJECT_DIR, 'bizondemand/web/templates'),
+	os.path.join(PROJECT_DIR, 'products/web/templates'),
+)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

@@ -1,10 +1,12 @@
 from datetime import datetime
 
+from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.forms.models import modelformset_factory, inlineformset_factory
 from django.db.models import Q
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 
 from common.forms import render_form_to_response, make_custom_field
 from products.forms import *
@@ -12,10 +14,6 @@ from products.models import *
 
 CategoryClassificationFormSet = inlineformset_factory( Good, CategoryClassification, extra=1, formfield_callback=make_custom_field )
 SupplierFormSet = inlineformset_factory( Good, SupplierProduct, extra=1, formfield_callback=make_custom_field )
-
-@login_required
-def index( request ) :
-	return render_to_response('products/index.html', {})
 
 @login_required
 def good_index( request ) :
@@ -35,23 +33,30 @@ def good_index( request ) :
 			'past_goods':past_goods
 		})
 
-@login_required
-def service_index( request ) :
-	current_services = Service.objects.filter( 
+#@login_required
+#def service_index( request ) :
+#	current_services = Service.objects.filter( 
+#		(Q(introduction_date__lte = datetime.now()) | Q(introduction_date__isnull=True)) &
+#		(Q(sales_discontinuation_date__gte=datetime.now()) | Q(sales_discontinuation_date__isnull=True))
+#		)
+#	future_services = Service.objects.filter( 
+#		Q(introduction_date__gte = datetime.now()) 
+#		)
+#	past_services = Service.objects.filter( 
+#		Q(sales_discontinuation_date__lte=datetime.now()) 
+#		)
+#	return render_to_response('products/services/index.html', {
+#			'current_services':current_services, 
+#			'future_services':future_services,
+#			'past_services':past_services
+#			})
+
+class ServicesList( ListView):
+	model = Service
+	queryset=  Service.objects.filter( 
 		(Q(introduction_date__lte = datetime.now()) | Q(introduction_date__isnull=True)) &
 		(Q(sales_discontinuation_date__gte=datetime.now()) | Q(sales_discontinuation_date__isnull=True))
 		)
-	future_services = Service.objects.filter( 
-		Q(introduction_date__gte = datetime.now()) 
-		)
-	past_services = Service.objects.filter( 
-		Q(sales_discontinuation_date__lte=datetime.now()) 
-		)
-	return render_to_response('products/services/index.html', {
-			'current_services':current_services, 
-			'future_services':future_services,
-			'past_services':past_services
-			})
 
 def product_edit( request, product_form,  product, url):
 	category_formset = CategoryClassificationFormSet( instance=product, prefix="categories")
