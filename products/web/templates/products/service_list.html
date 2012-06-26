@@ -8,7 +8,7 @@
 		<thead>
 			<tr>
 				<th>Name</th>
-				<th>Description</th>
+				<th>Comment</th>
 				<th>Introduction Date</th>
 				<th>Sales Discontinuation Date</th>
 				<th>Support Discontinuation Date</th>
@@ -18,10 +18,14 @@
 			{% for service in object_list %}
 				<tr>
 					<td>{{service.name}}</td>
-					<td>{{service.description}}</td>
+					<td>{{service.comment}}</td>
 					<td>{{service.introduction_date}}</td>
 					<td>{{service.sales_discontinuation_date}}</td>
 					<td>{{service.support_discontinuation_date}}</td>
+					<td>
+						<a href="services/{{service.pk}}" class="btn">Update</a>
+						<a href="services/delete/{{service.pk}}" class="btn">Delete</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
