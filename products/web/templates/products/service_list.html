@@ -1,6 +1,29 @@
-{% extends "products/services/template.html" %}
+{% extends 'base.html' %}
 
+{% block title %}Services{% endblock %}
+{% block page_title %}Services{% endblock %}
 {% block content %}
-<h2>Services</h2>
-{% include "products/index_template.html" with current=current_services future=future_services past=past_services edit_url="services" %}
+	<a href="services/add" class="btn">Add</a>
+	<table id="service_list" width="100%">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Introduction Date</th>
+				<th>Sales Discontinuation Date</th>
+				<th>Support Discontinuation Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for service in object_list %}
+				<tr>
+					<td>{{service.name}}</td>
+					<td>{{service.description}}</td>
+					<td>{{service.introduction_date}}</td>
+					<td>{{service.sales_discontinuation_date}}</td>
+					<td>{{service.support_discontinuation_date}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

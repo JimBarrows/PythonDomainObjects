@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Service{% endblock %}
+{% block page_title %}Service{% endblock %}
+{% block css %}
+	<!-- service_form.html begin -->
+	{{ form.media.css }}
+	<!-- service_form.html end -->
+{% endblock %}
+{% block footer_javascript_include %}
+	<!-- service_form.html begin -->
+	{{ form.media.js }}
+	<!-- service_form.html end -->
+{% endblock %}
+{% block content %}
+	<!-- service_form.html begin -->
+	<form action="" method="post">
+		{% include "formtools/forms.html" with form=form %}	
+		<input id="save_button" type="submit" value="Save"/>
+		{% csrf_token %}
+	</form>
+{% endblock %}
