@@ -60,8 +60,7 @@
     "model": "products.unitofmeasure", 
     "fields": {
       "abbreviation": "Day", 
-      "description": "Day", 
-      "polymorphic_ctype": 76
+      "description": "Day" 
     }
   }, 
   {
@@ -69,8 +68,7 @@
     "model": "products.unitofmeasure", 
     "fields": {
       "abbreviation": "Wk", 
-      "description": "Week", 
-      "polymorphic_ctype": 76
+      "description": "Week" 
     }
   }, 
   {
@@ -78,8 +76,7 @@
     "model": "products.unitofmeasure", 
     "fields": {
       "abbreviation": "Month", 
-      "description": "Month", 
-      "polymorphic_ctype": 76
+      "description": "Month" 
     }
   }, 
   {
@@ -87,8 +84,7 @@
     "model": "products.unitofmeasure", 
     "fields": {
       "abbreviation": "Yr", 
-      "description": "Year", 
-      "polymorphic_ctype": 76
+      "description": "Year" 
     }
   }, 
   {
@@ -96,8 +92,7 @@
     "model": "products.unitofmeasure", 
     "fields": {
       "abbreviation": "USD", 
-      "description": "U.S. Dollar", 
-      "polymorphic_ctype": 78
+      "description": "U.S. Dollar" 
     }
   }, 
   {
@@ -165,6 +160,20 @@
     "model": "products.identificationtype", 
     "fields": {
       "description": "Other ID"
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "products.category", 
+    "fields": {
+      "description": "Web Application"
+    }
+  },
+  {
+    "pk": 2, 
+    "model": "products.category", 
+    "fields": {
+      "description": "Subscription"
     }
   }
 ]
