@@ -22,4 +22,9 @@ urlpatterns = patterns('products.views',
 	(r'^goods/(?P<pk>\d+)/$',  login_required(ProductsDetail.as_view(model=Good))),
 	(r'^goods/update/(?P<pk>\d+)/$',  login_required(ProductUpdate.as_view(model=Good, form_class=GoodForm, success_url='/products/goods'))),
 	(r'^goods/delete/(?P<pk>\d+)/$',  login_required(ProductDelete.as_view(model=Good, success_url='/products/goods'))),
-                       )
+	(r'^categories$', login_required(CategoryList.as_view( ))),
+	(r'^categories/add$', login_required(CategoryCreate.as_view( ))),
+	(r'^categories/(?P<pk>\d+)/$', login_required(CategoryDetail.as_view( ))),
+	(r'^categories/update/(?P<pk>\d+)$', login_required(CategoryUpdate.as_view( ))),
+	(r'^categories/delete/(?P<pk>\d+)/$',  login_required(CategoryDelete.as_view())),
+)

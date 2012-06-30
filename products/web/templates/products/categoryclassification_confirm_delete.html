@@ -1,0 +1,37 @@
+{% extends "base.html"%}
+{% block title%}Delete Category - {{object.product.name}}{% endblock%}
+{% block page_title%}Delete Category - {{object.product.name}}{% endblock%}
+{% block content%}
+	<table>
+		<tr>
+			<th>Product</th>
+			<td>{{object.product.name}}
+		</tr>
+		<tr>
+			<th>Category</th>
+			<td>{{object.category_type.description}}
+		</tr>
+		<tr>
+			<th>Primay</th>
+			<td>{{object.primary}}
+		</tr>
+		<tr>
+			<th>From</th>
+			<td>{{object.from_date}}
+		</tr>
+		<tr>
+			<th>Thru</th>
+			<td>{{object.thru_date}}
+		</tr>
+		<tr>
+			<th>Comment</th>
+			<td>{{object.comment}}
+		</tr>
+	</table>
+	<form id="delete-categories-form" method="post" action="">
+		{% csrf_token %}
+		<button class="btn btn-primary" type="submit">Delete</button>
+		<a class="btn" href="/products/categories">Cancel</a>
+	</form>
+
+{% endblock %}

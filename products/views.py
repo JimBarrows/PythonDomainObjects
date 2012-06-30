@@ -65,3 +65,24 @@ class ProductDelete( DeleteView):
 
 class ProductsDetail( DetailView):
 	pass
+
+class CategoryList( ListView):
+	model=CategoryClassification
+	queryset=CategoryClassification.objects.all()
+
+class CategoryCreate( CreateView):
+	model=CategoryClassification
+	form_class=CategoryClassificationForm
+	success_url="/products/categories"
+
+class CategoryDetail( DetailView):
+	model=CategoryClassification
+
+class CategoryUpdate( UpdateView):
+	model=CategoryClassification
+	form_class=CategoryClassificationForm
+	success_url='/products/categories'
+
+class CategoryDelete( DeleteView):
+	model=CategoryClassification
+	success_url='/products/categories'
