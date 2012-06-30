@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Price Component{% endblock %}
+{% block page_title %}Price Component{% endblock %}
+{% block content %}
+	<!-- pricecomponent_detail.html begin -->
+	<table >
+			<tr>
+				<th >From</th>
+				<td>{{ object.from_date }}</td>
+			</tr>
+			<tr>
+				<th >Thru</th>
+				<td>{{ object.thru_date }}</td>
+			</tr>
+			<tr>
+				<th >Price</th>
+				<td>{{ object.price }}</td>
+			</tr>
+			<tr>
+				<th >Percent</th>
+				<td>{{ object.percent }}</td>
+			</tr>
+			<tr>
+				<th >Currency</th>
+				<td>{{ object.currency }}</td>
+			</tr>
+			<tr>
+				<th >Product</th>
+				<td>{{ object.product.name }}</td>
+			</tr>
+			<tr>
+				<th >Area</th>
+				<td>{{ object.geographic_boundary }}</td>
+			</tr>
+			<tr>
+				<th >Party Type</th>
+				<td>{{ object.party_type }}</td>
+			</tr>
+			<tr>
+				<th >Product Category</th>
+				<td>{{ object.product_category }}</td>
+			</tr>
+			<tr>
+				<th>Quantity Break</th>
+				<td>{{ object.quantity_break }}</td>
+			</tr>
+			<tr>
+				<th>Order Value</th>
+				<td>{{ object.order_value }}</td>
+			</tr>
+			<tr>
+				<th >Sales Type</th>
+				<td>{{ object.sales_type }}</td>
+			</tr>
+			<tr>
+				<th >Pricing Organization</th>
+				<td>{{ object.specificed_for }}</td>
+			</tr>
+			<tr>
+				<th >Feature</th>
+				<td>{{ object.feature }}</td>
+			</tr>
+			<tr>
+				<th >Part</th>
+				<td>{{ object.part }}</td>
+			</tr>
+			<tr>
+				<th >Comment</th>
+				<td>{{ object.comment }}</td>
+			</tr>
+	</table >
+	<a href="/products/pricing" class="btn btn-primary">Done</a>
+	<!-- pricecomponent_detail.html end -->
+{% endblock %}

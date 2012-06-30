@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Price Component{% endblock %}
+{% block page_title %}Price Component{% endblock %}
+{% block content %}
+	<!-- pricecomponent_list.html begin -->
+	<a href="/products/pricing/add" class="btn btn-small">Add</a>
+	<table width="100%" class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th rowspan="2">From</th>
+				<th rowspan="2">Thru</th>
+				<th rowspan="2">Price</th>
+				<th rowspan="2">Percent</th>
+				<th rowspan="2">Currency</th>
+				<th rowspan="2">Product</th>
+				<th rowspan="2">Area</th>
+				<th rowspan="2">Party Type</th>
+				<th rowspan="2">Product Category</th>
+				<th colspan="2">Quantity Break</th>
+				<th colspan="2">Order Value</th>
+				<th rowspan="2">Sales Type</th>
+				<th rowspan="2">Pricing Organization</th>
+				<th rowspan="2">Feature</th>
+				<th rowspan="2">Part</th>
+			</tr>
+			<tr>
+				<th>From</th>
+				<th>Thru</th>
+				<th>From</th>
+				<th>Thru</th>
+			</tr>
+			<tr>
+		</thead>
+		<tbody>
+			{% for component in object_list %}
+				<tr>
+					<td>{{ component.from_date }}</td>
+					<td>{{ component.thru_date }}</td>
+					<td>{{ component.price }}</td>
+					<td>{{ component.percent }}</td>
+					<td>{{ component.currency }}</td>
+					<td>{{ component.product.name }}</td>
+					<td>{{ component.area }}</td>
+					<td>{{ component.party_type }}</td>
+					<td>{{ component.product_category }}</td>
+					<td>{{ component.quantity_break.from_quantity }}</td>
+					<td>{{ component.quantity_break.thru_quantity }}</td>
+					<td>{{ component.order_value.from_value }}</td>
+					<td>{{ component.order_value.thru_value }}</td>
+					<td>{{ component.sales_type }}</td>
+					<td>{{ component.specified_for }}</td>
+					<td>{{ component.feature }}</td>
+					<td>{{ component.par }}</td>
+					<td>
+						<div class="btn-group">
+							<a href="pricing/{{component.pk}}" class="btn btn-small">View</a>
+							<a href="pricing/update/{{component.pk}}" class="btn btn-small">Update</a>
+							<a href="pricing/delete/{{component.pk}}" class="btn btn-small">Delete</a>
+						</div>
+					</td>
+				</tr>
+			{% empty %}
+			<tr>
+				<td colspan="5"/>
+				<td colspan="7"><p>There are no price components</p></td>
+				<td colspan="5"/>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table >
+	<!-- pricecomponent_list.html end -->
+{% endblock %}

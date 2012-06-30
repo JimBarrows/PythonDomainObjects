@@ -76,10 +76,12 @@ class CostComponentType( models.Model):
 	description = models.CharField(max_length=250)
 
 class PriceComponent( PolymorphicModel):
-	product = models.ForeignKey('Product', blank=True, null=True)
 	from_date = models.DateField(default = datetime.today())
 	thru_date = models.DateField(blank=True, null=True)
-	comment = models.TextField(blank=True, null=True)
+	price = models.DecimalField( max_digits=8, decimal_places=2, blank=True, null=True)
+	percent = models.IntegerField( validators=[MaxValueValidator(100), MinValueValidator(0)], blank=True, null=True)
+	currency = models.ForeignKey('CurrencyMeasure', blank=True, null=True)
+	product = models.ForeignKey('Product', blank=True, null=True)
 	geographic_boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
 	party_type = models.ForeignKey(PartyType, blank=True, null=True)
 	product_category = models.ForeignKey('Category', blank=True, null=True) 
@@ -88,43 +90,35 @@ class PriceComponent( PolymorphicModel):
 	sales_type = models.ForeignKey('SaleType', blank=True, null=True)
 	specified_for = models.ForeignKey(Organization, blank=True, null=True)
 	feature = models.ForeignKey('Feature', blank=True, null=True)
-	currency = models.ForeignKey('CurrencyMeasure', blank=True, null=True)
 	part = models.ForeignKey('Part', blank=True, null=True)
+	comment = models.TextField(blank=True, null=True)
 	def __unicode__(self):
 		return self.comment
-	class Meta:
-		abstract = True
 
 class BasePrice( PriceComponent):
 	''' A starting point for figuring out the price. ''' 
-	price = models.DecimalField( max_digits=8, decimal_places=2)
+	pass
 
 class DiscountComponent( PriceComponent):
 	''' Discounts that can occur. '''
-	percent = models.IntegerField( validators=[MaxValueValidator(100), MinValueValidator(0)])
+	pass
 
 class SurchargeComponent( PriceComponent):
 	''' Discounts that can occur. '''
-	price = models.DecimalField( max_digits=8, decimal_places=2)
-	percent = models.IntegerField( validators=[MaxValueValidator(100), MinValueValidator(0)])
+	pass
 
 class ManufacturerSuggestedPrice( PriceComponent):
 	''' Not necessarily the price being charged. '''
-	price = models.DecimalField( max_digits=8, decimal_places=2)
 
 class OneTimeCharge( PriceComponent):
 	''' Not necessarily the price being charged. '''
-	price = models.DecimalField( max_digits=8, decimal_places=2)
-	percent = models.IntegerField( validators=[MaxValueValidator(100), MinValueValidator(0)])
 
 class RecurringCharge( PriceComponent):
 	per = models.ForeignKey('TimeFrequencyMeasure')
-	price = models.DecimalField( max_digits=8, decimal_places=2)
 
 class UtilizationCharge( PriceComponent):
 	per = models.ForeignKey('UnitOfMeasure', related_name="per_set")
 	quantity = models.IntegerField()
-	price = models.DecimalField( max_digits=8, decimal_places=2)
 
 class SaleType( models.Model):
 	description = models.CharField(max_length=250)

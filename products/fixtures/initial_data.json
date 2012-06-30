@@ -1,179 +1,32 @@
 [
   {
-    "pk": 1, 
-    "model": "products.productassociationtype", 
+    "pk": 1,
+    "model": "products.unitofmeasure",
     "fields": {
-      "description": "Marketing Package"
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "products.productassociationtype", 
-    "fields": {
-      "description": "Product Substitute"
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "products.productassociationtype", 
-    "fields": {
-      "description": "Product Obsolesence"
-    }
-  }, 
-  {
-    "pk": 4, 
-    "model": "products.productassociationtype", 
-    "fields": {
-      "description": "Product Complement"
-    }
-  }, 
-  {
-    "pk": 5, 
-    "model": "products.productassociationtype", 
-    "fields": {
-      "description": "Product Incompatibility"
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "products.costcomponenttype", 
-    "fields": {
-      "description": "Estimated Materials Cost"
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "products.costcomponenttype", 
-    "fields": {
-      "description": "Estimated Labor Cost"
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "products.costcomponenttype", 
-    "fields": {
-      "description": "Estimated Other Cost"
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "products.unitofmeasure", 
-    "fields": {
-      "abbreviation": "Day", 
-      "description": "Day" 
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "products.unitofmeasure", 
-    "fields": {
-      "abbreviation": "Wk", 
-      "description": "Week" 
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "products.unitofmeasure", 
-    "fields": {
-      "abbreviation": "Month", 
-      "description": "Month" 
-    }
-  }, 
-  {
-    "pk": 4, 
-    "model": "products.unitofmeasure", 
-    "fields": {
-      "abbreviation": "Yr", 
-      "description": "Year" 
-    }
-  }, 
-  {
-    "pk": 5, 
-    "model": "products.unitofmeasure", 
-    "fields": {
-      "abbreviation": "USD", 
-      "description": "U.S. Dollar" 
-    }
-  }, 
-  {
-    "pk": 1, 
-    "model": "products.timefrequencymeasure", 
-    "fields": {}
-  }, 
-  {
-    "pk": 2, 
-    "model": "products.timefrequencymeasure", 
-    "fields": {}
-  }, 
-  {
-    "pk": 3, 
-    "model": "products.timefrequencymeasure", 
-    "fields": {}
-  }, 
-  {
-    "pk": 4, 
-    "model": "products.timefrequencymeasure", 
-    "fields": {}
-  }, 
-  {
-    "pk": 5, 
-    "model": "products.currencymeasure", 
-    "fields": {}
-  }, 
-  {
-    "pk": 1, 
-    "model": "products.identificationtype", 
-    "fields": {
-      "description": "Manufacturer ID Number"
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "products.identificationtype", 
-    "fields": {
-      "description": "UPCA"
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "products.identificationtype", 
-    "fields": {
-      "description": "SKU"
-    }
-  }, 
-  {
-    "pk": 4, 
-    "model": "products.identificationtype", 
-    "fields": {
-      "description": "ISBN"
-    }
-  }, 
-  {
-    "pk": 6, 
-    "model": "products.identificationtype", 
-    "fields": {
-      "description": "UPCE"
-    }
-  }, 
-  {
-    "pk": 7, 
-    "model": "products.identificationtype", 
-    "fields": {
-      "description": "Other ID"
+      "abbreviation": "USD",
+      "description": "U.S. Dollar",
+      "polymorphic_ctype": 88
     }
   },
   {
-    "pk": 1, 
-    "model": "products.category", 
+    "pk": 1,
+    "model": "products.currencymeasure",
+    "fields": {}
+  },
+  {
+    "pk": 1,
+    "model": "products.category",
     "fields": {
-      "description": "Web Application"
+      "description": "Web Application",
+      "parent": null
     }
   },
   {
-    "pk": 2, 
-    "model": "products.category", 
+    "pk": 2,
+    "model": "products.category",
     "fields": {
-      "description": "Subscription"
+      "description": "Subscription",
+      "parent": null
     }
   }
 ]

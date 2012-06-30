@@ -86,3 +86,24 @@ class CategoryUpdate( UpdateView):
 class CategoryDelete( DeleteView):
 	model=CategoryClassification
 	success_url='/products/categories'
+
+class PricingComponentList( ListView):
+	model=PriceComponent
+	queryset=PriceComponent.objects.all()
+
+class PricingComponentCreate( CreateView):
+	model=PriceComponent
+	form_class=PriceComponentForm
+	success_url="/products/pricing"
+
+class PricingComponentDetail( DetailView):
+	model=PriceComponent
+
+class PricingComponentUpdate( UpdateView):
+	model=PriceComponent
+	form_class=PriceComponentForm
+	success_url="/products/pricing"
+
+class PricingComponentDelete( DeleteView):
+	model=PriceComponent
+	success_url="/products/pricing"

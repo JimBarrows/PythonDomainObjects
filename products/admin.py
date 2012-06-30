@@ -93,7 +93,8 @@ class MarketInterestInLine(admin.TabularInline):
 #		  DiscountComponentInLine, SurchargeComponentInLine, ManufacturerSuggestedPriceInLine, OneTimeChargeInLine, 
 #		  RecurringChargeInLine, UtilizationChargeInLine, InventoryItemInLine, IdentificationInLine ]
 
-#class CurrencyMeasureAdmin( admin.ModelAdmin):
+class CurrencyMeasureAdmin( admin.ModelAdmin):
+	pass
 #	inlines=[ BasePriceInLine]
 
 class CategoryAdmin( admin.ModelAdmin):
@@ -139,7 +140,7 @@ admin.site.register( Category, CategoryAdmin )
 #admin.site.register( OrderValue )
 #admin.site.register( SaleType )
 #admin.site.register( TimeFrequencyMeasure )
-#admin.site.register( CurrencyMeasure, CurrencyMeasureAdmin )
+admin.site.register( CurrencyMeasure, CurrencyMeasureAdmin )
 #admin.site.register( EstimatedProductCost )
 #admin.site.register( CostComponentType )
 #admin.site.register( ProductAssociation )
