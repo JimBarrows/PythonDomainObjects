@@ -3,31 +3,5 @@
 {% block title %}Services{% endblock %}
 {% block page_title %}Services{% endblock %}
 {% block content %}
-	<a href="services/add" class="btn">Add</a>
-	<table id="service_list" width="100%">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Comment</th>
-				<th>Introduction Date</th>
-				<th>Sales Discontinuation Date</th>
-				<th>Support Discontinuation Date</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for service in object_list %}
-				<tr>
-					<td>{{service.name}}</td>
-					<td>{{service.comment}}</td>
-					<td>{{service.introduction_date}}</td>
-					<td>{{service.sales_discontinuation_date}}</td>
-					<td>{{service.support_discontinuation_date}}</td>
-					<td>
-						<a href="services/{{service.pk}}" class="btn">Update</a>
-						<a href="services/delete/{{service.pk}}" class="btn">Delete</a>
-					</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+	{% include "products/product_list.html" with good_or_service="services" product_list=object_list %}
 {% endblock %}

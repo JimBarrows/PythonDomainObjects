@@ -4,8 +4,12 @@ from products.models import Good, Service, CategoryClassification
 from common.widgets import DatePickerWidget
 
 class GoodForm( ModelForm ):
+	introduction_date = forms.DateField(widget=DatePickerWidget, required=False)
+	sales_discontinuation_date = forms.DateField(widget=DatePickerWidget, required=False)
+	support_discontinuation_date = forms.DateField(widget=DatePickerWidget, required=False)
 	class Meta:
 		model=Good
+		exclude=('categories', 'suppliers', 'identifiers')
 
 class ServiceForm( ModelForm ):
 	introduction_date = forms.DateField(widget=DatePickerWidget, required=False)

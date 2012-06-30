@@ -2,31 +2,7 @@
 {% block title%}Delete Service{% endblock%}
 {% block page_title%}Delete Service{% endblock%}
 {% block content%}
-	<table>
-		<tr>
-			<th>Name:</th>
-			<td>{{object.name}}</td>
-		</tr>
-		<tr>
-			<th>Comment:</th>
-			<td>{{object.comment}}</td>
-		</tr>
-		<tr>
-			<th>Introduction Date:</th>
-			<td>{{object.introduction_date}}</td>
-		</tr>
-		<tr>
-			<th>Sales Discontinuation Date:</th>
-			<td>{{object.sales_discontinuation_date}}</td>
-		</tr>
-		<tr>
-			<th>Support Discontinuation Date:</th>
-			<td>{{object.support_discontinuation_date}}</td>
-		</tr>
-	</table>
-	<form id="delete-service-form" method="post" action="">
-		{% csrf_token %}
-		<button class="btn btn-primary" type="submit">Delete</button>
-		<a class="btn" href="/products/services">Cancel</a>
-	</form>
+	<!-- service_confirm_delete.html begin -->
+	{% include "products/product_confirm_delete.html" with product=object good_or_service='services' %}
+	<!-- service_confirm_delete.html end -->
 {% endblock %}

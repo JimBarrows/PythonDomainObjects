@@ -13,12 +13,8 @@ from products.models import *
 
 CategoryClassificationFormSet = inlineformset_factory( Product, CategoryClassification, extra=1, form=CategoryClassificationForm)
 
-class ServicesList( ListView):
-	model = Service
-	queryset=  Service.objects.filter( 
-		(Q(introduction_date__lte = datetime.now()) | Q(introduction_date__isnull=True)) &
-		(Q(sales_discontinuation_date__gte=datetime.now()) | Q(sales_discontinuation_date__isnull=True))
-		)
+class ProductsList( ListView):
+	pass
 
 def add_product_formsets_to_context( view, context):
 	if view.request.POST:
@@ -35,13 +31,10 @@ def save_product_formsets( context, instance):
 def product_formsets_are_valid( context):
 	return context['category_list'].is_valid()
 
-class ServicesCreate( CreateView):
-	model=Service
-	form_class=ServiceForm
-	success_url='/products/services'
+class ProductsCreate( CreateView):
 
 	def get_context_data(self, **kwargs):
-		context = super(ServicesCreate, self).get_context_data( **kwargs)
+		context = super(ProductsCreate, self).get_context_data( **kwargs)
 		context = add_product_formsets_to_context( self, context)
 		return context
 
@@ -51,13 +44,10 @@ class ServicesCreate( CreateView):
 		save_product_formsets( context, self.object)
 		return HttpResponseRedirect(self.get_success_url())
 
-class ServicesUpdate( UpdateView):
-	model=Service
-	form_class=ServiceForm
-	success_url='/products/services'
+class ProductUpdate( UpdateView):
 
 	def get_context_data(self, **kwargs):
-		context = super(ServicesUpdate, self).get_context_data( **kwargs)
+		context = super(ProductUpdate, self).get_context_data( **kwargs)
 		context = add_product_formsets_to_context( self, context)
 		return context
 
@@ -70,7 +60,8 @@ class ServicesUpdate( UpdateView):
 		else:
 			return self.render_to_response(self.get_context_data( form=form))
 
-class ServicesDelete( DeleteView):
-	model=Service
-	success_url='/products/services'
+class ProductDelete( DeleteView):
+	pass
 
+class ProductsDetail( DetailView):
+	pass

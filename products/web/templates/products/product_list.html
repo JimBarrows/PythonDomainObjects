@@ -1,0 +1,32 @@
+<!-- product_list begin-->
+<a href="{{good_or_service}}/add" class="btn btn-small btn-primary">Add</a>
+<table id="{{good_or_service}}_list" width="100%">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Comment</th>
+			<th>Introduction Date</th>
+			<th>Sales Discontinuation Date</th>
+			<th>Support Discontinuation Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for product in product_list %}
+			<tr>
+				<td>{{product.name}}</td>
+				<td>{{product.comment}}</td>
+				<td>{{product.introduction_date}}</td>
+				<td>{{product.sales_discontinuation_date}}</td>
+				<td>{{product.support_discontinuation_date}}</td>
+				<td>
+					<div class="btn-group">
+						<a href="{{good_or_service}}/{{product.pk}}" class="btn btn-small">View</a>
+						<a href="{{good_or_service}}/update/{{product.pk}}" class="btn btn-small">Update</a>
+						<a href="{{good_or_service}}/delete/{{product.pk}}" class="btn btn-small">Delete</a>
+					</div>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+<!-- product_list end -->
