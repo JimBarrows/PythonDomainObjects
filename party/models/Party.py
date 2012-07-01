@@ -1,4 +1,5 @@
 from django.db import models
+from polymorphic import PolymorphicModel
 from datetime import datetime
 from common.models import DateRange
 
@@ -30,16 +31,36 @@ class Organization( Party):
 		app_label = 'party'
 		verbose_name_plural = 'Organizations'
 
-class PartyType(models.Model):
+class PartyType(PolymorphicModel):
 	description = models.CharField(max_length=250)
-	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
 	def __unicode__(self):
 		return self.description
 	class Meta:
 		app_label = 'party'
 		verbose_name_plural = 'Party Types'
 
-class PartyClassification(models.Model):
+class OrganizationType(PartyType):
+	'''Base Classification for organizations'''
+
+class MinorityClassificationType(OrganizationType):
+	'''Base Classification for organizations'''
+
+class IndustryClassificationType(OrganizationType):
+	'''Base Classification for organizations'''
+
+class SizeClassificationType(OrganizationType):
+	'''Base Classification for organizations'''
+
+class PersonType(PartyType):
+	'''Base Classification for organizations'''
+
+class EeocClassificationType(PersonType):
+	'''Base Classification for organizations'''
+
+class IncomeClassificationType(PersonType):
+	'''Base Classification for organizations'''
+
+class PartyClassification(PolymorphicModel):
 	party = models.ForeignKey(Party)
 	party_type = models.ForeignKey(PartyType)
 	from_date = models.DateField(default = datetime.today())
@@ -50,6 +71,27 @@ class PartyClassification(models.Model):
 		app_label = 'party'
 		verbose_name_plural = 'Party Classifications'
 		verbose_name = 'Party Classification'
+
+class OrganizationClassification(PartyClassification):
+	'''Base Classification for organizations'''
+
+class MinorityClassification(OrganizationClassification):
+	'''Base Classification for Minorities'''
+
+class IndustryClassification(OrganizationClassification):
+	'''Base Classification for Industries'''
+
+class SizeClassification(OrganizationClassification):
+	'''Base Classification for Sizing an organization'''
+
+class PersonClassification(PartyClassification):
+	'''Base Classification for people'''
+
+class EeocClassification(PersonClassification):
+	'''Base Classification for people'''
+
+class IncomeClassification(PersonClassification):
+	'''Base Classification for people'''
 
 class PartyRoleType( models.Model):
 	description = models.CharField(max_length=250)

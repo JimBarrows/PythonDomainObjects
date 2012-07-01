@@ -1,62 +1,6 @@
 [
   {
     "pk": 1, 
-    "model": "party.partytype", 
-    "fields": {
-      "description": "Organization Classification", 
-      "parent": null
-    }
-  }, 
-  {
-    "pk": 2, 
-    "model": "party.partytype", 
-    "fields": {
-      "description": "Person Classification", 
-      "parent": null
-    }
-  }, 
-  {
-    "pk": 3, 
-    "model": "party.partytype", 
-    "fields": {
-      "description": "Minority Classification", 
-      "parent": 1
-    }
-  }, 
-  {
-    "pk": 4, 
-    "model": "party.partytype", 
-    "fields": {
-      "description": "Industry Classification", 
-      "parent": 1
-    }
-  }, 
-  {
-    "pk": 5, 
-    "model": "party.partytype", 
-    "fields": {
-      "description": "Size Classification", 
-      "parent": 1
-    }
-  }, 
-  {
-    "pk": 6, 
-    "model": "party.partytype", 
-    "fields": {
-      "description": "EEOC Classification", 
-      "parent": 2
-    }
-  }, 
-  {
-    "pk": 7, 
-    "model": "party.partytype", 
-    "fields": {
-      "description": "Income Classification", 
-      "parent": 2
-    }
-  }, 
-  {
-    "pk": 1, 
     "model": "party.partyroletype", 
     "fields": {
       "description": "Person Role", 
