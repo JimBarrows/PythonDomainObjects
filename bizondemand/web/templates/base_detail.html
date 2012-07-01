@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<!-- base_detail.html begin -->
+	<table class="detail">
+		{% block fields %}
+		{% endblock fields %}
+	</table>
+	<a href="{% block done_url %}{% endblock done_url %}" class="btn btn-primary">Done</a>
+	<!-- base_detail.html end -->
+{% endblock content %}

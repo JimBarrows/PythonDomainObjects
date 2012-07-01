@@ -1,6 +1,5 @@
-{% extends "base.html"%}
+{% extends "products/product_detail.html"%}
 {% block title%}Good - {{object.name}}{% endblock%}
 {% block page_title%}Good - {{object.name}}{% endblock%}
-{% block content%}
-	{% include "products/product_detail.html" with product=object good_or_service="goods" %}
-{% endblock %}
+
+{%block done_url%}/products/goods{% endblock done_url %}

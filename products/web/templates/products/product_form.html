@@ -1,188 +1,176 @@
+{% extends "base_form.html" %}
+{% block extra_fields %}
 	<!-- product_form.html begin -->
-	<form action="" method="post">
-		{% include "formtools/forms.html" with form=product_form %}	
-		<div class="tabable">
-			<ul id="{{good_or_service}}_tabs" class="nav nav-tabs">
-			  <li class="active"><a href="#category_pane">Categories</a></li>
-				<li><a href="#price_component_pane">Price Components</a></li>
-				<li><a href="#feature_pane">Features</a></li>
-			</ul>
-			<div class="tab-content">
-				<div id="{{good_or_service}}_category_pane" class="tab-pane active">
-					<h2>Categories</h2>
-					{% include "formtools/inline_formset.html" with forms=category_list %}	
-				</div>
-				<div id="{{good_or_service}}_price_component_pane" class="tab-pane">
-					<h2>Price Components</h2>
-					<h3>Base Prices</h3>
-					<table width="100%">
-						<thead>
-							<tr>
-								<th>From</th>
-								<th>Thru</th>
-								<th>Price</th>
-								<th>Currency</th>
-								<th>Percent</th>
-								<th>Comment</th>
-								<th>Geographic Boundary</th>
-								<th>Party Type</th>
-								<th>Product Category</th>
-								<th>Quantity Break</th>
-								<th>Order Value</th>
-								<th>Sale Type</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<h3>Discounts</h3>
-					<table width="100%">
-						<thead>
-							<tr>
-								<th>From</th>
-								<th>Thru</th>
-								<th>Price</th>
-								<th>Currency</th>
-								<th>Percent</th>
-								<th>Comment</th>
-								<th>Geographic Boundary</th>
-								<th>Party Type</th>
-								<th>Product Category</th>
-								<th>Quantity Break</th>
-								<th>Order Value</th>
-								<th>Sale Type</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<h3>Surcharges</h3>
-					<table width="100%">
-						<thead>
-							<tr>
-								<th>From</th>
-								<th>Thru</th>
-								<th>Price</th>
-								<th>Currency</th>
-								<th>Percent</th>
-								<th>Comment</th>
-								<th>Geographic Boundary</th>
-								<th>Party Type</th>
-								<th>Product Category</th>
-								<th>Quantity Break</th>
-								<th>Order Value</th>
-								<th>Sale Type</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<h3>MSRPs</h3>
-					<table width="100%">
-						<thead>
-							<tr>
-								<th>From</th>
-								<th>Thru</th>
-								<th>Price</th>
-								<th>Currency</th>
-								<th>Percent</th>
-								<th>Comment</th>
-								<th>Geographic Boundary</th>
-								<th>Party Type</th>
-								<th>Product Category</th>
-								<th>Quantity Break</th>
-								<th>Order Value</th>
-								<th>Sale Type</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<h3>One Time Charges</h3>
-					<table width="100%">
-						<thead>
-							<tr>
-								<th>From</th>
-								<th>Thru</th>
-								<th>Price</th>
-								<th>Currency</th>
-								<th>Percent</th>
-								<th>Comment</th>
-								<th>Geographic Boundary</th>
-								<th>Party Type</th>
-								<th>Product Category</th>
-								<th>Quantity Break</th>
-								<th>Order Value</th>
-								<th>Sale Type</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<h3>Recurring Charges</h3>
-					<table width="100%">
-						<thead>
-							<tr>
-								<th>From</th>
-								<th>Thru</th>
-								<th>Price</th>
-								<th>Currency</th>
-								<th>Percent</th>
-								<th>Comment</th>
-								<th>Time Frequency</th>
-								<th>Geographic Boundary</th>
-								<th>Party Type</th>
-								<th>Product Category</th>
-								<th>Quantity Break</th>
-								<th>Order Value</th>
-								<th>Sale Type</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-					<h3>Utilization Charge</h3>
-					<table width="100%">
-						<thead>
-							<tr>
-								<th>From</th>
-								<th>Thru</th>
-								<th>Price</th>
-								<th>Currency</th>
-								<th>Percent</th>
-								<th>Comment</th>
-								<th>Unit of Measure</th>
-								<th>Geographic Boundary</th>
-								<th>Party Type</th>
-								<th>Product Category</th>
-								<th>Quantity Break</th>
-								<th>Order Value</th>
-								<th>Sale Type</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-				<div id="{{good_or_service}}_feature_pane" class="tab-pane">
-					<h2>Feature</h2>
-				</div>
+	<div class="tabable">
+		<ul id="product_tabs" class="nav nav-tabs">
+		  <li class="active"><a href="#category_pane">Categories</a></li>
+			<li><a href="#price_component_pane">Price Components</a></li>
+			<li><a href="#feature_pane">Features</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="product_category_pane" class="tab-pane active">
+				<h2>Categories</h2>
+				{% include "formtools/inline_formset.html" with forms=category_list %}	
 			</div>
-		<input id="{{good_or_service}}_save_button" class="btn btn-primary" type="submit" value="Save"/>
-		<a id="{{good_or_service}}_cancel_button" class="btn">Cancel</a>
-	</form>
+			<div id="product_price_component_pane" class="tab-pane">
+				<h2>Price Components</h2>
+				<h3>Base Prices</h3>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Percent</th>
+							<th>Comment</th>
+							<th>Geographic Boundary</th>
+							<th>Party Type</th>
+							<th>Product Category</th>
+							<th>Quantity Break</th>
+							<th>Order Value</th>
+							<th>Sale Type</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<h3>Discounts</h3>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Percent</th>
+							<th>Comment</th>
+							<th>Geographic Boundary</th>
+							<th>Party Type</th>
+							<th>Product Category</th>
+							<th>Quantity Break</th>
+							<th>Order Value</th>
+							<th>Sale Type</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<h3>Surcharges</h3>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Percent</th>
+							<th>Comment</th>
+							<th>Geographic Boundary</th>
+							<th>Party Type</th>
+							<th>Product Category</th>
+							<th>Quantity Break</th>
+							<th>Order Value</th>
+							<th>Sale Type</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<h3>MSRPs</h3>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Percent</th>
+							<th>Comment</th>
+							<th>Geographic Boundary</th>
+							<th>Party Type</th>
+							<th>Product Category</th>
+							<th>Quantity Break</th>
+							<th>Order Value</th>
+							<th>Sale Type</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<h3>One Time Charges</h3>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Percent</th>
+							<th>Comment</th>
+							<th>Geographic Boundary</th>
+							<th>Party Type</th>
+							<th>Product Category</th>
+							<th>Quantity Break</th>
+							<th>Order Value</th>
+							<th>Sale Type</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<h3>Recurring Charges</h3>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Percent</th>
+							<th>Comment</th>
+							<th>Time Frequency</th>
+							<th>Geographic Boundary</th>
+							<th>Party Type</th>
+							<th>Product Category</th>
+							<th>Quantity Break</th>
+							<th>Order Value</th>
+							<th>Sale Type</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+				<h3>Utilization Charge</h3>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Price</th>
+							<th>Currency</th>
+							<th>Percent</th>
+							<th>Comment</th>
+							<th>Unit of Measure</th>
+							<th>Geographic Boundary</th>
+							<th>Party Type</th>
+							<th>Product Category</th>
+							<th>Quantity Break</th>
+							<th>Order Value</th>
+							<th>Sale Type</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div id="product_feature_pane" class="tab-pane">
+				<h2>Feature</h2>
+			</div>
+		</div>
+	<!-- product_form.html begin -->
+{% endblock extra_fields %}
 
-{% block css %}
-	<!-- product_form.html begin -->
-	{{ product_form.media.css }}
-	<!-- product_form.html end -->
-{% endblock %}
-{% block footer_javascript_include %}
-	<!-- product_form.html begin -->
-	{{ product_form.media.js }}
-	<script src="{{ STATIC_URL }}js/jquery.formset.min.js"></script>
-	<!-- product_form.html end -->
-{% endblock %}
 {% block footer_javascript %}
 	<!-- product_form.html begin -->
 	<script>
@@ -193,7 +181,7 @@
 			addText:'Add Another',
 			deleteText:'Delete'
 			})
-		$('#{{good_or_service}}_tabs a').click(function (e) {
+		$('#product_tabs a').click(function (e) {
 		  e.preventDefault();
 		  $(this).tab('show');
 		})

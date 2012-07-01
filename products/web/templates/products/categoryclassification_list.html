@@ -1,42 +1,30 @@
-{% extends 'base.html' %}
+{% extends 'base_list.html' %}
 
 {% block title %}Categories{% endblock %}
 {% block page_title %}Categories{% endblock %}
-{% block content %}
-	<a href="/products/categories/add" class="btn btn-small">Add</a>
-	<table width="100%">
-		<thead>
-			<tr>
-				<th>Product</th>
-				<th>Category</th>
-				<th>Primary</th>
-				<th>From</th>
-				<th>Thru</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for category in object_list %}
-				<tr>
-					<td>{{category.product.name}}</td>
-					<td>{{category.category_type.description}}</td>
-					<td>{{category.primary}}</td>
-					<td>{{category.from_date}}</td>
-					<td>{{category.thru_date}}</td>
-					<td>
-						<div class="btn-group">
-							<a href="categories/{{category.pk}}" class="btn btn-small">View</a>
-							<a href="categories/update/{{category.pk}}" class="btn btn-small">Update</a>
-							<a href="categories/delete/{{category.pk}}" class="btn btn-small">Delete</a>
-						</div>
-					</td>
-				</tr>
-				{% empty %}
-					<tr>
-						<td colspan='6'>
-							<p>Nothing has been categorized</p>
-						</td>
-					</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-{% endblock %}
+
+{% block add_url %}categories{%endblock%}
+{% block view_url%}categories{% endblock %}
+{% block update_url%}categories{% endblock %}
+{% block delete_url%}categories{% endblock %}
+
+{% block table_header %}
+	<tr>
+		<th>Product</th>
+		<th>Category</th>
+		<th>Primary</th>
+		<th>From</th>
+		<th>Thru</th>
+	</tr>
+{% endblock table_header %}
+
+{% block row %}
+	<td>{{object.product.name}}</td>
+	<td>{{object.category_type.description}}</td>
+	<td>{{object.primary}}</td>
+	<td>{{object.from_date}}</td>
+	<td>{{object.thru_date}}</td>
+{% endblock row %}
+{% block empty_row %}
+	<td colspan="5">There are no categories.</td>
+{% endblock empty_row %}

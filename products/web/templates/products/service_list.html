@@ -1,7 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'products/product_list.html' %}
 
 {% block title %}Services{% endblock %}
 {% block page_title %}Services{% endblock %}
-{% block content %}
-	{% include "products/product_list.html" with good_or_service="services" product_list=object_list %}
-{% endblock %}
+
+{% block add_url%}services{% endblock %}
+{% block view_url%}services{% endblock %}
+{% block update_url%}services{% endblock %}
+{% block delete_url%}services{% endblock %}
+{% block empty_row %}
+	<td colspan="5">There are no services</td>
+{% endblock empty_row %}

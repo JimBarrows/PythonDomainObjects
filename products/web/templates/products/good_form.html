@@ -1,11 +1,6 @@
-{% extends "base.html" %}
+{% extends "products/product_form.html" %}
 
 {% block title %}Good{% endblock %}
 {% block page_title %}Good{% endblock %}
-{% block content %}
-	<!-- service_form.html begin -->
-	{% include "products/product_form.html" with good_or_service="good" product_form=form %}
-	<!-- service_form.html end -->
-{% endblock %}
 
-
+{% block cancel_url%}/products/goods{% endblock %}

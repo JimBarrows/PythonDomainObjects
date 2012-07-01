@@ -1,4 +1,5 @@
-<table>
+{% extends "base_detail.html" %}
+{% block fields %}
 	<tr>
 		<th>Name:</th>
 		<td>{{object.name}}</td>
@@ -19,5 +20,5 @@
 		<th>Support Discontinuation Date:</th>
 		<td>{{object.support_discontinuation_date}}</td>
 	</tr>
-</table>
+{% endblock fields %}
 <a class="btn btn-primary" href="/products/{{good_or_service}}">Done</a>

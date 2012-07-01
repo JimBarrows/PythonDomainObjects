@@ -1,8 +1,4 @@
-{% extends "base.html"%}
+{% extends "products/product_confirm_delete.html"%}
 {% block title%}Delete Service{% endblock%}
 {% block page_title%}Delete Service{% endblock%}
-{% block content%}
-	<!-- good_confirm_delete.html begin -->
-	{% include 'products/product_confirm_delete.html' with product=object good_or_service='goods' %}
-	<!-- good_confirm_delete.html end -->
-{% endblock %}
+{% block cancel_link %}/products/goods{%endblock%}

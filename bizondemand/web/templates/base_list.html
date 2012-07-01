@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<!-- base_list.html begin -->
+	<a href="{%block add_url%}{% endblock %}/add" class="btn btn-small">Add</a>
+	<table width="100%" class="table table-striped table-condensed">
+		<thead>
+			{% block table_header %}
+			{% endblock table_header %}
+		</thead>
+		<tbody>
+			{% for object in object_list %}
+				<tr>
+					{% block row %}
+					{% endblock row %}
+					<td>
+						<div class="btn-group">
+							<a href="{%block view_url%}{% endblock%}/{{object.pk}}" class="btn btn-mini">View</a> 
+							<a href="{%block update_url%}{% endblock%}/update/{{object.pk}}" class="btn btn-mini">Update</a> 
+							<a href="{%block delete_url%}{% endblock%}/delete/{{object.pk}}" class="btn btn-mini">Delete</a> 
+						</div>
+					</td>
+				</tr>
+				{% empty %}
+					<tr>
+						{% block empty_row %}
+						<td>There is nothing to list</td>
+						{% endblock empty_row %}
+					</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<!-- base_list.html end -->
+{% endblock content %}

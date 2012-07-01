@@ -1,21 +1,6 @@
-{% extends "base.html" %}
+{% extends "base_form.html" %}
 
 {% block title %}Price{% endblock %}
 {% block page_title %}Price{% endblock %}
-{% block css %}
-	<!-- pricecomponent_form.html begin -->
-	{{ form.media.css }}
-	<!-- pricecomponent_form.html end -->
-{% endblock %}
-{% block content %}
-	<!-- pricecomponent_form.html begin -->
-	<form action="" method="post">
-		{% include "formtools/forms.html" with form=form %}	
-		<input id="save_button" class="btn btn-primary" type="submit" value="Save"/>
-	</form>
-{% endblock %}
-{% block footer_javascript_include %}
-	<!-- pricecomponent_form.html begin -->
-	{{ form.media.js }}
-	<!-- pricecomponent_form.html end -->
-{% endblock %}
+
+{% block cancel_url %}/products/pricing{% endblock %}

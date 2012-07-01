@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<!-- base_confirm_delete.html begin -->
+	<table class="detail">
+		{% block fields %}
+		{% endblock fields %}
+	</table>
+	<!-- base_confirm_delete.html end -->
+	{% block delete_form %}
+		<!-- base_confirm_delete.html begin -->
+		<form method="post" action="">
+			{% csrf_token %}
+			<button class="btn btn-primary" type="submit">Delete</button>
+			<a class="btn" href="{% block cancel_link %}{% endblock cancel_link %}">Cancel</a>
+		</form>
+		<!-- base_confirm_delete.html end -->
+	{% endblock delete_form %}
+{% endblock content %}

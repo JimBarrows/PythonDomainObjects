@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block css %}
+	<!-- base_form.html begin -->
+	{{ form.media.css }}
+	<!-- base_form.html end -->
+{% endblock css %}
+
+{% block content %}
+	<!-- base_form.html begin -->
+	<form action="" method="post">
+		{% for field in form %}
+			{% if field.is_hidden %}
+				{{field}}
+			{% else %}
+				<div id="{{field.html_name}}_row" class="row">
+					<div id="{{field.html_name}}_span" class="span3">
+ 						{{ field.label_tag }} {{ field }}
+ 						{% if field.errors %}
+ 							<ul>
+ 								{% for error in field.errors %}
+ 									<li class="alert alert-error">{{error}}</li>	
+								{% endfor %}
+ 							</ul>
+ 						{% endif %}
+ 					</div> <!-- {{field.html_name}}_span -->
+				</div> <!-- {{field.html_name}}_row -->
+			{% endif %}
+		{% endfor %}
+		{% block extra_fields %}
+		{% endblock extra_fields %}
+		{% csrf_token %}
+		<input class="btn btn-primary" type="submit" value="Save"/>
+		<a class="btn" href="{%block cancel_url%}{%endblock%}">Cancel</a>
+	</form>
+	<!-- base_form.html end -->
+{% endblock content %}
+
+{% block footer_javascript_include %}
+	<!-- base_form.html begin -->
+	{{ form.media.js }}
+	<!-- base_form.html end -->
+{% endblock %}
