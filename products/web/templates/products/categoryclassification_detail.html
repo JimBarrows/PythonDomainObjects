@@ -1,6 +1,6 @@
 {% extends "base_detail.html"%}
-{% block title%}Category - {{object.product.name}}{% endblock%}
-{% block page_title%}Category - {{object.product.name}}{% endblock%}
+{% block title%}Classification - {{object.product.name}}{% endblock%}
+{% block page_title%}Classification - {{object.product.name}}{% endblock%}
 {% block fields%}
 	<!-- categoryclassification_detail.html begin -->
 	<tr>
@@ -8,7 +8,7 @@
 	<td>{{object.product.name}}
 	</tr>
 	<tr>
-		<th>Category</th>
+		<th>Classification</th>
 		<td>{{object.category_type.description}}
 	</tr>
 	<tr>
@@ -30,4 +30,4 @@
 	<!-- categoryclassification_detail.html end -->
 {% endblock fields%}
 
-{% block done_url %}/products/categories{% endblock done_link %}
+{% block done_url %}/products/classifications{% endblock done_url %}

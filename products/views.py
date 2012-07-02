@@ -73,7 +73,7 @@ class CategoryList( ListView):
 class CategoryCreate( CreateView):
 	model=CategoryClassification
 	form_class=CategoryClassificationForm
-	success_url="/products/categories"
+	success_url="/products/classifications"
 
 class CategoryDetail( DetailView):
 	model=CategoryClassification
@@ -81,11 +81,11 @@ class CategoryDetail( DetailView):
 class CategoryUpdate( UpdateView):
 	model=CategoryClassification
 	form_class=CategoryClassificationForm
-	success_url='/products/categories'
+	success_url='/products/classifications'
 
 class CategoryDelete( DeleteView):
 	model=CategoryClassification
-	success_url='/products/categories'
+	success_url='/products/classifications'
 
 class PricingComponentList( ListView):
 	model=PriceComponent

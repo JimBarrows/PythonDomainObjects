@@ -1,6 +1,6 @@
 {% extends "base_confirm_delete.html"%}
-{% block title%}Delete Category - {{object.product.name}}{% endblock%}
-{% block page_title%}Delete Category - {{object.product.name}}{% endblock%}
+{% block title%}Delete Classification - {{object.product.name}}{% endblock%}
+{% block page_title%}Delete Classification - {{object.product.name}}{% endblock%}
 {% block fields%}
 	<!-- categoryclassification_confirm_delete.html begin -->
 	<tr>
@@ -8,7 +8,7 @@
 		<td>{{object.product.name}}
 	</tr>
 	<tr>
-		<th>Category</th>
+		<th>Classification</th>
 		<td>{{object.category_type.description}}
 	</tr>
 	<tr>
@@ -31,4 +31,4 @@
 	<!-- categoryclassification_confirm_delete.html end -->
 {% endblock fields %}
 
-{% block cancel_link %}/products/categories{% endblock cancel_link %}
+{% block cancel_link %}/products/classifications{% endblock cancel_link %}

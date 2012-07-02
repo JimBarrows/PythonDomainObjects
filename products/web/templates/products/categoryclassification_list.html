@@ -1,17 +1,17 @@
 {% extends 'base_list.html' %}
 
-{% block title %}Categories{% endblock %}
-{% block page_title %}Categories{% endblock %}
+{% block title %}Classifications{% endblock %}
+{% block page_title %}Classifications{% endblock %}
 
-{% block add_url %}categories{%endblock%}
-{% block view_url%}categories{% endblock %}
-{% block update_url%}categories{% endblock %}
-{% block delete_url%}categories{% endblock %}
+{% block add_url %}classifications{%endblock%}
+{% block view_url%}classifications{% endblock %}
+{% block update_url%}classifications{% endblock %}
+{% block delete_url%}classifications{% endblock %}
 
 {% block table_header %}
 	<tr>
 		<th>Product</th>
-		<th>Category</th>
+		<th>Classification</th>
 		<th>Primary</th>
 		<th>From</th>
 		<th>Thru</th>
@@ -26,5 +26,5 @@
 	<td>{{object.thru_date}}</td>
 {% endblock row %}
 {% block empty_row %}
-	<td colspan="5">There are no categories.</td>
+	<td colspan="5">There are no classifications.</td>
 {% endblock empty_row %}
