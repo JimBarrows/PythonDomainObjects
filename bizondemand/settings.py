@@ -83,6 +83,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 	os.path.join( PROJECT_DIR, 'bizondemand/web/static'),
 	os.path.join( PROJECT_DIR, 'products/web/static'),
+	os.path.join( PROJECT_DIR, 'business/web/static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -118,6 +119,8 @@ ROOT_URLCONF = 'bizondemand.urls'
 
 TEMPLATE_DIRS = (
 	os.path.join(PROJECT_DIR, 'bizondemand/web/templates'),
+	os.path.join(PROJECT_DIR, 'business/web/templates'),
+	os.path.join(PROJECT_DIR, 'party/templates'),
 	os.path.join(PROJECT_DIR, 'products/web/templates'),
 )
 

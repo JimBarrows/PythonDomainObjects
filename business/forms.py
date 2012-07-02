@@ -4,11 +4,10 @@ from common.widgets import DatePickerWidget
 from common.forms import CommonModelForm,make_custom_field
 
 class BusinessForm( CommonModelForm ):
-	date_started = DateField(label='Date Started', widget=TextInput( attrs={'class':'dateFieldPicker'}))
-	formfield_callback = make_custom_field
+	date_started = DateField(label='Date Started', widget=DatePickerWidget, required=True)
 	class Meta:
 		model=Organization
-		fields=['name']
+		exclude=['roles', 'classification']
 
 class SubOrgForm( BusinessForm ):
 	sub_org_role = ChoiceField( label='Organization Type', choices=(
@@ -17,4 +16,3 @@ class SubOrgForm( BusinessForm ):
 			('Subsidiary','Subsidiary'),
 			('DBA','DBA'))
 		)
-	formfield_callback = make_custom_field

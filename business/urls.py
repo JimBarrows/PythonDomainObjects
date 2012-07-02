@@ -1,10 +1,8 @@
 from django.conf.urls.defaults import *
 from django.views.generic.simple import direct_to_template
+from views import *
 
 
 urlpatterns = patterns('business.views',
-                       (r'^$', 'index'),
-                       (r'^setup$', 'setup'),
-                       (r'^addSubOrg$', 'add_sub_org'),
-                       (r'^subOrganizationForm', 'subOrganizationForm')
+                       (r'^setup$', BusinessCreate.as_view()),
                        )

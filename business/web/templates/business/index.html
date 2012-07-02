@@ -1,9 +1,9 @@
 {% extends "business/template.html" %}
 
 {% block title %}Business{% endblock %}
+{% block page_title%}Main Organization: {{ business }}{% endblock %}
 
 {% block content %}
-<h1>Main Organization: {{ business }}</h1>
 <a href="/business/subOrganizationForm"><i class="icon-plus-sign"></i> Add a Sub-Organization</a>
 <h2>Departments</h2>
 {% if departments %}
