@@ -68,9 +68,17 @@ class EstimatedProductCost( PolymorphicModel):
 	cost = models.DecimalField( max_digits=8, decimal_places=2)
 	feature = models.ForeignKey('Feature', blank=True, null=True)
 	product = models.ForeignKey('Product', blank=True, null=True)
-	kind = models.ForeignKey('CostComponentType')
 	geographic_boundary = models.ForeignKey(GeographicBoundary, blank=True, null=True)
-	organization = models.ForeignKey(Organization, related_name='estimatedProductCost_set')
+	organization = models.ForeignKey(Organization, related_name='estimatedProductCost_set', blank=True, null=True)
+
+class EstimatedMaterialsCost( EstimatedProductCost):
+	pass
+
+class EstimatedLaborCost( EstimatedProductCost):
+	pass
+
+class EstimatedOtherCosts( EstimatedProductCost):
+	pass
 
 class CostComponentType( models.Model):
 	description = models.CharField(max_length=250)

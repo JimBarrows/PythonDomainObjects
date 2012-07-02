@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from products.models import Good, Service, CategoryClassification, PriceComponent
+from products.models import Good, Service, CategoryClassification, PriceComponent, EstimatedProductCost
 from common.widgets import DatePickerWidget
 
 class GoodForm( ModelForm ):
@@ -30,3 +30,9 @@ class PriceComponentForm( ModelForm):
 	thru_date = forms.DateField(widget=DatePickerWidget, required=False)
 	class Meta:
 		model=PriceComponent
+
+class EstimatedProductCostForm( ModelForm):
+	from_date = forms.DateField(widget=DatePickerWidget, required=True)
+	thru_date = forms.DateField(widget=DatePickerWidget, required=False)
+	class Meta:
+		model=EstimatedProductCost

@@ -107,3 +107,24 @@ class PricingComponentUpdate( UpdateView):
 class PricingComponentDelete( DeleteView):
 	model=PriceComponent
 	success_url="/products/pricing"
+
+class EstimatedProductCostList( ListView):
+	model=EstimatedProductCost
+	queryset=EstimatedProductCost.objects.all()
+
+class EstimatedProductCostCreate( CreateView):
+	model=EstimatedProductCost
+	form_class=EstimatedProductCostForm
+	success_url="/products/costing"
+
+class EstimatedProductCostDetail( DetailView):
+	model=EstimatedProductCost
+
+class EstimatedProductCostUpdate( UpdateView):
+	model=EstimatedProductCost
+	form_class=EstimatedProductCostForm
+	success_url="/products/costing"
+
+class EstimatedProductCostDelete( DeleteView):
+	model=EstimatedProductCost
+	success_url="/products/costing"

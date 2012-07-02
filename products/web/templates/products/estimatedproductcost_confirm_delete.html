@@ -1,0 +1,17 @@
+{% extends 'base_confirm_delete.html' %}
+
+{% block title %}Delete Estimated Product Cost{% endblock %}
+{% block page_title %}Delete Estimated Product Cost{% endblock %}
+{% block fields %}
+	<!-- estimatedproductcost_confirm_delete.html begin -->
+			<tr> <th >From</th> <td>{{ object.from_date }}</td> </tr>
+			<tr> <th >Thru</th> <td>{{ object.thru_date }}</td> </tr>
+			<tr> <th >Cost</th> <td>{{ object.cost }}</td> </tr>
+			<tr> <th >Feature</th> <td>{{ object.feature }}</td> </tr>
+			<tr> <th >Product</th> <td>{{ object.product }}</td> </tr>
+			<tr> <th >Area</th> <td>{{ object.geographic_boundary }}</td> </tr>
+			<tr> <th >Organization</th> <td>{{ object.organization }}</td> </tr>
+	<!-- estimatedproductcost_confirm_delete.html begin -->
+{% endblock fields %}
+
+{%block cancel_link%}/products/costing{%endblock%}

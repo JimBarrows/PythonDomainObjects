@@ -1,0 +1,38 @@
+{% extends 'base_list.html' %}
+
+{% block title %}Estimated Product Cost{% endblock %}
+{% block page_title %}Estimated Product Cost{% endblock %}
+{%block add_url %}costing{% endblock %}
+{%block view_url %}costing{% endblock %}
+{%block update_url %}costing{% endblock %}
+{%block delete_url %}costing{% endblock %}
+
+{%block table_header %}
+	<!-- estimatedproductcost_list.html begin -->
+	<tr>
+		<th >From</th>
+		<th >Thru</th>
+		<th >Cost</th>
+		<th >Feature</th>
+		<th >Product</th>
+		<th >Area</th>
+		<th >Organization</th>
+	</tr>
+	<!-- estimatedproductcost_list.html end -->
+{% endblock table_header %}
+
+{% block row %}
+	<!-- estimatedproductcost_list.html begin -->
+	<td>{{ object.from_date|date:"y/n/d" }}</td>
+	<td>{{ object.thru_date|date:"y/n/d" }}</td>
+	<td>{{ object.cost}}</td>
+	<td>{{ object.feature }}</td>
+	<td>{{ object.product }}</td>
+	<td>{{ object.geographic_boundary }}</td>
+	<td>{{ object.organization }}</td>
+	<!-- estimatedproductcost_list.html end -->
+{% endblock row %}
+
+{% block empty_row %}
+	<td colspan="19">There are no costing components.</td>
+{% endblock empty_row %}
