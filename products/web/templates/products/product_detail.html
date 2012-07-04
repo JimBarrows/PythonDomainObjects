@@ -22,7 +22,8 @@
 	</tr>
 {% endblock fields %}
 {% block extra_fields %}
-<div class="tabable">
+	<!-- product_detail.html begin -->
+	<div class="tabable">
 		<ul id="product_tabs" class="nav nav-tabs">
 		  <li class="active"><a href="#product_category_pane">Categories</a></li>
 			<li><a href="#product_price_component_pane">Price Components</a></li>
@@ -55,11 +56,61 @@
 				</table>
 			</div>
 			<div id="product_price_component_pane" class="tab-pane">
-				<h2>Price Components</h2>
+				<table class="table table-bordered table-striped table-condensed">
+					<thead>
+						<tr>
+							<th rowspan="2">From</th>
+							<th rowspan="2">Thru</th>
+							<th rowspan="2">Price / Percent</th>
+							<th rowspan="2">Area</th>
+							<th rowspan="2">Party Type</th>
+							<th rowspan="2">Product Category</th>
+							<th colspan="2">Quantity Break</th>
+							<th colspan="2">Order Value</th>
+							<th rowspan="2">Sales Type</th>
+							<th rowspan="2">Pricing Organization</th>
+							<th rowspan="2">Feature</th>
+							<th rowspan="2">Part</th>
+						</tr>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>From</th>
+							<th>Thru</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for price in object.pricecomponent_set.all %}
+							<tr>
+								<td>{{price.from_date|date:"y/n/d"}}</td>
+								<td>{{price.thru_date|date:"y/n/d"}}</td>
+								<td>
+									{% if price.price %}
+										{{price.currency}} {{price.price}}
+									{% else %}
+										{{price.percent}}
+									{% endif %}
+								</td>
+								<td>{{price.area}}</td>
+								<td>{{price.party_type}}</td>
+								<td>{{price.product_category}}</td>
+								<td>{{price.quantity_break.from_quantity}}</td>
+								<td>{{price.quantity_break.thru_quantity}}</td>
+								<td>{{price.quantity_break.from_value}}</td>
+								<td>{{price.quantity_break.thru_value}}</td>
+								<td>{{price.sales_type}}</td>
+								<td>{{price.specified_for}}</td>
+								<td>{{price.feature}}</td>
+								<td>{{price.par}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
 			</div>
 			{% block post_tab_panes %}	
 			{% endblock post_tab_panes %}	
 		</div>
+	<!-- product_detail.html end -->
 {% endblock extra_fields %}
 {% block footer_javascript %}
 	<!-- product_detail.html begin -->

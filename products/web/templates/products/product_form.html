@@ -11,11 +11,10 @@
 		</ul>
 		<div class="tab-content">
 			<div id="product_category_pane" class="tab-pane active">
-				<h2>Categories</h2>
 				{% include "formtools/inline_formset.html" with forms=category_list %}	
 			</div>
 			<div id="product_price_component_pane" class="tab-pane">
-				<h2>Price Components</h2>
+				{% include "formtools/inline_formset.html" with forms=pricecomponent_list %}	
 			</div>
 			<div id="product_feature_pane" class="tab-pane">
 				<h2>Feature</h2>

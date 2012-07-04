@@ -13,6 +13,7 @@ from products.models import *
 
 CategoryClassificationFormSet = inlineformset_factory( Product, CategoryClassification, extra=1, form=CategoryClassificationForm)
 IdentificationFormSet = inlineformset_factory( Good, Identification, extra=1, form=IdentificationForm)
+PriceComponentFormSet = inlineformset_factory( Product, PriceComponent, extra=1, form=PriceComponentForm)
 
 class ProductsList( ListView):
 	pass
@@ -20,17 +21,21 @@ class ProductsList( ListView):
 def add_product_formsets_to_context( view, context):
 	if view.request.POST:
 		context['category_list'] = CategoryClassificationFormSet( view.request.POST, instance=view.object)
+		context['pricecomponent_list'] = PriceComponentFormSet( view.request.POST, instance=view.object)
 	else :
 		context['category_list'] = CategoryClassificationFormSet( instance=view.object)
+		context['pricecomponent_list'] = PriceComponentFormSet( instance=view.object)
 	return context
 
 def save_product_formsets( context, instance):
 	category_list = context['category_list']
 	category_list.instance = instance
 	category_list.save()
+	context['pricecomponent_list'].instance = instance
+	context['pricecomponent_list'].save()
 
 def product_formsets_are_valid( context):
-	return context['category_list'].is_valid()
+	return context['category_list'].is_valid() and context['pricecomponent_list'].is_valid()
 
 def add_good_formsets_to_context( view, context):
 	if view.request.POST:
@@ -40,9 +45,11 @@ def add_good_formsets_to_context( view, context):
 	return context
 
 def save_good_formsets( context, instance):
-		context['identification_list'].instance=instance
-		context['identification_list'].save()
-		save_product_formsets( context, instance)
+	context['identification_list'].instance=instance
+	context['identification_list'].save()
+	context['pricecomponent_list'].instance = instance
+	context['pricecomponent_list'].save()
+	save_product_formsets( context, instance)
 
 class ProductCreate( CreateView):
 
