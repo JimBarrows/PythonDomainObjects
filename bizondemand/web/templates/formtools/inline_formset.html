@@ -3,9 +3,8 @@
 {{ forms.non_form_errors.as_ul }}
 </div>
 {% endif %}
-{{ forms.management_form }}
 <fieldset id="{{forms.prefix}}_fieldset">
-	<table id="{{forms.prefix}}_table">
+	<table id="{{forms.prefix}}_table" width="100%" class="table table-bordered table-striped table-condensed">
 		{% for form in forms.forms %}
 			{% if forloop.first %}
 				<thead>
@@ -37,4 +36,5 @@
 			{% endfor %}
 		</tbody>
 	</table>
+{{ forms.management_form }}
 <fieldset>

@@ -2,4 +2,37 @@
 {% block title%}Good - {{object.name}}{% endblock%}
 {% block page_title%}Good - {{object.name}}{% endblock%}
 
+
+{% block post_tabs %}
+	<!-- good_detail.html begin -->
+	<li><a href="#identification_pane">Identities</a></li>
+	<!-- good_detail.html end -->
+{% endblock post_tabs %}
+
+{% block post_tab_panes %}
+	<!-- good_detail.html begin -->
+	<div id="identification_pane" class="tab-pane">
+		<table class="table table-bordered table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Identification</th>
+					<th>From Date</th>
+					<th>Thru Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for identification in identification_list %}
+					<tr>
+						<td>{{identification.kind.description}}</td>
+						<td>{{identification.value}}</td>
+						<td>{{identification.from_date}}</td>
+						<td>{{identification.thru_date}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<!-- good_detail.html end -->
+{% endblock post_tab_panes %}
 {%block done_url%}/products/goods{% endblock done_url %}

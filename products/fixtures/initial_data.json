@@ -28,5 +28,40 @@
       "description": "Subscription",
       "parent": null
     }
+  },
+  {
+    "pk": 1,
+    "model": "products.identificationtype",
+    "fields": {
+      "description": "Manufacturer ID No"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "products.identificationtype",
+    "fields": {
+      "description": "UPCA"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "products.identificationtype",
+    "fields": {
+      "description": "SKU"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "products.identificationtype",
+    "fields": {
+      "description": "ISBN"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "products.identificationtype",
+    "fields": {
+      "description": "UPCE"
+    }
   }
 ]

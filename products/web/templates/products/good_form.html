@@ -1,6 +1,33 @@
 {% extends "products/product_form.html" %}
 
 {% block title %}Good{% endblock %}
+
 {% block page_title %}Good{% endblock %}
 
 {% block cancel_url%}/products/goods{% endblock %}
+
+{% block post_tabs %}
+	<!-- good_form.html begin -->
+	<li><a href="#id_pane">Identification Codes</a></li>
+	<!-- good_form.html end -->
+{% endblock post_tabs %}
+
+{% block post_tab_panes %}
+	<!-- good_form.html begin -->
+	<div id="id_pane" class="tab-pane">
+		{% include "formtools/inline_formset.html" with forms=identification_list %}
+	</div>
+	<!-- good_form.html end -->
+{% endblock post_tab_panes %}o
+
+{% block tab_javascript %}
+	<!-- good_form.html begin -->
+	$('#{{identification_list.prefix}}_table tbody tr').formset({
+			prefix:'{{identification_list.prefix}}',
+			addCssClass:'btn',
+			deleteCssClass:'btn',
+			addText:'Add Another',
+			deleteText:'Delete'
+		})
+	<!-- good_form.html end -->
+{% endblock tab_javascript %}

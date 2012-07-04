@@ -4,6 +4,8 @@
 	<!-- base_form.html begin -->
 	{{ form.media.css }}
 	<!-- base_form.html end -->
+	{% block more_css %}
+	{% endblock more_css %}
 {% endblock css %}
 
 {% block content %}
@@ -40,4 +42,6 @@
 	<!-- base_form.html begin -->
 	{{ form.media.js }}
 	<!-- base_form.html end -->
+	{% block more_footer_javascript_include %}
+	{% endblock more_footer_javascript_include %}
 {% endblock %}

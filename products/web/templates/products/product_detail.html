@@ -21,4 +21,53 @@
 		<td>{{object.support_discontinuation_date}}</td>
 	</tr>
 {% endblock fields %}
-<a class="btn btn-primary" href="/products/{{good_or_service}}">Done</a>
+{% block extra_fields %}
+<div class="tabable">
+		<ul id="product_tabs" class="nav nav-tabs">
+		  <li class="active"><a href="#product_category_pane">Categories</a></li>
+			<li><a href="#product_price_component_pane">Price Components</a></li>
+			{% block post_tabs %}
+			{% endblock post_tabs %}
+		</ul>
+		<div class="tab-content">
+			<div id="product_category_pane" class="tab-pane active">
+				<table class="table table-bordered table-striped table-condensed">
+					<thead>
+						<tr>
+							<th>Category Type</th>
+							<th>From Date</th>
+							<th>Thru Date</th>
+							<th>Primary</th>
+							<th>Comment</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for category in category_list %}
+							<tr>
+								<td>{{category.category_type.description}}</td>
+								<td>{{category.from_date}}</td>
+								<td>{{category.thru_date}}</td>
+								<td>{{category.primary}}</td>
+								<td>{{category.comment}}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div id="product_price_component_pane" class="tab-pane">
+				<h2>Price Components</h2>
+			</div>
+			{% block post_tab_panes %}	
+			{% endblock post_tab_panes %}	
+		</div>
+{% endblock extra_fields %}
+{% block footer_javascript %}
+	<!-- product_detail.html begin -->
+	<script type="text/javascript">
+		$('#product_tabs a').click(function (e) {
+		  e.preventDefault();
+		  $(this).tab('show');
+		})
+	</script>
+{% endblock footer_javascript %}
+

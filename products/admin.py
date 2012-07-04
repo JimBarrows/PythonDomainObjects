@@ -116,8 +116,7 @@ class CategoryAdmin( admin.ModelAdmin):
 #admin.site.register( Good, GoodAdmin )
 admin.site.register( Category, CategoryAdmin )
 #admin.site.register( Feature,  FeatureAdmin)
-#admin.site.register( IdentificationType )
-#
+admin.site.register( IdentificationType )
 #admin.site.register( FeatureCategory )
 #admin.site.register( FeatureInteraction )
 #admin.site.register( Dimension )
