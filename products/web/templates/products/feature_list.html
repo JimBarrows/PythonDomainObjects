@@ -1,0 +1,22 @@
+{% extends 'base_list.html' %}
+
+{% block title %}Features{% endblock %}
+{% block page_title %}Features{% endblock %}
+
+{% block add_url %}features{%endblock%}
+{% block view_url%}features{% endblock %}
+{% block update_url%}features{% endblock %}
+{% block delete_url%}features{% endblock %}
+
+{% block table_header %}
+	<tr>
+		<th>Description</th>
+	</tr>
+{% endblock table_header %}
+
+{% block row %}
+	<td>{{object.description}}</td>
+{% endblock row %}
+{% block empty_row %}
+	<td colspan="5">There are no features.</td>
+{% endblock empty_row %}

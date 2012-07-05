@@ -42,3 +42,15 @@ class IdentificationForm( ModelForm):
 	thru_date = forms.DateField(widget=DatePickerWidget, required=False)
 	class Meta:
 		model=Identification
+
+class FeatureForm( ModelForm):
+	class Meta:
+		model=Feature
+		exclude=( 'product',)
+
+class FeatureApplicabilityForm( ModelForm):
+	from_date = forms.DateField(widget=DatePickerWidget, required=True)
+	thru_date = forms.DateField(widget=DatePickerWidget, required=False)
+	class Meta:
+		model=FeatureApplicability
+

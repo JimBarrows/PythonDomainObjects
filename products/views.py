@@ -14,6 +14,7 @@ from products.models import *
 CategoryClassificationFormSet = inlineformset_factory( Product, CategoryClassification, extra=1, form=CategoryClassificationForm)
 IdentificationFormSet = inlineformset_factory( Good, Identification, extra=1, form=IdentificationForm)
 PriceComponentFormSet = inlineformset_factory( Product, PriceComponent, extra=1, form=PriceComponentForm)
+FeatureApplicabilityFormSet = inlineformset_factory( Feature, FeatureApplicability, extra=1, form=FeatureApplicabilityForm)
 
 class ProductsList( ListView):
 	pass
@@ -191,3 +192,67 @@ class EstimatedProductCostUpdate( UpdateView):
 class EstimatedProductCostDelete( DeleteView):
 	model=EstimatedProductCost
 	success_url="/products/costing"
+
+class FeatureList( ListView):
+	model=Feature
+	queryset=Feature.objects.all()
+
+class FeatureCreate( CreateView):
+	model=Feature
+	form_class=FeatureForm
+	success_url="/products/features"
+	def get_context_data(self, **kwargs):
+		context = super(FeatureCreate, self).get_context_data( **kwargs)
+		if self.request.POST:
+			context['productfeatureapplicability_list'] = FeatureApplicabilityFormSet( self.request.POST, instance=self.object)
+		else :
+			context['productfeatureapplicability_list'] = FeatureApplicabilityFormSet( instance=self.object)
+		return context
+
+	def form_valid( self, form):
+		context = self.get_context_data()
+		if context['productfeatureapplicability_list'].is_valid() :
+			self.object = form.save()
+			context['productfeatureapplicability_list'].instance = self.object
+			context['productfeatureapplicability_list'].save() 
+			return HttpResponseRedirect(self.get_success_url())
+		else:
+			return self.render_to_response(self.get_context_data(form=form))
+
+class FeatureDetail( DetailView):
+	model=Feature
+	def get_context_data(self, **kwargs):
+		context = super(FeatureDetail,self).get_context_data(**kwargs)
+		context['productfeatureapplicability_list'] = FeatureApplicability.objects.filter(feature=self.object)
+		return context
+
+class FeatureUpdate( UpdateView):
+	model=Feature
+	form_class=FeatureForm
+	success_url="/products/features"
+	def get_context_data(self, **kwargs):
+		context = super(FeatureUpdate, self).get_context_data( **kwargs)
+		if self.request.POST:
+			context['productfeatureapplicability_list'] = FeatureApplicabilityFormSet( self.request.POST, instance=self.object)
+		else :
+			context['productfeatureapplicability_list'] = FeatureApplicabilityFormSet( instance=self.object)
+		return context
+
+	def form_valid( self, form):
+		context = self.get_context_data()
+		if context['productfeatureapplicability_list'].is_valid() :
+			self.object = form.save()
+			context['productfeatureapplicability_list'].instance = self.object
+			context['productfeatureapplicability_list'].save() 
+			return HttpResponseRedirect(self.get_success_url())
+		else:
+			return self.render_to_response(self.get_context_data(form=form))
+
+class FeatureDelete( DeleteView):
+	model=Feature
+	success_url="/products/features"
+	def get_context_data(self, **kwargs):
+		context = super(FeatureDelete,self).get_context_data(**kwargs)
+		context['productfeatureapplicability_list'] = FeatureApplicability.objects.filter(feature=self.object)
+		return context
+

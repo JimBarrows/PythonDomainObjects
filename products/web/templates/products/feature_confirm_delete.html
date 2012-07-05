@@ -1,0 +1,36 @@
+{% extends "base_confirm_delete.html"%}
+{% block title%}Feature - {{object.description}}{% endblock%}
+{% block page_title%}Feature - {{object.description}}{% endblock%}
+{% block fields%}
+	<!-- feature_confirm_delete.html begin -->
+	<tr>
+		<th>Description</th>
+		<td>{{object.description}}
+	</tr>
+	<!-- feature_confirm_delete.html end -->
+{% endblock fields%}
+
+{% block extra_fields %}
+	<table class="table table-bordered table-striped table-condensed">
+		<thead>
+			<tr>
+				<th>From Date</th>
+				<th>Thru Date</th>
+				<th>Kind</th>
+				<th>Product</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for application in productfeatureapplicability_list %}
+				<tr>
+					<td>{{application.from_date}}</td>
+					<td>{{application.thru_date}}</td>
+					<td>{{application.product}}</td>
+					<td>{{application.kind}}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock extra_fields %}
+
+{% block cancel_link %}/products/features{% endblock cancel_link %}

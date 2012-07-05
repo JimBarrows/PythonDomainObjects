@@ -1,0 +1,38 @@
+{% extends "base_form.html" %}
+
+{% block title %}Feature{% endblock %}
+
+{% block page_title %}Feature{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}/css/date_picker.css" type="text/css"/>
+{% endblock css %}
+
+{% block extra_fields %}
+	<!-- feature_form.html begin -->
+	{% include "formtools/inline_formset.html" with forms=productfeatureapplicability_list %}
+	<!-- feature_form.html end -->
+{% endblock extra_fields %}
+
+{% block more_footer_javascript_include %}
+	<!-- feature_form.html begin -->
+	<script src="{{ STATIC_URL}}js/jquery.formset.js"></script>
+	<script src="{{ STATIC_URL}}js/date_picker.js"></script>
+	<!-- feature_form.html end -->
+{% endblock more_footer_javascript_include %}
+
+{% block footer_javascript %}
+	<!-- feature_form.html begin -->
+	<script type="text/javascript">
+		$('#{{productfeatureapplicability_list.prefix}}_table tbody tr').formset({
+			prefix:'{{productfeatureapplicability_list.prefix}}',
+			addCssClass:'btn',
+			deleteCssClass:'btn',
+			addText:'Add Another',
+			deleteText:'Delete'
+		})
+	</script>
+	<!-- feature_form.html end -->
+{% endblock footer_javascript%}
+
+{% block cancel_url %}/products/features{% endblock cancel_url %}

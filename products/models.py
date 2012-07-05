@@ -236,7 +236,6 @@ class CategoryClassification( models.Model ):
 
 class Feature( PolymorphicModel ):
 	description = models.CharField(max_length=250)
-	category = models.ForeignKey('FeatureCategory')
 	product = models.ManyToManyField('Product', through='FeatureApplicability')
 	def __unicode__(self):
 		return self.description
@@ -284,13 +283,6 @@ class FeatureApplicability( models.Model) :
 	kind = models.CharField(max_length=10, choices=ApplicabilityChoices)
 	def __unicode__(self):
 		return self.feature.description
-
-class FeatureInteraction( models.Model ):
-	incompatibility = models.BooleanField()
-	interaction_dependancy = models.BooleanField()
-	of = models.ForeignKey('Feature', related_name='of_set')
-	factor_in = models.ForeignKey('Feature', related_name='factor_in_set')
-	context_of = models.ForeignKey('Product')
 
 class Category(models.Model):
 	description = models.CharField(max_length=250)
