@@ -240,6 +240,9 @@ class Feature( PolymorphicModel ):
 	def __unicode__(self):
 		return self.description
 
+class ProductQuality( Feature ):
+	pass
+
 class Dimension( Feature ) :
 	number_specified =models.IntegerField()
 	measured_using = models.ForeignKey('UnitOfMeasure')

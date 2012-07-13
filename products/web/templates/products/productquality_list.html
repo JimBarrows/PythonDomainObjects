@@ -1,0 +1,17 @@
+{% extends 'products/feature_list.html' %}
+
+{% block title %}Product Quality{% endblock %}
+{% block page_title %}Product Quality{% endblock %}
+
+{% block add_url %}product_quality{%endblock%}
+{% block view_url%}product_quality{% endblock %}
+{% block update_url%}product_quality{% endblock %}
+{% block delete_url%}product_quality{% endblock %}
+
+{%block feature_tab_active%} {%endblock%}
+{%block product_quality_tab_active%}active{%endblock%}
+
+{% block empty_row %}
+	<td colspan="5">There are no product quality features.</td>
+{% endblock empty_row %}
+

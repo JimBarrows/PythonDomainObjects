@@ -8,6 +8,17 @@
 {% block update_url%}features{% endblock %}
 {% block delete_url%}features{% endblock %}
 
+{% block pre_content %}
+	<!-- feature_list.html begin -->
+	<div class="tabable">
+		<ul id="feature_tabs" class="nav nav-tabs">
+			<li class="{%block feature_tab_active%}active{%endblock%}"><a href="/products/features">Features</a></li>
+			<li class="{%block product_quality_tab_active%}{%endblock%}"><a href="/products/features/product_quality">Quality Features</a></li>
+		</ul>
+	</div>
+	<div class="tab-content">
+	<!-- feature_list.html end -->
+{% endblock pre_content %}
 {% block table_header %}
 	<tr>
 		<th>Description</th>
@@ -17,6 +28,13 @@
 {% block row %}
 	<td>{{object.description}}</td>
 {% endblock row %}
+
 {% block empty_row %}
 	<td colspan="5">There are no features.</td>
 {% endblock empty_row %}
+
+{% block post_content %}
+	<!-- feature_list.html begin -->
+	</div>
+	<!-- feature_list.html end -->
+{% endblock post_content %}

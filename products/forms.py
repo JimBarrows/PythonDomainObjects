@@ -54,3 +54,7 @@ class FeatureApplicabilityForm( ModelForm):
 	class Meta:
 		model=FeatureApplicability
 
+class ProductQualityForm( ModelForm):
+	class Meta:
+		model=ProductQuality
+		exclude=( 'product',)

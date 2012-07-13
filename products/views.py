@@ -256,3 +256,24 @@ class FeatureDelete( DeleteView):
 		context['productfeatureapplicability_list'] = FeatureApplicability.objects.filter(feature=self.object)
 		return context
 
+class ProductQualityList( FeatureList):
+	model=ProductQuality
+	queryset=ProductQuality.objects.all()
+
+class ProductQualityCreate( FeatureCreate):
+	model=ProductQuality
+	form_class=ProductQualityForm
+	success_url="/products/features/product_quality"
+
+class ProductQualityDetail( FeatureDetail):
+	model=ProductQuality
+
+class ProductQualityUpdate( FeatureUpdate):
+	model=ProductQuality
+	form_class=ProductQualityForm
+	success_url="/products/features/product_quality"
+
+class ProductQualityDelete( FeatureDelete):
+	model=ProductQuality
+	success_url="/products/features/product_quality"
+
