@@ -214,6 +214,27 @@ class DiscountComponentDelete( DeleteView):
 	model=DiscountComponent
 	success_url="/products/pricing/discounts"
 
+class SurchargeComponentList( PricingComponentList):
+	model=SurchargeComponent
+	queryset=SurchargeComponent.objects.all()
+
+class SurchargeComponentCreate( PricingComponentCreate):
+	model=SurchargeComponent
+	form_class=SurchargeComponentForm
+	success_url="/products/pricing/surcharges"
+
+class SurchargeComponentDetail( PricingComponentDetail):
+	model=SurchargeComponent
+
+class SurchargeComponentUpdate( PricingComponentUpdate):
+	model=SurchargeComponent
+	form_class=SurchargeComponentForm
+	success_url="/products/pricing/surcharges"
+
+class SurchargeComponentDelete( DeleteView):
+	model=SurchargeComponent
+	success_url="/products/pricing/surcharges"
+
 class EstimatedProductCostList( ListView):
 	model=EstimatedProductCost
 	queryset=EstimatedProductCost.objects.all()

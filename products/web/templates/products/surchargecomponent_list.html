@@ -1,0 +1,30 @@
+{% extends 'products/pricecomponent_list.html' %}
+
+{% block title %}Surcharges{% endblock %}
+{% block page_title %}Surcharges{% endblock %}
+{%block add_url %}surcharges{% endblock %}
+{%block view_url %}surcharges{% endblock %}
+{%block update_url %}surcharges{% endblock %}
+{%block delete_url %}surcharges{% endblock %}
+
+{% block pre_content %}
+	<!-- surcharge_list.html begin -->
+	<div class="tabable">
+		<ul id="feature_tabs" class="nav nav-tabs">
+			<li class="{%block base_price_tab_active%}{%endblock%}"><a href="/products/pricing/base_prices">Base Price</a></li>
+			<li class="{%block discount_component_tab_active%}{%endblock%}"><a href="/products/pricing/discounts">Discounts</a></li>
+			<li class="{%block surcharge_component_tab_active%}active{%endblock%}"><a href="/products/pricing/surcharges">Surcharges</a></li>
+			<li class="{%block manufactureres_suggested_price_tab_active%}{%endblock%}"><a href="/products/pricing/msrps">MSPRpricing</a></li>
+			<li class="{%block one_time_charge_tab_active%}{%endblock%}"><a href="/products/pricing/one_time_charges">One Time Charges</a></li>
+			<li class="{%block recurring_charge_tab_active%}{%endblock%}"><a href="/products/pricing/recurring_charges">Recurring Charges</a></li>
+			<li class="{%block utilization_charge_tab_active%}{%endblock%}"><a href="/products/pricing/utilization_charges">Utilization Charges</a></li>
+		</ul>
+	</div>
+	<div class="tab-content">
+	<!-- surcharge_list.html end -->
+{% endblock pre_content %}
+
+{% block empty_row %}
+	<td colspan="19">There are no surcharges.</td>
+{% endblock empty_row %}
+
