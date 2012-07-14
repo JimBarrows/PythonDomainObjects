@@ -31,11 +31,13 @@ class PriceComponentForm( ModelForm):
 	class Meta:
 		model=PriceComponent
 
-class BasePriceForm( ModelForm):
-	from_date = forms.DateField(widget=DatePickerWidget, required=True)
-	thru_date = forms.DateField(widget=DatePickerWidget, required=False)
+class BasePriceForm( PriceComponentForm):
 	class Meta:
 		model=BasePrice
+
+class DiscountComponentForm( PriceComponentForm):
+	class Meta:
+		model=DiscountComponent
 
 class EstimatedProductCostForm( ModelForm):
 	from_date = forms.DateField(widget=DatePickerWidget, required=True)

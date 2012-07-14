@@ -193,6 +193,27 @@ class BasePriceDelete( DeleteView):
 	model=BasePrice
 	success_url="/products/pricing/base_prices"
 
+class DiscountComponentList( PricingComponentList):
+	model=DiscountComponent
+	queryset=DiscountComponent.objects.all()
+
+class DiscountComponentCreate( PricingComponentCreate):
+	model=DiscountComponent
+	form_class=DiscountComponentForm
+	success_url="/products/pricing/discounts"
+
+class DiscountComponentDetail( PricingComponentDetail):
+	model=DiscountComponent
+
+class DiscountComponentUpdate( PricingComponentUpdate):
+	model=DiscountComponent
+	form_class=DiscountComponentForm
+	success_url="/products/pricing/discounts"
+
+class DiscountComponentDelete( DeleteView):
+	model=DiscountComponent
+	success_url="/products/pricing/discounts"
+
 class EstimatedProductCostList( ListView):
 	model=EstimatedProductCost
 	queryset=EstimatedProductCost.objects.all()
