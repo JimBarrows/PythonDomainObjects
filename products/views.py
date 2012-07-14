@@ -172,6 +172,27 @@ class PricingComponentDelete( DeleteView):
 	model=PriceComponent
 	success_url="/products/pricing"
 
+class BasePriceList( PricingComponentList):
+	model=BasePrice
+	queryset=BasePrice.objects.all()
+
+class BasePriceCreate( PricingComponentCreate):
+	model=BasePrice
+	form_class=BasePriceForm
+	success_url="/products/pricing/base_prices"
+
+class BasePriceDetail( PricingComponentDetail):
+	model=BasePrice
+
+class BasePriceUpdate( PricingComponentUpdate):
+	model=BasePrice
+	form_class=BasePriceForm
+	success_url="/products/pricing/base_prices"
+
+class BasePriceDelete( DeleteView):
+	model=BasePrice
+	success_url="/products/pricing/base_prices"
+
 class EstimatedProductCostList( ListView):
 	model=EstimatedProductCost
 	queryset=EstimatedProductCost.objects.all()

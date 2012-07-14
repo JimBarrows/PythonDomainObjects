@@ -7,6 +7,23 @@
 {%block update_url %}pricing{% endblock %}
 {%block delete_url %}pricing{% endblock %}
 
+{% block pre_content %}
+	<!-- pricecomponent_list.html begin -->
+	<div class="tabable">
+		<ul id="feature_tabs" class="nav nav-tabs">
+			<li class="{%block base_price_tab_active%}active{%endblock%}"><a href="/products/pricing/base_prices">Base Price</a></li>
+			<li class="{%block discount_component_tab_active%}{%endblock%}"><a href="/products/pricing/discounts">Discounts</a></li>
+			<li class="{%block surcharge_component_tab_active%}{%endblock%}"><a href="/products/pricing/surcharges">Surcharges</a></li>
+			<li class="{%block manufactureres_suggested_price_tab_active%}{%endblock%}"><a href="/products/pricing/msrps">MSPRpricing</a></li>
+			<li class="{%block one_time_charge_tab_active%}{%endblock%}"><a href="/products/pricing/one_time_charges">One Time Charges</a></li>
+			<li class="{%block recurring_charge_tab_active%}{%endblock%}"><a href="/products/pricing/recurring_charges">Recurring Charges</a></li>
+			<li class="{%block utilization_charge_tab_active%}{%endblock%}"><a href="/products/pricing/utilization_charges">Utilization Charges</a></li>
+		</ul>
+	</div>
+	<div class="tab-content">
+	<!-- pricecomponent_list.html end -->
+{% endblock pre_content %}
+
 {%block table_header %}
 	<!-- pricecomponent_list.html begin -->
 	<tr>
@@ -60,3 +77,9 @@
 {% block empty_row %}
 	<td colspan="19">There are no price components.</td>
 {% endblock empty_row %}
+
+{% block post_content %}
+	<!-- pricecomponent_list.html begin -->
+	</div>
+	<!-- pricecomponent_list.html end -->
+{% endblock post_content %}
