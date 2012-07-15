@@ -43,6 +43,10 @@ class SurchargeComponentForm( PriceComponentForm):
 	class Meta:
 		model=SurchargeComponent
 
+class ManufacturersSuggestedRetailPriceForm( PriceComponentForm):
+	class Meta:
+		model=ManufacturersSuggestedRetailPrice
+
 class EstimatedProductCostForm( ModelForm):
 	from_date = forms.DateField(widget=DatePickerWidget, required=True)
 	thru_date = forms.DateField(widget=DatePickerWidget, required=False)

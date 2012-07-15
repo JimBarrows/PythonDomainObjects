@@ -115,7 +115,7 @@ class SurchargeComponent( PriceComponent):
 	''' Discounts that can occur. '''
 	pass
 
-class ManufacturerSuggestedPrice( PriceComponent):
+class ManufacturersSuggestedRetailPrice( PriceComponent):
 	''' Not necessarily the price being charged. '''
 
 class OneTimeCharge( PriceComponent):

@@ -1,0 +1,21 @@
+{% extends 'products/pricecomponent_list.html' %}
+
+{% block title %}MSRPs{% endblock %}
+{% block page_title %}MSRPs{% endblock %}
+{% block add_url %}msrps{% endblock %}
+{% block view_url %}msrps{% endblock %}
+{% block update_url %}msrps{% endblock %}
+{% block delete_url %}msrps{% endblock %}
+
+{% block base_price_tab_active%}{% endblock %}
+{% block discount_component_tab_active%}{% endblock %}
+{% block surcharge_component_tab_active%}{% endblock %}
+{% block manufactureres_suggested_price_tab_active%}active{% endblock %}
+{% block one_time_charge_tab_active%}{% endblock %}
+{% block recurring_charge_tab_active%}{% endblock %}
+{% block utilization_charge_tab_active%}{% endblock %}
+
+{% block empty_row %}
+	<td colspan="19">There are no msrps.</td>
+{% endblock empty_row %}
+

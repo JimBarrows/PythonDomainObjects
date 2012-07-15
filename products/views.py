@@ -235,6 +235,27 @@ class SurchargeComponentDelete( DeleteView):
 	model=SurchargeComponent
 	success_url="/products/pricing/surcharges"
 
+class ManufacturersSuggestedRetailPriceList( PricingComponentList):
+	model=ManufacturersSuggestedRetailPrice
+	queryset=ManufacturersSuggestedRetailPrice.objects.all()
+
+class ManufacturersSuggestedRetailPriceCreate( PricingComponentCreate):
+	model=ManufacturersSuggestedRetailPrice
+	form_class=ManufacturersSuggestedRetailPriceForm
+	success_url="/products/pricing/msrps"
+
+class ManufacturersSuggestedRetailPriceDetail( PricingComponentDetail):
+	model=ManufacturersSuggestedRetailPrice
+
+class ManufacturersSuggestedRetailPriceUpdate( PricingComponentUpdate):
+	model=ManufacturersSuggestedRetailPrice
+	form_class=ManufacturersSuggestedRetailPriceForm
+	success_url="/products/pricing/msrps"
+
+class ManufacturersSuggestedRetailPriceDelete( DeleteView):
+	model=ManufacturersSuggestedRetailPrice
+	success_url="/products/pricing/msrps"
+
 class EstimatedProductCostList( ListView):
 	model=EstimatedProductCost
 	queryset=EstimatedProductCost.objects.all()
