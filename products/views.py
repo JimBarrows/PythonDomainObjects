@@ -256,6 +256,27 @@ class ManufacturersSuggestedRetailPriceDelete( DeleteView):
 	model=ManufacturersSuggestedRetailPrice
 	success_url="/products/pricing/msrps"
 
+class OneTimeChargeList( PricingComponentList):
+	model=OneTimeCharge
+	queryset=OneTimeCharge.objects.all()
+
+class OneTimeChargeCreate( PricingComponentCreate):
+	model=OneTimeCharge
+	form_class=OneTimeChargeForm
+	success_url="/products/pricing/one_time_charges"
+
+class OneTimeChargeDetail( PricingComponentDetail):
+	model=OneTimeCharge
+
+class OneTimeChargeUpdate( PricingComponentUpdate):
+	model=OneTimeCharge
+	form_class=OneTimeChargeForm
+	success_url="/products/pricing/one_time_charges"
+
+class OneTimeChargeDelete( DeleteView):
+	model=OneTimeCharge
+	success_url="/products/pricing/one_time_charges"
+
 class EstimatedProductCostList( ListView):
 	model=EstimatedProductCost
 	queryset=EstimatedProductCost.objects.all()

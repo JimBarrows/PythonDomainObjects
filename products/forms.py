@@ -47,6 +47,10 @@ class ManufacturersSuggestedRetailPriceForm( PriceComponentForm):
 	class Meta:
 		model=ManufacturersSuggestedRetailPrice
 
+class OneTimeChargeForm( PriceComponentForm):
+	class Meta:
+		model=OneTimeCharge
+
 class EstimatedProductCostForm( ModelForm):
 	from_date = forms.DateField(widget=DatePickerWidget, required=True)
 	thru_date = forms.DateField(widget=DatePickerWidget, required=False)

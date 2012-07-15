@@ -1,0 +1,21 @@
+{% extends 'products/pricecomponent_list.html' %}
+
+{% block title %}One Time Charges{% endblock %}
+{% block page_title %}One Time Charges{% endblock %}
+{% block add_url %}one_time_charges{% endblock %}
+{% block view_url %}one_time_charges{% endblock %}
+{% block update_url %}one_time_charges{% endblock %}
+{% block delete_url %}one_time_charges{% endblock %}
+
+{% block base_price_tab_active%}{% endblock %}
+{% block discount_component_tab_active%}{% endblock %}
+{% block surcharge_component_tab_active%}{% endblock %}
+{% block manufactureres_suggested_price_tab_active%}{% endblock %}
+{% block one_time_charge_tab_active%}active{% endblock %}
+{% block recurring_charge_tab_active%}{% endblock %}
+{% block utilization_charge_tab_active%}{% endblock %}
+
+{% block empty_row %}
+	<td colspan="19">There are no one time charges.</td>
+{% endblock empty_row %}
+
