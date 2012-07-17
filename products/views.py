@@ -298,6 +298,27 @@ class RecurringChargeDelete( DeleteView):
 	model=RecurringCharge
 	success_url="/products/pricing/recurring_charges"
 
+class UtilizationChargeList( PricingComponentList):
+	model=UtilizationCharge
+	queryset=UtilizationCharge.objects.all()
+
+class UtilizationChargeCreate( PricingComponentCreate):
+	model=UtilizationCharge
+	form_class=UtilizationChargeForm
+	success_url="/products/pricing/utilization_charges"
+
+class UtilizationChargeDetail( PricingComponentDetail):
+	model=UtilizationCharge
+
+class UtilizationChargeUpdate( PricingComponentUpdate):
+	model=UtilizationCharge
+	form_class=UtilizationChargeForm
+	success_url="/products/pricing/utilization_charges"
+
+class UtilizationChargeDelete( DeleteView):
+	model=UtilizationCharge
+	success_url="/products/pricing/utilization_charges"
+
 class EstimatedProductCostList( ListView):
 	model=EstimatedProductCost
 	queryset=EstimatedProductCost.objects.all()

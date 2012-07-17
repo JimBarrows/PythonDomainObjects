@@ -1,0 +1,31 @@
+{% extends 'products/pricecomponent_list.html' %}
+
+{% block title %}Utilization Charges{% endblock %}
+{% block page_title %}Utilization Charges{% endblock %}
+{% block add_url %}utilization_charges{% endblock %}
+{% block view_url %}utilization_charges{% endblock %}
+{% block update_url %}utilization_charges{% endblock %}
+{% block delete_url %}utilization_charges{% endblock %}
+
+{% block base_price_tab_active%}{% endblock %}
+{% block discount_component_tab_active%}{% endblock %}
+{% block surcharge_component_tab_active%}{% endblock %}
+{% block manufactureres_suggested_price_tab_active%}{% endblock %}
+{% block one_time_charge_tab_active%}{% endblock %}
+{% block recurring_charge_tab_active%}{% endblock %}
+{% block utilization_charge_tab_active%}active{% endblock %}
+
+{% block top_column_headers %}
+	<th rowspan="2">Per</th>
+	<th rowspan="2">Quantity</th>
+{% endblock top_column_headers %}
+
+{% block columns %}
+	<td>{{ object.per }}</td>
+	<td>{{ object.quantity }}</td>
+{% endblock columns %}
+
+{% block empty_row %}
+	<td colspan="19">There are no utilization charges.</td>
+{% endblock empty_row %}
+
