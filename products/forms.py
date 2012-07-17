@@ -51,6 +51,10 @@ class OneTimeChargeForm( PriceComponentForm):
 	class Meta:
 		model=OneTimeCharge
 
+class RecurringChargeForm( PriceComponentForm):
+	class Meta:
+		model=RecurringCharge
+
 class EstimatedProductCostForm( ModelForm):
 	from_date = forms.DateField(widget=DatePickerWidget, required=True)
 	thru_date = forms.DateField(widget=DatePickerWidget, required=False)

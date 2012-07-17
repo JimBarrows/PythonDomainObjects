@@ -54,6 +54,8 @@
 		<th rowspan="2">Pricing Organization</th>
 		<th rowspan="2">Feature</th>
 		<th rowspan="2">Part</th>
+		{% block top_column_headers %}
+		{% endblock top_column_headers %}
 	</tr>
 	<tr>
 		<th>From</th>
@@ -85,6 +87,8 @@
 	<td>{{ object.specified_for }}</td>
 	<td>{{ object.feature }}</td>
 	<td>{{ object.par }}</td>
+	{% block columns %}
+	{% endblock columns %}
 	<!-- pricecomponent_list.html end -->
 {% endblock row %}
 

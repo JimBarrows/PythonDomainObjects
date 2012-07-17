@@ -1,0 +1,13 @@
+{% extends 'products/pricecomponent_detail.html' %}
+
+{% block title %}Recurring Charges{% endblock %}
+{% block page_title %}Recurring Charges{% endblock %}
+
+{% block additional_fields %}
+	<tr>
+		<th>Per</th>
+		<td>{{object.per}}</td>
+	</tr>
+{% endblock additional_fields %}
+
+{% block done_url%}/products/pricing/recurring_charges{%endblock%}

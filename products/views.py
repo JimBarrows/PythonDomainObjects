@@ -277,6 +277,27 @@ class OneTimeChargeDelete( DeleteView):
 	model=OneTimeCharge
 	success_url="/products/pricing/one_time_charges"
 
+class RecurringChargeList( PricingComponentList):
+	model=RecurringCharge
+	queryset=RecurringCharge.objects.all()
+
+class RecurringChargeCreate( PricingComponentCreate):
+	model=RecurringCharge
+	form_class=RecurringChargeForm
+	success_url="/products/pricing/recurring_charges"
+
+class RecurringChargeDetail( PricingComponentDetail):
+	model=RecurringCharge
+
+class RecurringChargeUpdate( PricingComponentUpdate):
+	model=RecurringCharge
+	form_class=RecurringChargeForm
+	success_url="/products/pricing/recurring_charges"
+
+class RecurringChargeDelete( DeleteView):
+	model=RecurringCharge
+	success_url="/products/pricing/recurring_charges"
+
 class EstimatedProductCostList( ListView):
 	model=EstimatedProductCost
 	queryset=EstimatedProductCost.objects.all()
