@@ -14,40 +14,34 @@ class PurchaseOrder( Order):
 	requested_bill_to = models.ForeignKey( PartyRole, related_name='billToCustomerPo_set' )
 	placing_location = models.ForeignKey( ContactMechanism, related_name='placing_locationPo_set' )
 	location_for_taking = models.ForeignKey( ContactMechanism, related_name='location_for_takingPo_set' )
-	billed_to = models.ForeignKey( ContactMechanism, related_name='billed_to_set' )
 
 class SalesOrder( Order):
 	placed_by = models.ForeignKey( PartyRole, related_name='placingCustomerSo_set' )
 	taken_by = models.ForeignKey( PartyRole, related_name='internalOrganizationSo_set' )
 	requested_bill_to = models.ForeignKey( PartyRole, related_name='billToCustomerSo_set' )
-	placing_location = models.ForeignKey( ContactMechanism, related_name='placing_locationSo_set' )
-	location_for_taking = models.ForeignKey( ContactMechanism, related_name='location_for_takingSo_set' )
-	billed_to = models.ForeignKey( ContactMechanism, related_name='billed_toSo_set' )
+	placing_location = models.ForeignKey( ContactMechanism, related_name='placing_locationSo_set', blank=True, null=True )
+	location_for_taking = models.ForeignKey( ContactMechanism, related_name='location_for_takingSo_set', blank=True, null=True )
 
 class OrderItem( models.Model ):
-	quantity = models.IntegerField(),
+	quantity = models.IntegerField()
 	unit_price = models.DecimalField( max_digits=8, decimal_places=2 )
-	estimated_delivery_date = models.DateField()
-	shipping_instructions = models.TextField()
+	estimated_delivery_date = models.DateField(blank=True, null=True)
+	shipping_instructions = models.TextField(blank=True, null=True)
 	item_description = models.TextField()
 	comment = models.TextField()
 	ordered_with = models.ForeignKey('self', blank = True, null = True, related_name='child_set' )
-	product = models.ForeignKey( Product )
-	product_feature = models.ForeignKey( Feature )
+	product = models.ForeignKey( Product, blank=True, null=True )
+	product_feature = models.ForeignKey( Feature, blank=True, null=True)
+	ship_to = models.ForeignKey( ContactMechanism, blank=True, null=True )
+	ship_to_customer = models.ForeignKey( PartyRole, blank=True, null=True )
 
 
 class PurchaseOrderItem( OrderItem):
-	''' Purchase Order Item '''
 	order = models.ForeignKey( PurchaseOrder )
-	ship_to = models.ForeignKey( ContactMechanism )
-	ship_to_customer = models.ForeignKey( PartyRole )
 
 class SalesOrderItem( OrderItem):
-	''' Sales Order Item '''
 	order = models.ForeignKey( SalesOrder )
-	ship_to = models.ForeignKey( ContactMechanism )
-	ship_to_customer = models.ForeignKey( PartyRole )
-	purchased_by = models.ManyToManyField( 'PurchaseOrderItem')
+	purchased_by = models.ManyToManyField( 'PurchaseOrderItem', blank=True, null=True)
 
 class OrderRole( models.Model ):
 	percent_contribution = models.IntegerField( validators=[MaxValueValidator(100), MinValueValidator(0)])

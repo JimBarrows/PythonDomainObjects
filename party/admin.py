@@ -2,13 +2,23 @@ from party.models import *
 from django.contrib import admin
 
 
-#class PartyClassificationInline(admin.TabularInline):
-#	model=PartyClassification
-#	extra=1
+class PartyClassificationInline(admin.TabularInline):
+	model=PartyClassification
+	extra=1
 
-#class PartyAdmin(admin.ModelAdmin):
-#	inlines=[PartyClassificationInline, PartyRoleInLine, PartyContactMechanismInLine ]
+class PartyRoleInLine(admin.TabularInline):
+	model=PartyRole
+	extra=1
 
+class PartyContactMechanismInLine(admin.TabularInline):
+	model=PartyContactMechanism
+	extra=1
+
+class PartyAdmin(admin.ModelAdmin):
+	inlines=[PartyClassificationInline, PartyRoleInLine, PartyContactMechanismInLine ]
+
+admin.site.register(Person, PartyAdmin)
+admin.site.register(Organization, PartyAdmin)
 admin.site.register(PartyType)
 admin.site.register(OrganizationType)
 admin.site.register(MinorityClassificationType)
