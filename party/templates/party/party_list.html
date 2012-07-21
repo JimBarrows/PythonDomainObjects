@@ -1,0 +1,21 @@
+{% extends 'base_list.html' %}
+
+{% block title %}Parties{% endblock %}
+{% block page_title %}Parties{% endblock %}
+{% block add_url %}party{% endblock %}
+{% block view_url %}party{% endblock %}
+{% block update_url %}party{% endblock %}
+{% block delete_url %}party{% endblock %}
+
+{% block table_header %}
+	<tr>
+		<th>Name</th>
+	</tr>
+{% endblock table_header %}
+{% block row %}
+	<td>{{object.cast}}</td>
+{% endblock row %}
+{% block empty_row %}
+	<td colspan="19">There are no parties.</td>
+{% endblock empty_row %}
+

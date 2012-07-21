@@ -83,6 +83,7 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 	os.path.join( PROJECT_DIR, 'bizondemand/web/static'),
 	os.path.join( PROJECT_DIR, 'products/web/static'),
+	os.path.join( PROJECT_DIR, 'orders/web/static'),
 	os.path.join( PROJECT_DIR, 'business/web/static'),
 )
 
@@ -122,6 +123,7 @@ TEMPLATE_DIRS = (
 	os.path.join(PROJECT_DIR, 'business/web/templates'),
 	os.path.join(PROJECT_DIR, 'party/templates'),
 	os.path.join(PROJECT_DIR, 'products/web/templates'),
+	os.path.join(PROJECT_DIR, 'orders/web/templates'),
 )
 
 INSTALLED_APPS = (

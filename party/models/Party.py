@@ -1,15 +1,34 @@
 from django.db import models
+from django.contrib.contenttypes.models import ContentType
 from polymorphic import PolymorphicModel
 from datetime import datetime
 from common.models import DateRange
+import abc
 
 class Party(models.Model):
 	classification = models.ManyToManyField( 'PartyType', through='PartyClassification')
 	roles = models.ManyToManyField( 'PartyRoleType', through='PartyRole')
+
 	def findRoleByName(self, name):
 		return self.partyrole_set.filter( party_role_type__description__exact=name).get()
+
 	def __unicode__(self):
 		return 'Party'
+
+	real_type = models.ForeignKey(ContentType, editable=False, null=True)
+
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.real_type = self._get_real_type()
+#		super(InheritanceCastModel, self).save(*args, **kwargs)
+		super(Party, self).save(*args, **kwargs)
+
+	def _get_real_type(self):
+		return ContentType.objects.get_for_model(type(self))
+
+	def cast(self):
+		return self.real_type.get_object_for_this_type(pk=self.pk)
+
 	class Meta:
 		app_label = 'party'
 
@@ -18,7 +37,7 @@ class Person( Party):
 	middle_name = models.CharField(max_length=128, blank=True, null = True)
 	last_name = models.CharField(max_length=128)
 	def __unicode__(self):
-		return self.first_name + ' ' + self.middle_name + ' '+ self.last_name
+		return '{0}, {1} {2}'.format( self.last_name, self.first_name, self.middle_name)
 	class Meta:
 		app_label = 'party'
 		verbose_name_plural = 'People'
@@ -41,24 +60,38 @@ class PartyType(PolymorphicModel):
 
 class OrganizationType(PartyType):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class MinorityClassificationType(OrganizationType):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class IndustryClassificationType(OrganizationType):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class SizeClassificationType(OrganizationType):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class PersonType(PartyType):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class EeocClassificationType(PersonType):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class IncomeClassificationType(PersonType):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class PartyClassification(PolymorphicModel):
 	party = models.ForeignKey(Party)
@@ -74,24 +107,38 @@ class PartyClassification(PolymorphicModel):
 
 class OrganizationClassification(PartyClassification):
 	'''Base Classification for organizations'''
+	class Meta:
+		app_label = 'party'
 
 class MinorityClassification(OrganizationClassification):
 	'''Base Classification for Minorities'''
+	class Meta:
+		app_label = 'party'
 
 class IndustryClassification(OrganizationClassification):
 	'''Base Classification for Industries'''
+	class Meta:
+		app_label = 'party'
 
 class SizeClassification(OrganizationClassification):
 	'''Base Classification for Sizing an organization'''
+	class Meta:
+		app_label = 'party'
 
 class PersonClassification(PartyClassification):
 	'''Base Classification for people'''
+	class Meta:
+		app_label = 'party'
 
 class EeocClassification(PersonClassification):
 	'''Base Classification for people'''
+	class Meta:
+		app_label = 'party'
 
 class IncomeClassification(PersonClassification):
 	'''Base Classification for people'''
+	class Meta:
+		app_label = 'party'
 
 class PartyRoleType( models.Model):
 	description = models.CharField(max_length=250)

@@ -1,0 +1,29 @@
+{% extends 'base_list.html' %}
+
+{% block title %}Sales Orders{% endblock %}
+{% block page_title %}Sales Orders{% endblock %}
+{% block add_url %}orders/sales{% endblock %}
+{% block view_url %}orders/sales{% endblock %}
+{% block update_url %}orders/sales{% endblock %}
+{% block delete_url %}orders/sales{% endblock %}
+
+{% block table_header %}
+	<tr>
+		<th>Order Date</th>
+		<th>Entry Date</th>
+		<th>Customer</th>
+		<th>Ship To</th>
+		<th>Bill To</th>
+	</tr>
+{% endblock table_header %}
+{% block row %}
+	<td>{{object.order_date}}</td>
+	<td>{{object.entry_date}}</td>
+	<td>{{object.placed_by}} - {{object.placed_by.party.name}}</td>
+	<td>Fixe Me</td>
+	<td>Fixe Me</td>
+{% endblock row %}
+{% block empty_row %}
+	<td colspan="19">There are no orders.</td>
+{% endblock empty_row %}
+

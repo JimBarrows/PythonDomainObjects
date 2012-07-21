@@ -5,6 +5,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.forms import DateField
 from django.views.generic import CreateView, UpdateView
+from django.http import HttpResponseRedirect
 
 from common.forms import render_form_to_response
 from common.widgets import DatePickerWidget
@@ -23,11 +24,13 @@ parentRole = PartyRoleType.objects.filter( description__contains='Parent Organiz
 class BusinessCreate( CreateView):
 	model=Organization	
 	form_class=BusinessForm
+	success_url='business/setup/index.html'
 
 	def form_valid(self, form):
 		self.object = form.save()
-		PartyRole.objects.create( party=organization, party_role_type=internalOrgRole, from_date=form.cleaned_data['date_started'])
-		PartyRole.objects.create( party=organization, party_role_type=parentRole, from_date=form.cleaned_data['date_started'] )
+		PartyRole.objects.create( party=self.object, party_role_type=internalOrgRole, from_date=form.cleaned_data['date_started'])
+		PartyRole.objects.create( party=self.object, party_role_type=parentRole, from_date=form.cleaned_data['date_started'] )
+		return HttpResponseRedirect(self.get_success_url())
 			
 
 @login_required
