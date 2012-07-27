@@ -20,6 +20,7 @@ class PartyAdmin(admin.ModelAdmin):
 admin.site.register(Person, PartyAdmin)
 admin.site.register(Organization, PartyAdmin)
 admin.site.register(PartyType)
+admin.site.register(PartyRoleType)
 admin.site.register(OrganizationType)
 admin.site.register(MinorityClassificationType)
 admin.site.register(IndustryClassificationType)

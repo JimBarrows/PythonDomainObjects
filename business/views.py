@@ -8,17 +8,11 @@ from django.views.generic import CreateView, UpdateView
 from django.http import HttpResponseRedirect
 
 from common.forms import render_form_to_response
+from common.views import *
 from common.widgets import DatePickerWidget
 from party.models import Organization, PartyRole, PartyRoleType, PartyRelationshipType, PartyRelationship
 from business.forms import BusinessForm, SubOrgForm
 
-
-internalOrganizations = Organization.objects.filter( roles__description__exact='Internal Organization')
-primaryBusinessFormQuery = internalOrganizations.filter( roles__description__exact='Parent Organization')
-organizationRollup = PartyRelationshipType.objects.filter( name__exact='Organization Rollup').get()
-departmentRole = PartyRoleType.objects.filter( description__exact='Department').get()
-internalOrgRole = PartyRoleType.objects.filter( description__contains='Internal Organization').get()
-parentRole = PartyRoleType.objects.filter( description__contains='Parent Organization').get()
 
 
 class BusinessCreate( CreateView):

@@ -8,8 +8,8 @@ WEB_ROOT = os.path.join( os.path.dirname( __file__), '/web')
 admin.autodiscover()
 urlpatterns = patterns('',
     (r'^business/', include( 'business.urls')),
+    (r'^crm/', include( 'crm.urls')),
     (r'^orders/', include( 'orders.urls')),
-    (r'^party/', include( 'party.urls')),
     (r'^products/', include( 'products.urls')),
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),

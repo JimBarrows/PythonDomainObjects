@@ -1,0 +1,75 @@
+{% extends 'base_detail.html' %}
+
+{% block title %}Person{% endblock %}
+{% block page_title %}Person{% endblock %}
+{% block fields %}
+	<!-- party/person_detail.html begin -->
+	<tr>
+		<th >First Name</th>
+		<td>{{ object.first_name }}</td>
+	</tr>
+	<tr>
+		<th >Middle Name</th>
+		<td>{{ object.middle_name }}</td>
+	</tr>
+	<tr>
+		<th >Last Name</th>
+		<td>{{ object.last_name }}</td>
+	</tr>
+	<!-- party/person_detail.html end -->
+{% endblock fields %}
+{% block extra_fields %}
+	<!-- party/person_detail.html begin -->
+	<div id="party_tabs" class="tabbable">
+		<ul id="party_tabs_nav" class="nav nav-tabs">
+			<li class="active"><a href="#roles" data-toggle="tab">Roles</a></li>
+			<li><a href="#relationships">Relationships</a></li>
+			<li><a href="#contact_information">Contact Information</a></li>
+			<li><a href="#communications">Communications</a></li>
+		</ul> <!-- party_tabs_nav -->
+		<div id="party_tabs_content" class="tab-content">
+			<div class="tab-pane active" id="roles">
+				<table id="roles_table" caption="Roles" class="table table-bordered table-striped table-condensed">
+					<thead>
+						<tr>
+							<th>From</th>
+							<th>Thru</th>
+							<th>Role</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for role in object.partyrole.all%}
+						<tr>
+							<td>{{role}} - {{ role.from_date }}</td>
+							<td>{{ role.thru_date }}</td>
+							<td>{{ role.party_role_type.description }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div> <!-- roles -->
+			<div class="tab-pane" id="relationships">
+				<h1>Relationships</h1>
+			</div> <!-- relationships -->
+			<div class="tab-pane" id="contact_information">
+				<h1>Contact Information</h1>
+			</div> <!-- contact_information -->
+			<div class="tab-pane" id="communications">
+				<h1>Communications</h1>
+			</div> <!-- communications -->
+		</div> <!-- party_tabs_content -->
+	</div> <!-- party_tabs --> 
+	<!-- party/person_detail.html end -->
+{% endblock extra_fields %}
+{% block done_url%}/party{%endblock%}
+
+{% block footer_javascript %}
+	<!-- party/person_detail.html begin-->
+	<script type="text/javascript">
+		$( '#party_tabs a').click( function(e) {
+			e.preventDefault();
+			$(this).tab('show');
+		})
+	</script>
+	<!-- party/person_detail.html end-->
+{% endblock footer_javascript %}

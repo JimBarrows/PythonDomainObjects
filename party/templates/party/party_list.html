@@ -2,20 +2,41 @@
 
 {% block title %}Parties{% endblock %}
 {% block page_title %}Parties{% endblock %}
-{% block add_url %}party{% endblock %}
-{% block view_url %}party{% endblock %}
-{% block update_url %}party{% endblock %}
-{% block delete_url %}party{% endblock %}
+{% block add_url %}/party{% endblock %}
+{% block view_url %}/party{% endblock %}
+{% block update_url %}/party{% endblock %}
+{% block delete_url %}/party{% endblock %}
+
+{% block buttons %}
+	<!-- begin party_list.html -->
+	<a href="{%block add_person_url%}/party{% endblock %}/add_person" class="btn btn-small">Add Person</a>
+	<a href="{%block add_organization_url%}/party{% endblock %}/add_organization" class="btn btn-small">Add Organization</a>
+	<!-- end party_list.html -->
+{% endblock buttons %}
 
 {% block table_header %}
+	<!-- begin party_list.html -->
 	<tr>
 		<th>Name</th>
 	</tr>
+	<!-- end party_list.html -->
 {% endblock table_header %}
+
 {% block row %}
-	<td>{{object.cast}}</td>
+	<!-- begin party_list.html -->
+	<td>{{object}}</td>
+	<!-- end party_list.html -->
 {% endblock row %}
+
+{% block additional_buttons %}
+	<!-- begin party_list.html -->
+	<a href="{%block communicate_url%}/party{% endblock %}/contact" class="btn btn-mini">Contact</a>
+	<!-- end party_list.html -->
+{% endblock additional_buttons %}
+
 {% block empty_row %}
-	<td colspan="19">There are no parties.</td>
+	<!-- begin party_list.html -->
+	<td colspan="1">There are no parties.</td>
+	<!-- end party_list.html -->
 {% endblock empty_row %}
 

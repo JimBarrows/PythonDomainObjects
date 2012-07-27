@@ -82,9 +82,10 @@ STATICFILES_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 	os.path.join( PROJECT_DIR, 'bizondemand/web/static'),
+	os.path.join( PROJECT_DIR, 'business/web/static'),
+	os.path.join( PROJECT_DIR, 'crm/static'),
 	os.path.join( PROJECT_DIR, 'products/web/static'),
 	os.path.join( PROJECT_DIR, 'orders/web/static'),
-	os.path.join( PROJECT_DIR, 'business/web/static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -121,6 +122,7 @@ ROOT_URLCONF = 'bizondemand.urls'
 TEMPLATE_DIRS = (
 	os.path.join(PROJECT_DIR, 'bizondemand/web/templates'),
 	os.path.join(PROJECT_DIR, 'business/web/templates'),
+	os.path.join(PROJECT_DIR, 'crm/templates'),
 	os.path.join(PROJECT_DIR, 'party/templates'),
 	os.path.join(PROJECT_DIR, 'products/web/templates'),
 	os.path.join(PROJECT_DIR, 'orders/web/templates'),
@@ -137,14 +139,15 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 #dont' user until you figure out error    'south',
     'lettuce.django',
+    'accounting',
+    'business',
     'common',
+    'crm',
+    'ecommerce',
+    'invoices',
+    'orders',
     'party',
     'products',
-    'orders',
-    'ecommerce',
-    'business',
-    'invoices',
-    'accounting',
     'tests',
 )
 

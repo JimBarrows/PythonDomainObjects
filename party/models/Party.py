@@ -5,29 +5,14 @@ from datetime import datetime
 from common.models import DateRange
 import abc
 
-class Party(models.Model):
+class Party(PolymorphicModel):
 	classification = models.ManyToManyField( 'PartyType', through='PartyClassification')
-	roles = models.ManyToManyField( 'PartyRoleType', through='PartyRole')
 
 	def findRoleByName(self, name):
 		return self.partyrole_set.filter( party_role_type__description__exact=name).get()
 
 	def __unicode__(self):
 		return 'Party'
-
-	real_type = models.ForeignKey(ContentType, editable=False, null=True)
-
-	def save(self, *args, **kwargs):
-		if not self.id:
-			self.real_type = self._get_real_type()
-#		super(InheritanceCastModel, self).save(*args, **kwargs)
-		super(Party, self).save(*args, **kwargs)
-
-	def _get_real_type(self):
-		return ContentType.objects.get_for_model(type(self))
-
-	def cast(self):
-		return self.real_type.get_object_for_this_type(pk=self.pk)
 
 	class Meta:
 		app_label = 'party'
@@ -36,24 +21,30 @@ class Person( Party):
 	first_name=models.CharField(max_length=128)
 	middle_name = models.CharField(max_length=128, blank=True, null = True)
 	last_name = models.CharField(max_length=128)
+
 	def __unicode__(self):
 		return '{0}, {1} {2}'.format( self.last_name, self.first_name, self.middle_name)
+
 	class Meta:
 		app_label = 'party'
 		verbose_name_plural = 'People'
 
 class Organization( Party):
 	name=models.CharField(max_length=128)
+
 	def __unicode__(self):
 		return self.name
+
 	class Meta:
 		app_label = 'party'
 		verbose_name_plural = 'Organizations'
 
 class PartyType(PolymorphicModel):
 	description = models.CharField(max_length=250)
+
 	def __unicode__(self):
 		return self.description
+
 	class Meta:
 		app_label = 'party'
 		verbose_name_plural = 'Party Types'
@@ -143,6 +134,7 @@ class IncomeClassification(PersonClassification):
 class PartyRoleType( models.Model):
 	description = models.CharField(max_length=250)
 	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
+	parties = models.ManyToManyField( 'Party', through='PartyRole')
 	def __unicode__(self):
 		return self.description
 	class Meta:
