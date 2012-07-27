@@ -38,9 +38,9 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for role in object.partyrole.all%}
+						{% for role in object.partyrole_set.all %}
 						<tr>
-							<td>{{role}} - {{ role.from_date }}</td>
+							<td>{{ role.from_date }}</td>
 							<td>{{ role.thru_date }}</td>
 							<td>{{ role.party_role_type.description }}</td>
 						</tr>
