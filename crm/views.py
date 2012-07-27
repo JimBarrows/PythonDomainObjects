@@ -5,6 +5,11 @@ from party.models import Person, PartyRole
 from common.views import customer_role
 from crm.forms import PersonForm
 
+def make_customer( party):
+		party_role = PartyRole(party=party,
+													 party_role_type=customer_role)
+		party_role.save()
+
 class PersonCreate ( CreateView):
 	form_class=PersonForm
 	template_name='crm/person_form.html'
@@ -12,8 +17,15 @@ class PersonCreate ( CreateView):
 
 	def form_valid(self, form):
 		self.object = form.save()
-		print("object: {0}".format(self.object))
-		party_role = PartyRole(party=self.object,
-													 party_role_type=customer_role)
-		party_role.save()
+		make_customer( self.object)
+		return HttpResponseRedirect(self.get_success_url())
+
+class PersonUpdate ( UpdateView):
+	form_class=PersonForm
+	model=Person
+	template_name='crm/person_form.html'
+	success_url='/crm'
+
+	def form_valid(self, form):
+		self.object = form.save()
 		return HttpResponseRedirect(self.get_success_url())
