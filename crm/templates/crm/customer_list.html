@@ -1,11 +1,41 @@
-{% extends 'party/party_list.html' %}
+{% extends 'base_list.html' %}
 
 {% block title %}Customers{% endblock %}
 {% block page_title %}Customers{% endblock %}
-{% block add_person_url %}/crm{% endblock %}
-{% block add_organization_url %}/crm{% endblock %}
+{% block add_url %}/crm{% endblock %}
 {% block view_url %}/crm{% endblock %}
 {% block update_url %}/crm{% endblock %}
 {% block delete_url %}/crm{% endblock %}
 
+{% block buttons %}
+	<!-- begin crm_list.html -->
+	<a href="/crm/add" class="btn btn-small">Add</a>
+	<!-- end crm_list.html -->
+{% endblock buttons %}
+
+{% block table_header %}
+	<!-- begin crm_list.html -->
+	<tr>
+		<th>Name</th>
+	</tr>
+	<!-- end crm_list.html -->
+{% endblock table_header %}
+
+{% block row %}
+	<!-- begin crm_list.html -->
+	<td>{{object}}</td>
+	<!-- end crm_list.html -->
+{% endblock row %}
+
+{% block additional_buttons %}
+	<!-- begin crm_list.html -->
+	<a href="{%block communicate_url%}/crm{% endblock %}/contact" class="btn btn-mini">Contact</a>
+	<!-- end crm_list.html -->
+{% endblock additional_buttons %}
+
+{% block empty_row %}
+	<!-- begin crm_list.html -->
+	<td colspan="1">There are no customers.</td>
+	<!-- end crm_list.html -->
+{% endblock empty_row %}
 

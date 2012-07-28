@@ -12,7 +12,7 @@ def add_roles( party):
 
 class CustomerCreate ( CreateView):
 	form_class=CustomerForm
-	template_name='crm/person_form.html'
+	template_name='crm/customer_form.html'
 	success_url='/crm'
 
 	def form_valid(self, form):
@@ -23,7 +23,7 @@ class CustomerCreate ( CreateView):
 class CustomerUpdate ( UpdateView):
 	form_class=CustomerForm
 	model=Party
-	template_name='crm/person_form.html'
+	template_name='crm/customer_form.html'
 	success_url='/crm'
 
 	def form_valid(self, form):
@@ -32,5 +32,5 @@ class CustomerUpdate ( UpdateView):
 
 class CustomerDelete ( DeleteView):
 	model=Party
-	template_name='crm/person_confirm_delete.html'
+	template_name='crm/customer_confirm_delete.html'
 	success_url='/crm'

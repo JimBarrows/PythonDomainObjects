@@ -11,10 +11,10 @@ urlpatterns = patterns('crm.urls',
 	(r'^$', login_required(  ListView.as_view( 
 			queryset=Party.objects.filter(partyrole__party_role_type=customer_role), 
 			template_name='crm/customer_list.html'))),
-	(r'^add_person', login_required( CustomerCreate.as_view())),
+	(r'^add', login_required( CustomerCreate.as_view())),
 	(r'^update/(?P<pk>\d+)', login_required( CustomerUpdate.as_view())),
 	(r'^delete/(?P<pk>\d+)', login_required( CustomerDelete.as_view())),
 	(r'^(?P<pk>\d+)$', login_required(  DetailView.as_view( 
 			model=Party, 
-			template_name='crm/person_detail.html'))),
+			template_name='crm/customer_detail.html'))),
 )
