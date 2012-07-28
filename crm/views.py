@@ -1,17 +1,17 @@
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from models import *
-from party.models import Person, PartyRole
+from party.models import Party, Person, PartyRole
 from common.views import customer_role
-from crm.forms import PersonForm
+from crm.forms import CustomerForm
 
 def add_roles( party):
 		party_role = PartyRole(party=party,
 													 party_role_type=customer_role)
 		party_role.save()
 
-class PersonCreate ( CreateView):
-	form_class=PersonForm
+class CustomerCreate ( CreateView):
+	form_class=CustomerForm
 	template_name='crm/person_form.html'
 	success_url='/crm'
 
@@ -20,9 +20,9 @@ class PersonCreate ( CreateView):
 		add_roles( self.object)
 		return HttpResponseRedirect(self.get_success_url())
 
-class PersonUpdate ( UpdateView):
-	form_class=PersonForm
-	model=Person
+class CustomerUpdate ( UpdateView):
+	form_class=CustomerForm
+	model=Party
 	template_name='crm/person_form.html'
 	success_url='/crm'
 
@@ -30,7 +30,7 @@ class PersonUpdate ( UpdateView):
 		self.object = form.save()
 		return HttpResponseRedirect(self.get_success_url())
 
-class PersonDelete ( DeleteView):
-	model=Person
+class CustomerDelete ( DeleteView):
+	model=Party
 	template_name='crm/person_confirm_delete.html'
 	success_url='/crm'

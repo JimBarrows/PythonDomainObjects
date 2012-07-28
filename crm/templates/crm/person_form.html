@@ -1,5 +1,70 @@
-{% extends "base_form.html" %}
+{% extends "base.html" %}
 
 {% block title %}Customer{% endblock %}
 
 {% block page_title %}Customer{% endblock %}
+
+{% block css %}
+	<!-- customer_form.html begin -->
+	{{ form.media.css }}
+	<!-- customer_form.html end -->
+{% endblock css %}
+
+{% block content %}
+<!-- customer_form.html begin -->
+	<form action="" method="post">
+		<div class="control-group">
+			<label class="control-label">Customer is a/an</label>
+			<div id="customer-type" class="controls">
+			<fieldset id="buttons">
+				<label class="radio inline" for="id_party_type_0">
+					<input type="radio" id="id_party_type_0" value="Person" name="party_type" checked="checked"/>
+					Person 
+				</label>
+				<label class="radio inline" for = "id_party_type_1">
+					<input type="radio" id="id_party_type_1" value="Organization" name="party_type" />
+					Organization
+				</label>
+				</fieldset>
+			</div>       
+			<div class="tab-content">
+				<div class="tab-pane active" id="person-tab">
+					<label class="control-label" for="id_first_name">First Name</label> 
+					<div class="controls"><input id="id_first_name" type="text" name="first_name" maxlength="250" /></div>
+					<label class="control-label" for="id_middle_name">Middle Name</label> 
+					<div class="controls"><input id="id_middle_name" type="text" name="middle_name" maxlength="250" /></div>
+					<label class="control-label" for="id_last_name">Last Name</label> 
+					<div class="controls"><input id="id_last_name" type="text" name="last_name" maxlength="250" /></div>
+				</div>
+				<div class="tab-pane" id="organization-tab">
+					<label class="control-label" for="id_name">Name</label> 
+					<div class="controls"><input id="id_name" type="text" name="name" maxlength="250" /></div>
+				</div>
+			</div>
+		</div>
+		{%csrf_token%}
+		<input class="btn btn-primary" type="submit" value="Save"/>
+		<a class="btn" href="{%block cancel_url%}{%endblock%}">Cancel</a>
+	</form>
+{% endblock content %}
+
+{% block footer_javascript_include %}
+	<!-- customer_form.html begin -->
+	{{ form.media.js }}
+	<script>
+		$(function(){
+			$('#buttons').buttonset();
+			$("#id_party_type_0").click( function(e){
+				$('[for=id_party_type_0]').click();
+				$('#organization-tab').hide();
+				$('#person-tab').show();
+			})
+			$("#id_party_type_1").click( function(e){
+				$('[for=id_party_type_1]').click();
+				$('#person-tab').hide();
+				$('#organization-tab').show();
+			})
+			})
+	</script>
+	<!-- customer_form.html end -->
+{% endblock %}

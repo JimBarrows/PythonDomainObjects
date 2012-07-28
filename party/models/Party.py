@@ -41,6 +41,7 @@ class Organization( Party):
 
 class PartyType(PolymorphicModel):
 	description = models.CharField(max_length=250)
+	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
 
 	def __unicode__(self):
 		return self.description
@@ -214,3 +215,25 @@ class StatusType(models.Model):
 		app_label = 'party'
 		verbose_name = 'Status Type '
 		verbose_name_plural = 'Status Types'
+
+class IdentificationType(PolymorphicModel):
+	description = models.CharField(max_length=250)
+	parent = models.ForeignKey('self', blank = True, null = True, related_name='child_set')
+
+	def __unicode__(self):
+		return self.description
+
+	class Meta:
+		app_label = 'party'
+
+class Identifier(models.Model):
+	party = models.ForeignKey(Party)
+	identification_type = models.ForeignKey(IdentificationType)
+	value = models.CharField(max_length=250)
+	from_date = models.DateField(default = datetime.today())
+	thru_date = models.DateField(blank = True, null = True)
+	def __unicode__(self):
+		return u'%s - %s -%s' % (unicode( self.party), self.value, self.identification_type.description)
+	class Meta:
+		app_label = 'party'
+

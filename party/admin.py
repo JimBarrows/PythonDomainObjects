@@ -2,6 +2,10 @@ from party.models import *
 from django.contrib import admin
 
 
+class IdentifierInline(admin.TabularInline):
+	model=Identifier
+	extra=1
+
 class PartyClassificationInline(admin.TabularInline):
 	model=PartyClassification
 	extra=1
@@ -15,7 +19,7 @@ class PartyContactMechanismInLine(admin.TabularInline):
 	extra=1
 
 class PartyAdmin(admin.ModelAdmin):
-	inlines=[PartyClassificationInline, PartyRoleInLine, PartyContactMechanismInLine ]
+	inlines=[IdentifierInline, PartyClassificationInline, PartyRoleInLine, PartyContactMechanismInLine ]
 
 admin.site.register(Person, PartyAdmin)
 admin.site.register(Organization, PartyAdmin)
@@ -37,3 +41,4 @@ admin.site.register(SizeClassification)
 admin.site.register(PersonClassification)
 admin.site.register(EeocClassification)
 admin.site.register(IncomeClassification)
+admin.site.register(IdentificationType)
