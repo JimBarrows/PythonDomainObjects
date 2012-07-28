@@ -13,6 +13,7 @@ urlpatterns = patterns('crm.urls',
 			template_name='crm/customer_list.html'))),
 	(r'^add_person', login_required( PersonCreate.as_view())),
 	(r'^update/(?P<pk>\d+)', login_required( PersonUpdate.as_view())),
+	(r'^delete/(?P<pk>\d+)', login_required( PersonDelete.as_view())),
 	(r'^(?P<pk>\d+)$', login_required(  DetailView.as_view( 
 			model=Party, 
 			template_name='crm/person_detail.html'))),

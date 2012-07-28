@@ -29,3 +29,8 @@ class PersonUpdate ( UpdateView):
 	def form_valid(self, form):
 		self.object = form.save()
 		return HttpResponseRedirect(self.get_success_url())
+
+class PersonDelete ( DeleteView):
+	model=Person
+	template_name='crm/person_confirm_delete.html'
+	success_url='/crm'
