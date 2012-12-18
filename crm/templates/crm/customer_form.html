@@ -18,16 +18,26 @@
 			<label class="control-label">Customer is a/an</label>
 			<div id="customer-type" class="controls">
 				<label class="radio inline" for="id_customer_type_0">
-					<input type="radio" id="id_customer_type_0" value="Person" name="customer_type" checked="checked"/>
+					<input type="radio" 
+									id="id_customer_type_0" value="Person" 
+									name="customer_type" 
+									{% if form.customer_type.value == 'Person' %}
+										checked=checked
+									{% endif %} />
 					Person 
 				</label>
 				<label class="radio inline" for = "id_customer_type_1">
-					<input type="radio" id="id_customer_type_1" value="Organization" name="customer_type" />
+					<input type="radio" 
+									id="id_customer_type_1" value="Organization" 
+									name="customer_type" 
+									{% if form.customer_type.value == 'Organization' %}
+										checked=checked
+									{% endif %} />
 					Organization
 				</label>
 			</div>       
 			<div class="tab-content">
-				<div class="tab-pane active" id="person-tab">
+				<div class="tab-pane {% if form.customer_type.value == 'Person' %}active{% endif %}" id="person-tab">
 					<label class="control-label" for="id_first_name">First Name</label> 
 					<div class="controls"><input id="id_first_name" type="text" name="first_name" maxlength="250" /></div>
 					{% if form.first_name.errors %}
@@ -56,7 +66,7 @@
 						</ul>
 					{% endif %}
 				</div>
-				<div class="tab-pane" id="organization-tab">
+				<div class="tab-pane {% if form.customer_type.value == 'Organization' %} active {% endif %}" id="organization-tab">
 					<label class="control-label" for="id_name">Name</label> 
 					<div class="controls"><input id="id_name" type="text" name="name" maxlength="250" /></div>
 					<label class="control-label" for="id_organization_type">Type</label> 

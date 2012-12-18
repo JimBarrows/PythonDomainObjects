@@ -16,7 +16,6 @@ class CustomerCreate ( CreateView):
 	success_url='/crm'
 
 	def form_valid(self, form):
-		print("Before self.object={0}".format(self.object))
 		if( form.cleaned_data['customer_type'] == 'Person') :
 			self.object = Person( first_name=form.cleaned_data['first_name'],
 														middle_name=form.cleaned_data['middle_name'],
@@ -27,7 +26,6 @@ class CustomerCreate ( CreateView):
 			self.object.save()
 			PartyClassification(party=self.object,
 													party_type = form.cleaned_data['organization_type']).save()
-		print("After self.object={0}".format(self.object))
 		add_roles( self.object)
 		return HttpResponseRedirect(self.get_success_url())
 
@@ -36,6 +34,23 @@ class CustomerUpdate ( UpdateView):
 	model=Party
 	template_name='crm/customer_form.html'
 	success_url='/crm'
+
+	def get_initial(self) :
+		initial = super(CustomerUpdate, self).get_initial()
+		initial.update({'customer_type': 'Person' if isinstance(self.object, Person) else 'Organization'})
+		if( isinstance( self.object, Person)) :
+			initial.update({'first_name': self.object.first_name})
+			initial.update({'middle_name': self.object.middle_name})
+			initial.update({'last_name': self.object.last_name})
+		else :
+			initial.update({'name': self.object.name})
+		return initial
+
+	def get_form_kwargs(self) :
+		kwargs = super(CustomerUpdate, self).get_form_kwargs()
+		print("kwargs: {0}".format(kwargs))
+		return kwargs
+
 
 	def form_valid(self, form):
 		self.object = form.save()
