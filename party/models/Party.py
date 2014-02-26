@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
-from polymorphic import PolymorphicModel
+from polymodels.models import PolymorphicModel
 from datetime import datetime
 from common.models import DateRange
 import abc

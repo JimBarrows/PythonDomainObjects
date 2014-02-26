@@ -4,8 +4,7 @@
     "model": "party.partytype",
     "fields": {
       "description": "Legal Organization",
-      "parent": null,
-      "polymorphic_ctype": 175
+      "parent": null
     }
   },
   {
@@ -13,8 +12,7 @@
     "model": "party.partytype",
     "fields": {
       "description": "Corporation",
-      "parent": 1,
-      "polymorphic_ctype": 175
+      "parent": 1
     }
   },
   {
@@ -22,8 +20,7 @@
     "model": "party.partytype",
     "fields": {
       "description": "Government Agency",
-      "parent": 1,
-      "polymorphic_ctype": 175
+      "parent": 1
     }
   },
   {
@@ -31,8 +28,7 @@
     "model": "party.partytype",
     "fields": {
       "description": "Informal Organization",
-      "parent": null,
-      "polymorphic_ctype": 175
+      "parent": null
     }
   },
   {
@@ -40,8 +36,7 @@
     "model": "party.partytype",
     "fields": {
       "description": "Team",
-      "parent": 4,
-      "polymorphic_ctype": 175
+      "parent": 4
     }
   },
   {
@@ -49,8 +44,7 @@
     "model": "party.partytype",
     "fields": {
       "description": "Family",
-      "parent": 4,
-      "polymorphic_ctype": 175
+      "parent": 4
     }
   },
   {

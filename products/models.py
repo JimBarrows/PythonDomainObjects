@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from polymorphic import PolymorphicModel
+from polymodels.models import PolymorphicModel
 from party.models import PartyType
 from datetime import datetime
 from party.models import Organization, Facility, PartyRole, GeographicBoundary

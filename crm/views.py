@@ -2,13 +2,13 @@ from django.views.generic import DetailView, ListView, CreateView, UpdateView, D
 from django.http import HttpResponseRedirect
 from models import *
 from party.models import Party, Person, PartyRole, Organization, PartyClassification
-from common.views import customer_role
+#from common.views import customer_role
 from crm.forms import CustomerForm
 
-def add_roles( party):
-		party_role = PartyRole(party=party,
-													 party_role_type=customer_role)
-		party_role.save()
+#def add_roles( party):
+		#party_role = PartyRole(party=party,
+		#					party_role_type=customer_role)
+	#	party_role.save()
 
 class CustomerCreate ( CreateView):
 	form_class=CustomerForm
@@ -26,7 +26,7 @@ class CustomerCreate ( CreateView):
 			self.object.save()
 			PartyClassification(party=self.object,
 													party_type = form.cleaned_data['organization_type']).save()
-		add_roles( self.object)
+		#add_roles( self.object)
 		return HttpResponseRedirect(self.get_success_url())
 
 class CustomerUpdate ( UpdateView):
