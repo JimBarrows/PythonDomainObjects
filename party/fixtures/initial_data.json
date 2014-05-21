@@ -1,0 +1,27 @@
+[
+	{"pk": 1, "model": 
+	"party.partytype", 
+	"fields": {"parent": null, "description": "Legal Organization", "content_type": 81}}, 
+	{"pk": 2, "model": "party.partytype", "fields": {"parent": 1, "description": "Corporation", "content_type": 81}}, 
+	{"pk": 3, "model": "party.partytype", "fields": {"parent": null, "description": "Informal Organization", "content_type": 81}}, 
+	{"pk": 4, "model": "party.partytype", "fields": {"parent": 3, "description": "Team", "content_type": 81}}]
+
+
+  {
+    "pk": 1,
+    "model": "party.partytype",
+    "fields": {
+      "description": "Legal Organization",
+      "parent": null,
+      "polymorphic_ctype": 175
+    }
+  },
+  {
+    "pk": 2,
+    "model": "party.partytype",
+    "fields": {
+      "description": "Corporation",
+      "parent": 1,
+      "polymorphic_ctype": 175
+    }
+  },
